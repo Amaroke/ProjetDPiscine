@@ -1,0 +1,13 @@
+./.idea/*
+/.idea/.gitignore
+/.idea/deployment.xml
+/.idea/git_toolbox_prj.xml
+/.idea/modules.xml
+/.idea/php.xml
+/.idea/vcs.xml
+/.idea/webServers.xml
+
+./public/src/css/in.css
+./public/src/css/app.css
+/.idea/misc.xml
+./package-lock.json
