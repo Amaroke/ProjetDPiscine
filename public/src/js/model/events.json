@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "DATE",
+      "duration": "DURATION"
+    },
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "DATE",
+      "duration": "DURATION"
+    },
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "DATE",
+      "duration": "DURATION"
+    }
+  ]
+}
