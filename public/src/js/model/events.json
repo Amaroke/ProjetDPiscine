@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "2012-04-23T18:25:43.511Z",
+      "duration": "DURATION"
+    },
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "2020-04-23T18:25:43.511Z",
+      "duration": "DURATION"
+    },
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "2050-04-23T18:25:43.511Z",
+      "duration": "DURATION"
+    },
+    {
+      "user": "LOGIN",
+      "title": "TITLE",
+      "date": "2020-04-23T18:25:43.511Z",
+      "duration": "DURATION"
+    }
+  ]
+}
