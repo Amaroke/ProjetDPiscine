@@ -6,9 +6,7 @@ module.exports = {
         return JSON.stringify(json)
     },
     showEventsDay: function (date) {
-        const json = require('./events.json')
-        const strEvents = JSON.stringify(json)
-        const objEvents = JSON.parse(strEvents)
+        const objEvents = require('./events.json')
         const events = []
         objEvents.events.forEach(function (event) {
             const dateEvent = new Date(event.date)
@@ -19,9 +17,7 @@ module.exports = {
         return events
     },
     showEventsMonth: function (date) {
-        const json = require('./events.json')
-        const strEvents = JSON.stringify(json)
-        const objEvents = JSON.parse(strEvents)
+        const objEvents = require('./events.json')
         const events = []
         objEvents.events.forEach(function (event) {
             const dateEvent = new Date(event.date)
@@ -32,9 +28,7 @@ module.exports = {
         return events
     },
     showEventsYear: function (date) {
-        const json = require('./events.json')
-        const strEvents = JSON.stringify(json)
-        const objEvents = JSON.parse(strEvents)
+        const objEvents = require('./events.json')
         const events = []
         objEvents.events.forEach(function (event) {
             const dateEvent = new Date(event.date)
