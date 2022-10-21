@@ -1,6 +1,7 @@
 // noinspection JSUnresolvedVariable
 
 const json = require("./events.json");
+const fs = require('fs')
 
 module.exports = {
     showEvents: function () {
@@ -45,6 +46,10 @@ module.exports = {
             }
         })
         return events
+    },
+    addEvent: function (event) {
+        json.events.push(event)
+        fs.writeFileSync("./public/js/model/events.json", JSON.stringify(json))
     }
 }
 
