@@ -4,7 +4,7 @@
   "author": "Anthony Briot, Guillaume Zimol, Hugo Steinbach",
   "scripts": {
     "dev": "npm run development",
-    "tailwind:build": "npx tailwindcss -i public/src/css/in.css -o public/src/css/app.css --watch"
+    "tailwind:build": "npx tailwindcss -i public/css/in.css -o public/css/app.css --watch"
   },
   "version": "1.0.0",
   "main": "index.js",
