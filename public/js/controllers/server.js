@@ -1,9 +1,19 @@
 const events = require('../model/events.js')
+const users = require('../model/users.js')
 const express = require('express')
+const bodyParser = require("body-parser")
+const path = require("path");
 const app = express()
+
 
 // Racine du site
 app.use(express.static(__dirname+'/../../../public'));
+
+let urlEncodedParser = bodyParser.urlencoded({extended : false});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname+'/../views/login.html'));
+})
 
 // Events
 app.get('/events', (req, res) => {
@@ -25,6 +35,17 @@ app.get('/events/month', (req, res) => {
 app.get('/events/year', (req, res) => {
     res.send(events.showEventsYear(new Date(req.query.date)))
 })
+
+app.post('/login', urlEncodedParser, (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    if(users.verif(username, password) === true){
+        res.sendFile(path.join(__dirname+'/../../index.html'));
+    } else{
+        //faire un truc plus style
+        res.status(401)
+    }
+});
 
 // Server listen 8080
 app.listen(8080, () => {
