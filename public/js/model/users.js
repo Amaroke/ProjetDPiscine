@@ -1,18 +1,45 @@
 const json = require("./users.json");
+const fs = require("fs");
+
 module.exports = {
-    showUsers: function () {
-        return JSON.stringify(json)
-    },
-    verif: function (loginP, passwordP){
+
+    existUser: function (loginP) {
         const objUsers = require('./users.json')
-        let reponse = false;
+        objUsers.users.forEach(function (user) {
+            const login = user.login
+            if (login === loginP) {
+                return true;
+            }
+        })
+        return false
+    },
+
+    validUser: function (loginP, passwordP) {
+        const objUsers = require('./users.json')
         objUsers.users.forEach(function (user) {
             const login = user.login
             const password = user.password
             if (login === loginP && password === passwordP) {
-                reponse = true;
+                return true
             }
         })
-        return reponse
+        return false
+    },
+
+    addUser: function (req) {
+        // TODO Utiliser des vrais noms
+        let user = {
+            "login": req.use,
+            "password": req.pswd,
+            "name": req.name,
+            "first_name": req.firstName,
+        }
+        json.users.push(user)
+        fs.writeFileSync("./public/js/model/users.json", JSON.stringify(json))
+    },
+
+    deleteAll: function () {
+        fs.writeFileSync("./public/js/model/users.json", '{"users":[]}')
     }
+
 }

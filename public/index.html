@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Planning DPISCINE</title>
     <link rel="stylesheet" href="css/app.css">
-    <link rel="script" href="js/controllers/controller.js">
+    <script src="js/controllers/controllerIndex.js"></script>
 </head>
 <body style="background-color: #37b6f0">
 <div class="max-w-full mx-auto bg-white">
@@ -24,7 +24,25 @@
             </a>
         </div>
     </div>
-    <svg id="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 210" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(14, 165, 233, 1)" offset="0%"></stop><stop stop-color="rgba(150.898, 222.676, 255, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)" d="M0,42L30,52.5C60,63,120,84,180,101.5C240,119,300,133,360,133C420,133,480,119,540,94.5C600,70,660,35,720,35C780,35,840,70,900,87.5C960,105,1020,105,1080,105C1140,105,1200,105,1260,101.5C1320,98,1380,91,1440,84C1500,77,1560,70,1620,56C1680,42,1740,21,1800,42C1860,63,1920,126,1980,150.5C2040,175,2100,161,2160,129.5C2220,98,2280,49,2340,56C2400,63,2460,126,2520,154C2580,182,2640,175,2700,164.5C2760,154,2820,140,2880,140C2940,140,3000,154,3060,147C3120,140,3180,112,3240,108.5C3300,105,3360,126,3420,119C3480,112,3540,77,3600,56C3660,35,3720,28,3780,31.5C3840,35,3900,49,3960,52.5C4020,56,4080,49,4140,70C4200,91,4260,140,4290,164.5L4320,189L4320,210L4290,210C4260,210,4200,210,4140,210C4080,210,4020,210,3960,210C3900,210,3840,210,3780,210C3720,210,3660,210,3600,210C3540,210,3480,210,3420,210C3360,210,3300,210,3240,210C3180,210,3120,210,3060,210C3000,210,2940,210,2880,210C2820,210,2760,210,2700,210C2640,210,2580,210,2520,210C2460,210,2400,210,2340,210C2280,210,2220,210,2160,210C2100,210,2040,210,1980,210C1920,210,1860,210,1800,210C1740,210,1680,210,1620,210C1560,210,1500,210,1440,210C1380,210,1320,210,1260,210C1200,210,1140,210,1080,210C1020,210,960,210,900,210C840,210,780,210,720,210C660,210,600,210,540,210C480,210,420,210,360,210C300,210,240,210,180,210C120,210,60,210,30,210L0,210Z"></path><defs><linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(14, 165, 233, 1)" offset="0%"></stop><stop stop-color="rgba(152.272, 223.103, 255, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 50px); opacity:0.9" fill="url(#sw-gradient-1)" d="M0,63L30,80.5C60,98,120,133,180,140C240,147,300,126,360,112C420,98,480,91,540,91C600,91,660,98,720,101.5C780,105,840,105,900,91C960,77,1020,49,1080,59.5C1140,70,1200,119,1260,122.5C1320,126,1380,84,1440,80.5C1500,77,1560,112,1620,129.5C1680,147,1740,147,1800,154C1860,161,1920,175,1980,171.5C2040,168,2100,147,2160,140C2220,133,2280,140,2340,122.5C2400,105,2460,63,2520,52.5C2580,42,2640,63,2700,66.5C2760,70,2820,56,2880,63C2940,70,3000,98,3060,115.5C3120,133,3180,140,3240,150.5C3300,161,3360,175,3420,150.5C3480,126,3540,63,3600,56C3660,49,3720,98,3780,115.5C3840,133,3900,119,3960,105C4020,91,4080,77,4140,84C4200,91,4260,119,4290,133L4320,147L4320,210L4290,210C4260,210,4200,210,4140,210C4080,210,4020,210,3960,210C3900,210,3840,210,3780,210C3720,210,3660,210,3600,210C3540,210,3480,210,3420,210C3360,210,3300,210,3240,210C3180,210,3120,210,3060,210C3000,210,2940,210,2880,210C2820,210,2760,210,2700,210C2640,210,2580,210,2520,210C2460,210,2400,210,2340,210C2280,210,2220,210,2160,210C2100,210,2040,210,1980,210C1920,210,1860,210,1800,210C1740,210,1680,210,1620,210C1560,210,1500,210,1440,210C1380,210,1320,210,1260,210C1200,210,1140,210,1080,210C1020,210,960,210,900,210C840,210,780,210,720,210C660,210,600,210,540,210C480,210,420,210,360,210C300,210,240,210,180,210C120,210,60,210,30,210L0,210Z"></path></svg>
+    <svg id="wave" style="transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 210"
+         xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
+                <stop stop-color="rgba(14, 165, 233, 1)" offset="0%"></stop>
+                <stop stop-color="rgba(150.898, 222.676, 255, 1)" offset="100%"></stop>
+            </linearGradient>
+        </defs>
+        <path style="transform:translate(0, 0px); opacity:1" fill="url(#sw-gradient-0)"
+              d="M0,42L30,52.5C60,63,120,84,180,101.5C240,119,300,133,360,133C420,133,480,119,540,94.5C600,70,660,35,720,35C780,35,840,70,900,87.5C960,105,1020,105,1080,105C1140,105,1200,105,1260,101.5C1320,98,1380,91,1440,84C1500,77,1560,70,1620,56C1680,42,1740,21,1800,42C1860,63,1920,126,1980,150.5C2040,175,2100,161,2160,129.5C2220,98,2280,49,2340,56C2400,63,2460,126,2520,154C2580,182,2640,175,2700,164.5C2760,154,2820,140,2880,140C2940,140,3000,154,3060,147C3120,140,3180,112,3240,108.5C3300,105,3360,126,3420,119C3480,112,3540,77,3600,56C3660,35,3720,28,3780,31.5C3840,35,3900,49,3960,52.5C4020,56,4080,49,4140,70C4200,91,4260,140,4290,164.5L4320,189L4320,210L4290,210C4260,210,4200,210,4140,210C4080,210,4020,210,3960,210C3900,210,3840,210,3780,210C3720,210,3660,210,3600,210C3540,210,3480,210,3420,210C3360,210,3300,210,3240,210C3180,210,3120,210,3060,210C3000,210,2940,210,2880,210C2820,210,2760,210,2700,210C2640,210,2580,210,2520,210C2460,210,2400,210,2340,210C2280,210,2220,210,2160,210C2100,210,2040,210,1980,210C1920,210,1860,210,1800,210C1740,210,1680,210,1620,210C1560,210,1500,210,1440,210C1380,210,1320,210,1260,210C1200,210,1140,210,1080,210C1020,210,960,210,900,210C840,210,780,210,720,210C660,210,600,210,540,210C480,210,420,210,360,210C300,210,240,210,180,210C120,210,60,210,30,210L0,210Z"></path>
+        <defs>
+            <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
+                <stop stop-color="rgba(14, 165, 233, 1)" offset="0%"></stop>
+                <stop stop-color="rgba(152.272, 223.103, 255, 1)" offset="100%"></stop>
+            </linearGradient>
+        </defs>
+        <path style="transform:translate(0, 50px); opacity:0.9" fill="url(#sw-gradient-1)"
+              d="M0,63L30,80.5C60,98,120,133,180,140C240,147,300,126,360,112C420,98,480,91,540,91C600,91,660,98,720,101.5C780,105,840,105,900,91C960,77,1020,49,1080,59.5C1140,70,1200,119,1260,122.5C1320,126,1380,84,1440,80.5C1500,77,1560,112,1620,129.5C1680,147,1740,147,1800,154C1860,161,1920,175,1980,171.5C2040,168,2100,147,2160,140C2220,133,2280,140,2340,122.5C2400,105,2460,63,2520,52.5C2580,42,2640,63,2700,66.5C2760,70,2820,56,2880,63C2940,70,3000,98,3060,115.5C3120,133,3180,140,3240,150.5C3300,161,3360,175,3420,150.5C3480,126,3540,63,3600,56C3660,49,3720,98,3780,115.5C3840,133,3900,119,3960,105C4020,91,4080,77,4140,84C4200,91,4260,119,4290,133L4320,147L4320,210L4290,210C4260,210,4200,210,4140,210C4080,210,4020,210,3960,210C3900,210,3840,210,3780,210C3720,210,3660,210,3600,210C3540,210,3480,210,3420,210C3360,210,3300,210,3240,210C3180,210,3120,210,3060,210C3000,210,2940,210,2880,210C2820,210,2760,210,2700,210C2640,210,2580,210,2520,210C2460,210,2400,210,2340,210C2280,210,2220,210,2160,210C2100,210,2040,210,1980,210C1920,210,1860,210,1800,210C1740,210,1680,210,1620,210C1560,210,1500,210,1440,210C1380,210,1320,210,1260,210C1200,210,1140,210,1080,210C1020,210,960,210,900,210C840,210,780,210,720,210C660,210,600,210,540,210C480,210,420,210,360,210C300,210,240,210,180,210C120,210,60,210,30,210L0,210Z"></path>
+    </svg>
 </div>
 <div class="flex p-10 h-full flex-col">
     <div class="rounded-xl">
@@ -99,12 +117,6 @@
     </div>
 </div>
 <!-- MODAL ADD EVENT -->
-<script type="text/javascript">
-    function sendFormAddEvent(url) {
-        document.formAddEvent.action = url;
-        document.formAddEvent.submit();
-    }
-</script>
 <div id="modalNewEvent" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div id="bgModalNewEvent" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -131,7 +143,7 @@
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="date"
                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Date
-                                        </label>
+                                    </label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="datetime-local" name="date" id="date"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
@@ -139,7 +151,9 @@
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="duration" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (en minutes)</label>
+                                    <label for="duration"
+                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (en
+                                        minutes)</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input id="duration" name="duration" type="number" min="0"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
@@ -159,7 +173,7 @@
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                        <button id="creerEvent" type="submit" onClick="sendFormAddEvent('./events/add');"
+                        <button id="createEvent" type="submit" onClick="sendFormAddEvent('./events/add');"
                                 class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
                             Créer
                         </button>
@@ -175,250 +189,4 @@
 </div>
 <!-- END MODAL ADD EVENT-->
 </body>
-<script>
-    let curentView = "week";
-    let currentMonth = new Date().getMonth() + 1;
-    let currentDay = new Date().getDate();
-    let currentYear = new Date().getFullYear();
-
-    let firstdayWeek;
-    let lastdayWeek;
-
-
-    window.addEventListener("load", function () {
-        loadHTML("./js/views/week.html");
-        let menuButton = document.getElementById("menu-button");
-        let selectView = document.getElementById("selectView");
-        let month = document.getElementById("monthView");
-        let week = document.getElementById("weekView");
-        let day = document.getElementById("dayView");
-        let next = document.getElementById("next");
-        let prev = document.getElementById("prev");
-        let today = document.getElementById("today");
-        let titleHead = document.getElementById("titleHead");
-        let modalNewEvent = document.getElementById("modalNewEvent");
-        let addEventButton = document.getElementById("addEventButton");
-        let bgModalNewEvent = document.getElementById("bgModalNewEvent");
-        let annulerEvent = document.getElementById("annulerEvent");
-        let creerEvent = document.getElementById("creerEvent");
-
-        setUpWeek();
-
-        creerEvent.addEventListener("click", function () {
-            modalNewEvent.classList.add("hidden");
-        });
-        annulerEvent.addEventListener("click", function () {
-            modalNewEvent.classList.add("hidden");
-        });
-        bgModalNewEvent.addEventListener("click", function () {
-            modalNewEvent.classList.add("hidden");
-        });
-        addEventButton.addEventListener("click", function () {
-            modalNewEvent.classList.remove("hidden");
-        });
-        next.addEventListener("click", function () {
-            switch (curentView) {
-                case "week":
-                    nextWeek();
-                    break;
-                case "month":
-                    nextMonth();
-                    break;
-                case "day":
-                    nextDay();
-                    break;
-            }
-        });
-        prev.addEventListener("click", function () {
-            switch (curentView) {
-                case "week":
-                    prevWeek();
-                    break;
-                case "month":
-                    prevMonth();
-                    break;
-                case "day":
-                    prevDay();
-                    break;
-            }
-        });
-        today.addEventListener("click", function () {
-            if (curentView === "week") {
-                toDayWeek();
-            } else if (curentView === "month") {
-                toDayMonth();
-            } else if (curentView === "day") {
-                toDayDay();
-            }
-        });
-        month.addEventListener("click", function () {
-            loadHTML("./js/views/month.html");
-            selectView.classList.add("hidden");
-            curentView = "month";
-            changeTitleHead();
-            menuButton.innerHTML = "Month view " +
-                "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
-                "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
-                "</svg>";
-        });
-        week.addEventListener("click", function () {
-            loadHTML("./js/views/week.html");
-            titleHead.innerHTML = "Lun " + firstdayWeek.getUTCDate() + "-" + "Dim " + lastdayWeek.getUTCDate();
-            selectView.classList.add("hidden");
-            curentView = "week";
-            changeTitleHead();
-            menuButton.innerHTML = "Week view" +
-                "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
-                "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
-                "</svg>";
-
-
-        });
-        day.addEventListener("click", function () {
-            loadHTML("./js/views/day.html");
-            selectView.classList.add("hidden");
-            curentView = "day";
-            changeTitleHead();
-            menuButton.innerHTML = "Day view" +
-                "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
-                "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
-                "</svg>";
-        });
-        menuButton.addEventListener("click", function () {
-            selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
-        });
-    });
-
-    function loadHTML(file) {
-        fetch(file)
-            .then(response => response.text())
-            .then(text => document.getElementById('display').innerHTML = text);
-    }
-
-    function setUpWeek() {
-        let curr = new Date(); // get current date
-        let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-        let last = first + 6; // last day is the first day + 6
-
-        firstdayWeek = new Date(curr.setDate(first));
-        lastdayWeek = new Date(curr.setDate(last));
-        changeTitleHead();
-    }
-
-    function nextWeek() {
-        firstdayWeek.setDate(firstdayWeek.getDate() + 7);
-        lastdayWeek.setDate(lastdayWeek.getDate() + 7);
-
-        changeTitleHead();
-    }
-
-    function prevWeek() {
-        firstdayWeek.setDate(firstdayWeek.getDate() - 7);
-        lastdayWeek.setDate(lastdayWeek.getDate() - 7);
-
-        changeTitleHead();
-    }
-
-    function nextMonth() {
-        if (currentMonth === 12) {
-            currentMonth = 1;
-            currentYear++;
-        } else {
-            currentMonth++;
-        }
-        changeTitleHead();
-    }
-
-    function prevMonth() {
-        if (currentMonth === 1) {
-            currentMonth = 12;
-            currentYear--;
-        } else {
-            currentMonth--;
-        }
-        changeTitleHead();
-    }
-
-    function nextDay() {
-        currentDay++;
-        changeTitleHead();
-    }
-
-    function prevDay() {
-        currentDay--;
-        changeTitleHead();
-    }
-
-    function toDayWeek() {
-        let curr = new Date(); // get current date
-        let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-        let last = first + 6; // last day is the first day + 6
-
-        firstdayWeek = new Date(curr.setDate(first));
-        lastdayWeek = new Date(curr.setDate(last));
-        changeTitleHead();
-    }
-
-    function toDayMonth() {
-        currentMonth = new Date().getMonth() + 1;
-        currentYear = new Date().getFullYear();
-        changeTitleHead();
-    }
-
-    function toDayDay() {
-        currentDay = new Date().getDate();
-        changeTitleHead();
-    }
-
-    function changeTitleHead() {
-        switch (curentView) {
-            case "month":
-                switch (currentMonth) {
-                    case 1:
-                        titleHead.innerHTML = "Janvier" + " " + currentYear;
-                        break;
-                    case 2:
-                        titleHead.innerHTML = "Février" + " " + currentYear;
-                        break;
-                    case 3:
-                        titleHead.innerHTML = "Mars" + " " + currentYear;
-                        break;
-                    case 4:
-                        titleHead.innerHTML = "Avril" + " " + currentYear;
-                        break;
-                    case 5:
-                        titleHead.innerHTML = "Mai" + " " + currentYear;
-                        break;
-                    case 6:
-                        titleHead.innerHTML = "Juin" + " " + currentYear;
-                        break;
-                    case 7:
-                        titleHead.innerHTML = "Juillet" + " " + currentYear;
-                        break;
-                    case 8:
-                        titleHead.innerHTML = "Aout" + " " + currentYear;
-                        break;
-                    case 9:
-                        titleHead.innerHTML = "Septembre" + " " + currentYear;
-                        break;
-                    case 10:
-                        titleHead.innerHTML = "Octobre" + " " + currentYear;
-                        break;
-                    case 11:
-                        titleHead.innerHTML = "Novembre" + " " + currentYear;
-                        break;
-                    case 12:
-                        titleHead.innerHTML = "Decembre" + " " + currentYear;
-                        break;
-                }
-                break;
-            case "week":
-                titleHead.innerHTML = "Lun " + firstdayWeek.getUTCDate() + " - " + "Dim " + lastdayWeek.getUTCDate();
-                break;
-            case "day":
-                titleHead.innerHTML = "Day " + currentDay;
-                break;
-        }
-    }
-</script>
 </html>

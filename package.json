@@ -4,7 +4,8 @@
   "author": "Anthony Briot, Guillaume Zimol, Hugo Steinbach",
   "scripts": {
     "dev": "npm run development",
-    "tailwind:build": "npx tailwindcss -i public/css/in.css -o public/css/app.css --watch"
+    "tailwind:build": "npx tailwindcss -i public/css/in.css -o public/css/app.css --watch",
+    "start": "nodemon ./public/js/controllers/server.js"
   },
   "version": "1.0.0",
   "main": "index.js",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "body-parser": "^1.20.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
   }
 }
