@@ -80,12 +80,18 @@
     </div>
 </div>
 <!-- MODAL ADD EVENT -->
+<script type="text/javascript">
+    function sendFormAddEvent(url) {
+        document.formAddEvent.action = url;
+        document.formAddEvent.submit();
+    }
+</script>
 <div id="modalNewEvent" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div id="bgModalNewEvent" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                <form class="space-y-8">
+                <form name="formAddEvent" method="post" class="space-y-8">
                     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div class="space-y-6 sm:space-y-5">
                             <div>
@@ -95,20 +101,20 @@
                             </div>
                             <div class="space-y-6 sm:space-y-5">
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="event-name"
+                                    <label for="title"
                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Nom</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="event-name" id="event-name"
+                                        <input type="text" name="title" id="title"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="date-event"
+                                    <label for="date"
                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Date
                                         </label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="datetime-local" name="date-event" id="date-event"
+                                        <input type="datetime-local" name="date" id="date"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
@@ -116,7 +122,7 @@
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="duration" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (en minutes)</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input id="duration" name="duration" type="number"
+                                        <input id="duration" name="duration" type="number" min="0"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                     </div>
                                 </div>
@@ -134,7 +140,7 @@
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                        <button id="creerEvent" type="submit"
+                        <button id="creerEvent" type="submit" onClick="sendFormAddEvent('./events/add');"
                                 class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
                             Créer
                         </button>
