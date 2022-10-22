@@ -1,80 +1,211 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-white">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>Title</title>
     <link rel="stylesheet" href="../../css/app.css">
 </head>
-<body class="h-full">
-<!--
-  This example requires some changes to your config:
+<body>
+<section class="bg-white dark:bg-gray-900 ">
+  <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
+    <div class="w-full max-w-md my-5">
+      <div class="flex justify-center">
+        <h1 class="text-5xl font-bold tracking-tight sm:text-5xl md:text-5xl">
+          <span class="block lg:inline text-gray-400 dark:text-white">DP</span>
+          <span class="block text-sky-600 lg:inline -ml-2">iscine</span>
+        </h1>
+      </div>
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
-<!--
-  This example requires updating your template:
+      <div class="flex items-center justify-center mt-6">
+        <a id="displayFormConnexion" href="#" class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:text-gray-300">
+          Connexion
+        </a>
 
-  ```
-  <html class="h-full bg-white">
-  <body class="h-full">
-  ```
--->
-<div class="flex min-h-full">
-    <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div class="mx-auto w-full max-w-sm lg:w-96">
-            <div>
-                <img class="h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="DPiscine">
-                <h2 class="mt-6 text-3xl font-bold tracking-tight text-gray-900">Sign in</h2>
-            </div>
+        <a id="displayFormInscription" href="#" class="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-gray-400 dark:text-white">
+          Inscription
+        </a>
+      </div>
 
-            <div class="mt-8">
-                <div>
-                    <div class="relative mt-6">
-                        <div class="absolute inset-0 flex items-center" aria-hidden="true">
-                            <div class="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div class="relative flex justify-center text-sm">
-                            <span class="bg-white px-2 text-gray-500">Bienvenue à la piscine de Laxou</span>
-                        </div>
-                    </div>
-                </div>
+      <form id="formConnexion" action="/login" method="POST" onsubmit="return verifFormSignIn()" class="w-full max-w-md ">
+        <div class="relative flex items-center mt-3">
+                <span class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </span>
 
-                <div class="mt-6">
-                    <form action="/login" id="login" method="POST" class="space-y-6">
-                        <div>
-                            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                            <div class="mt-1">
-                                <input id="username" name="username" autocomplete="username" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            </div>
-                        </div>
-
-                        <div class="space-y-1">
-                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                            <div class="mt-1">
-                                <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                            </div>
-                        </div>
-
-                        <div>
-                            <button type="submit" class="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Sign in</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+          <input id="username" name="username" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Pseudo">
         </div>
+          <span id="mySpanUsernameSignIn" style="color:red"></span>
+        <div class="relative flex items-center mt-4">
+                <span class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </span>
+
+          <input id="password" name="password" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Mot de passe">
+        </div>
+          <span id="mySpanPasswordSignIn" style="color:red"></span>
+
+          <script>
+              let mdp_a_verif = document.getElementById("password")
+              let username = document.getElementById("username")
+              let lespanPassword = document.getElementById("mySpanPasswordSignIn")
+              let lespanUsername = document.getElementById("mySpanUsernameSignIn")
+              function verifFormSignIn() {
+                  if(mdp_a_verif.value.length === 0 && username.value.length === 0){
+                      lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
+                      lespanPassword.innerHTML = "Veuillez renseigner votre mot de passe !";
+                      return false;
+                  }
+                  else if(mdp_a_verif.value.length === 0){
+                      lespanPassword.innerHTML = "Veuillez renseigner votre mot de passe !";
+                      return false;
+                  } else if(username.value.length === 0){
+                      lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
+                      return false;
+                  }else{
+                      return true;
+                  }
+              }
+          </script>
+
+        <div class="mt-6">
+          <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+            Connexion
+          </button>
+        </div>
+      </form>
+
+
+    <form id="formInscription" action="users/add" method="POST" onsubmit="return verifFormRegister()" class="w-full max-w-md hidden">
+      <div class="relative flex items-center mt-3">
+                <span class="absolute">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                  </svg>
+                </span>
+        <input id="name" name="name" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Nom">
+      </div>
+        <span id="mySpanName" style="color:red"></span>
+
+      <div class="relative flex items-center mt-3">
+                <span class="absolute">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                  </svg>
+                </span>
+        <input id="firstName" name="firstName" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Prénom">
+      </div>
+        <span id="mySpanFirstName" style="color:red"></span>
+
+      <div class="relative flex items-center mt-3">
+                <span class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                </span>
+
+        <input id="usernameRegister" name="usernameRegister" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Pseudo">
+      </div>
+
+        <span id="mySpanUsername" style="color:red"></span>
+
+      <div class="relative flex items-center mt-8">
+                <span class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </span>
+
+        <input id="passwordRegister" name="passwordRegister" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Mot de passe">
+      </div>
+
+      <div class="relative flex items-center mt-4">
+                <span class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </span>
+
+        <input id="passwordRegisterConfirm" name="passwordRegisterConfirm" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirmer mot de passe">
+      </div>
+        <span id="mySpanPassword" style="color:red"></span>
+
+        <script>
+            let mdp_a_verif1 = document.getElementById("passwordRegister")
+            let mdp_a_verif2 = document.getElementById("passwordRegisterConfirm")
+            let usernameRegister = document.getElementById("usernameRegister")
+            let firstName = document.getElementById("firstName")
+            let name = document.getElementById("name")
+            let lespanPasswordRegister = document.getElementById("mySpanPassword")
+            let lespanUsernameRegister = document.getElementById("mySpanUsername")
+            let lespanName = document.getElementById("mySpanName")
+            let lespanFirstName = document.getElementById("mySpanFirstName")
+            function verifFormRegister() {
+                if ( mdp_a_verif1.value !== mdp_a_verif2.value){
+                    lespanPasswordRegister.innerHTML = "Les mots de passe sont différents !";
+                    return false;
+                } else if(mdp_a_verif1.value.length === 0 || mdp_a_verif2.value.length === 0){
+                    lespanPasswordRegister.innerHTML = "Veuillez remplir les deux champs !";
+                    return false;
+                } else if(usernameRegister.value.length === 0){
+                    lespanUsernameRegister.innerHTML = "Le champs pseudo est obligatoire !";
+                    return false;
+                } else if(name.value.length === 0){
+                    lespanName.innerHTML = "Le champs nom est obligatoire !";
+                    return false;
+                } else if(firstName.value.length === 0){
+                    lespanFirstName.innerHTML = "Le champs prénom est obligatoire !";
+                    return false;
+                } else{
+                    return true;
+                }
+            }
+        </script>
+
+      <div class="mt-6">
+        <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+          S'enregistrer
+        </button>
+      </div>
+    </form>
     </div>
-    <div class="relative w-0 flex-1 lg:block">
-        <img class="absolute inset-0 h-full w-full object-cover" src="https://www.grandnancy.eu/fileadmin/_processed_/0/f/csm_2018_04_27_piscine_laxou_2e0e2ef3a1.jpg" alt="">
-    </div>
-</div>
+  </div>
+</section>
 </body>
+<script>
+  window.addEventListener("load", function () {
+    let displayFormConnexion = document.getElementById("displayFormConnexion");
+    let displayFormInscription = document.getElementById("displayFormInscription");
+    let formConnexion = document.getElementById("formConnexion");
+    let formInscription = document.getElementById("formInscription");
+
+    displayFormConnexion.addEventListener("click", function () {
+      if (displayFormConnexion.classList.contains('border-gray-400')){
+        displayFormConnexion.classList.remove('border-gray-400');
+        displayFormConnexion.classList.add('border-blue-500');
+        displayFormInscription.classList.remove('border-blue-500');
+        displayFormInscription.classList.add('border-gray-400');
+        formConnexion.classList.remove('hidden');
+        formInscription.classList.add('hidden');
+      }
+    });
+
+
+    displayFormInscription.addEventListener("click", function () {
+      if (displayFormInscription.classList.contains('border-gray-400')) {
+        displayFormInscription.classList.remove('border-gray-400');
+        displayFormInscription.classList.add('border-blue-500');
+        displayFormConnexion.classList.remove('border-blue-500');
+        displayFormConnexion.classList.add('border-gray-400');
+        formInscription.classList.remove('hidden');
+        formConnexion.classList.add('hidden');
+      }
+    });
+  });
+</script>
 </html>
