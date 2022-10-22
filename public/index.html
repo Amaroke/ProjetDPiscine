@@ -9,53 +9,77 @@
 <body class="bg-sky-500">
 <div class="flex p-10 h-full flex-col bg-sky-500">
     <div class="rounded-xl">
-    <header class="flex flex-none items-center justify-between border-b border-gray-200 py-4 px-6 bg-white rounded-t-xl">
-        <h1 id="titleHead" class="text-lg font-semibold text-gray-900">
-        </h1>
-        <div class="flex items-center">
-            <div class="flex items-center rounded-md shadow-sm md:items-stretch">
-                <button id="prev" type="button" class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
-                    <span class="sr-only">Previous month</span>
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <button id="today" type="button" class="hidden border-t border-b border-gray-300 bg-white px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block">Today</button>
-                <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
-                <button id="next" type="button" class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
-                    <span class="sr-only">Next month</span>
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-            <div class="hidden md:ml-4 md:flex md:items-center">
-                <div class="relative">
-                    <button class="flex items-center rounded-md border border-gray-300 bg-white py-2 pl-3 pr-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50" id="menu-button" aria-expanded="false" aria-haspopup="true" >
-                        Week view
-                        <svg class="ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+        <header class="flex flex-none items-center justify-between border-b border-gray-200 py-4 px-6 bg-white rounded-t-xl">
+            <h1 id="titleHead" class="text-lg font-semibold text-gray-900">
+            </h1>
+            <div class="flex items-center">
+                <div class="flex items-center rounded-md shadow-sm md:items-stretch">
+                    <button id="prev" type="button"
+                            class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
+                        <span class="sr-only">Previous month</span>
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                                  clip-rule="evenodd"/>
                         </svg>
                     </button>
-                    <div class="hidden Entering: transition ease-out duration-100 From: transform opacity-0 scale-95 To: transform opacity-100 Leaving: transition ease-in duration-75 From: transform opacity-100 scale-100
-                    To: transform opacity-0 scale-95 scale-100 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" id="selectView">
-                        <div class="py-1" role="none">
-                            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="dayView">Day view</a>
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="weekView">Week view</a>
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="monthView">Month view</a>
+                    <button id="today" type="button"
+                            class="hidden border-t border-b border-gray-300 bg-white px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block">
+                        Today
+                    </button>
+                    <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
+                    <button id="next" type="button"
+                            class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
+                        <span class="sr-only">Next month</span>
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                             aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                                  clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="hidden md:ml-4 md:flex md:items-center">
+                    <div class="relative">
+                        <button class="flex items-center rounded-md border border-gray-300 bg-white py-2 pl-3 pr-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                                id="menu-button" aria-expanded="false" aria-haspopup="true">
+                            Week view
+                            <svg class="ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                      d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                        <div class="hidden Entering: transition ease-out duration-100 From: transform opacity-0 scale-95 To: transform opacity-100 Leaving: transition ease-in duration-75 From: transform opacity-100 scale-100
+                    To: transform opacity-0 scale-95 scale-100 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                             role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
+                             id="selectView">
+                            <div class="py-1" role="none">
+                                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                                   role="menuitem" tabindex="-1" id="dayView">Day view</a>
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                                   role="menuitem" tabindex="-1" id="weekView">Week view</a>
+                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                                   role="menuitem" tabindex="-1" id="monthView">Month view</a>
+                            </div>
                         </div>
                     </div>
+                    <div class="ml-6 h-6 w-px bg-gray-300"></div>
+                    <button id="addEventButton"
+                            class="ml-6 rounded-md border border-transparent bg-sky-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
+                        Add event
+                    </button>
                 </div>
-                <div class="ml-6 h-6 w-px bg-gray-300"></div>
-                <button id="addEventButton" class="ml-6 rounded-md border border-transparent bg-sky-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">Add event</button>
             </div>
+        </header>
+        <div id="display" class="rounded-b-xl">
         </div>
-    </header>
-    <div id="display" class="rounded-b-xl">
-    </div>
     </div>
 </div>
+<!-- MODAL ADD EVENT -->
 <div id="modalNewEvent" class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
     <div id="bgModalNewEvent" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -66,84 +90,69 @@
                         <div class="space-y-6 sm:space-y-5">
                             <div>
                                 <h3 class="text-lg font-medium leading-6 text-gray-900">Ajouter un nouvel événement</h3>
-                                <p class="mt-1 max-w-2xl text-sm text-gray-500">Veuillez remplir les informations puis cliquer sur créer !</p>
+                                <p class="mt-1 max-w-2xl text-sm text-gray-500">Veuillez remplir les informations et
+                                    cliquer sur créer !</p>
                             </div>
                             <div class="space-y-6 sm:space-y-5">
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="first-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">First name</label>
+                                    <label for="event-name"
+                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Nom</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
+                                        <input type="text" name="event-name" id="event-name"
+                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="last-name" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Last name</label>
+                                    <label for="date-event"
+                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Date
+                                        </label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
+                                        <input type="datetime-local" name="date-event" id="date-event"
+                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="email" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Email address</label>
+                                    <label for="duration" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (en minutes)</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input id="email" name="email" type="email" autocomplete="email" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                                        <input id="duration" name="duration" type="number"
+                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="country" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Country</label>
+                                    <label for="description"
+                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Description</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <select id="country" name="country" autocomplete="country-name" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
-                                            <option>United States</option>
-                                            <option>Canada</option>
-                                            <option>Mexico</option>
-                                        </select>
+                                        <input id="description" name="description" type="text"
+                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     </div>
                                 </div>
 
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="street-address" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Street address</label>
-                                    <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="street-address" id="street-address" autocomplete="street-address" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                                    </div>
-                                </div>
-
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="city" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">City</label>
-                                    <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                </div>
-
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="region" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">State / Province</label>
-                                    <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="region" id="region" autocomplete="address-level1" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                </div>
-
-                                <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
-                                    <label for="postal-code" class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">ZIP / Postal code</label>
-                                    <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
-                <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                    <button id="creerEvent" type="submit" class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">Créer</button>
-                    <button id="annulerEvent" class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">Annuler</button>
-                </div>
+                    <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                        <button id="creerEvent" type="submit"
+                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
+                            Créer
+                        </button>
+                        <button id="annulerEvent"
+                                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
+                            Annuler
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<!-- END MODAL ADD EVENT-->
 </body>
 <script>
     let curentView = "week";
-    let currentMonth = new Date().getMonth()+1;
+    let currentMonth = new Date().getMonth() + 1;
     let currentDay = new Date().getDate();
     let currentYear = new Date().getFullYear();
 
@@ -151,7 +160,7 @@
     let lastdayWeek;
 
 
-    window.addEventListener("load", function() {
+    window.addEventListener("load", function () {
         loadHTML("./js/views/week.html");
         let menuButton = document.getElementById("menu-button");
         let selectView = document.getElementById("selectView");
@@ -170,19 +179,19 @@
 
         setUpWeek();
 
-        creerEvent.addEventListener("click", function() {
+        creerEvent.addEventListener("click", function () {
             modalNewEvent.classList.add("hidden");
         });
-        annulerEvent.addEventListener("click", function() {
+        annulerEvent.addEventListener("click", function () {
             modalNewEvent.classList.add("hidden");
         });
-        bgModalNewEvent.addEventListener("click", function() {
+        bgModalNewEvent.addEventListener("click", function () {
             modalNewEvent.classList.add("hidden");
         });
-        addEventButton.addEventListener("click", function() {
+        addEventButton.addEventListener("click", function () {
             modalNewEvent.classList.remove("hidden");
         });
-        next.addEventListener("click", function() {
+        next.addEventListener("click", function () {
             switch (curentView) {
                 case "week":
                     nextWeek();
@@ -195,7 +204,7 @@
                     break;
             }
         });
-        prev.addEventListener("click", function() {
+        prev.addEventListener("click", function () {
             switch (curentView) {
                 case "week":
                     prevWeek();
@@ -208,16 +217,16 @@
                     break;
             }
         });
-        today.addEventListener("click", function() {
-            if (curentView == "week") {
+        today.addEventListener("click", function () {
+            if (curentView === "week") {
                 toDayWeek();
-            } else if (curentView == "month") {
+            } else if (curentView === "month") {
                 toDayMonth();
-            } else if (curentView == "day") {
+            } else if (curentView === "day") {
                 toDayDay();
             }
         });
-        month.addEventListener("click", function() {
+        month.addEventListener("click", function () {
             loadHTML("./js/views/month.html");
             selectView.classList.add("hidden");
             curentView = "month";
@@ -227,43 +236,43 @@
                 "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
                 "</svg>";
         });
-        week.addEventListener("click", function() {
+        week.addEventListener("click", function () {
             loadHTML("./js/views/week.html");
-            titleHead.innerHTML = "Lun " +firstdayWeek.getUTCDate() + "-" + "Dim " +lastdayWeek.getUTCDate();
+            titleHead.innerHTML = "Lun " + firstdayWeek.getUTCDate() + "-" + "Dim " + lastdayWeek.getUTCDate();
             selectView.classList.add("hidden");
             curentView = "week";
             changeTitleHead();
-            menuButton.innerHTML = "Week view"+
+            menuButton.innerHTML = "Week view" +
                 "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
                 "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
                 "</svg>";
 
 
         });
-        day.addEventListener("click", function() {
+        day.addEventListener("click", function () {
             loadHTML("./js/views/day.html");
             selectView.classList.add("hidden");
             curentView = "day";
             changeTitleHead();
-            menuButton.innerHTML = "Day view"+
+            menuButton.innerHTML = "Day view" +
                 "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
                 "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
                 "</svg>";
         });
-        menuButton.addEventListener("click", function(){
+        menuButton.addEventListener("click", function () {
             selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
         });
     });
 
-    function loadHTML(file){
+    function loadHTML(file) {
         fetch(file)
-            .then(response=> response.text())
-            .then(text=> document.getElementById('display').innerHTML = text);
+            .then(response => response.text())
+            .then(text => document.getElementById('display').innerHTML = text);
     }
 
-    function setUpWeek(){
+    function setUpWeek() {
         let curr = new Date(); // get current date
-        let first = curr.getDate() - curr.getDay()+1; // First day is the day of the month - the day of the week
+        let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
         let last = first + 6; // last day is the first day + 6
 
         firstdayWeek = new Date(curr.setDate(first));
@@ -271,21 +280,22 @@
         changeTitleHead();
     }
 
-    function nextWeek(){
+    function nextWeek() {
         firstdayWeek.setDate(firstdayWeek.getDate() + 7);
         lastdayWeek.setDate(lastdayWeek.getDate() + 7);
 
         changeTitleHead();
     }
-    function prevWeek(){
+
+    function prevWeek() {
         firstdayWeek.setDate(firstdayWeek.getDate() - 7);
         lastdayWeek.setDate(lastdayWeek.getDate() - 7);
 
         changeTitleHead();
     }
 
-    function nextMonth(){
-        if (currentMonth === 12){
+    function nextMonth() {
+        if (currentMonth === 12) {
             currentMonth = 1;
             currentYear++;
         } else {
@@ -293,8 +303,9 @@
         }
         changeTitleHead();
     }
-    function prevMonth(){
-        if (currentMonth === 1){
+
+    function prevMonth() {
+        if (currentMonth === 1) {
             currentMonth = 12;
             currentYear--;
         } else {
@@ -303,18 +314,19 @@
         changeTitleHead();
     }
 
-    function nextDay(){
+    function nextDay() {
         currentDay++;
         changeTitleHead();
     }
-    function prevDay(){
+
+    function prevDay() {
         currentDay--;
         changeTitleHead();
     }
 
-    function toDayWeek(){
+    function toDayWeek() {
         let curr = new Date(); // get current date
-        let first = curr.getDate() - curr.getDay()+1; // First day is the day of the month - the day of the week
+        let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
         let last = first + 6; // last day is the first day + 6
 
         firstdayWeek = new Date(curr.setDate(first));
@@ -322,18 +334,18 @@
         changeTitleHead();
     }
 
-    function toDayMonth(){
-        currentMonth = new Date().getMonth()+1;
+    function toDayMonth() {
+        currentMonth = new Date().getMonth() + 1;
         currentYear = new Date().getFullYear();
         changeTitleHead();
     }
 
-    function toDayDay(){
+    function toDayDay() {
         currentDay = new Date().getDate();
         changeTitleHead();
     }
 
-    function changeTitleHead(){
+    function changeTitleHead() {
         switch (curentView) {
             case "month":
                 switch (currentMonth) {
@@ -376,7 +388,7 @@
                 }
                 break;
             case "week":
-                titleHead.innerHTML = "Lun " +firstdayWeek.getUTCDate() + " - " + "Dim " +lastdayWeek.getUTCDate();
+                titleHead.innerHTML = "Lun " + firstdayWeek.getUTCDate() + " - " + "Dim " + lastdayWeek.getUTCDate();
                 break;
             case "day":
                 titleHead.innerHTML = "Day " + currentDay;

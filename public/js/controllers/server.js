@@ -39,7 +39,7 @@ app.post('/events/add', (req, res) => {
     let event = {
         "user" : req.query.user,
         "title" : req.query.title,
-        "date" : req.query.date,
+        "date" : new Date(req.query.date),
         "duration" : req.query.duration
     }
     events.addEvent(event)
