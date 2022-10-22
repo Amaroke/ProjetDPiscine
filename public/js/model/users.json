@@ -1,1 +1,1 @@
-{"users":[{"login":"user1","password":"XXX","name":"NAME","first_name":"FNAME"},{"login":"user2","password":"XXX","name":"NAME","first_name":"FNAME"},{"login":"user3","password":"XXX","name":"NAME","first_name":"FNAME"},{"login":"pseudo","password":"test","name":"nom","first_name":"prenom"},{"login":"test","password":"test","name":"ttest","first_name":"test"}]}
+{"users":[]}
