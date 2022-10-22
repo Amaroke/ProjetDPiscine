@@ -1,3 +1,5 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+@font-face { font-family: 'Batuphat'; src: url('../font/Batuphat.otf'); }
