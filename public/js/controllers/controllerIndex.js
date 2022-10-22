@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
     let addEventButton = document.getElementById("addEventButton");
     let bgModalNewEvent = document.getElementById("bgModalNewEvent");
     let annulerEvent = document.getElementById("annulerEvent");
-    let creerEvent = document.getElementById("creerEvent");
+    let creerEvent = document.getElementById("createEvent");
 
     setUpWeek();
 
