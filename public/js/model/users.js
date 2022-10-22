@@ -1,4 +1,5 @@
 const json = require("./users.json");
+const fs = require("fs");
 module.exports = {
     showUsers: function () {
         return JSON.stringify(json)
@@ -14,5 +15,15 @@ module.exports = {
             }
         })
         return reponse
+    },addUser: function (use,pswd,name,firstName){
+        let user = {
+            "login" : use,
+            "password": pswd,
+            "name" : name,
+            "first_name" : firstName,
+        }
+        json.users.push(user)
+        fs.writeFileSync("./public/js/model/users.json", JSON.stringify(json))
     }
+
 }

@@ -11,7 +11,7 @@ app.use(express.static(__dirname + '/../../../public'));
 let urlEncodedParser = bodyParser.urlencoded({extended: false});
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname + '/../views/login.html'));
+    res.sendFile(path.join(__dirname + '/../views/register.html'));
 })
 
 // Events
@@ -46,15 +46,24 @@ app.post('/events/delete/all', (req, res) => {
     res.redirect("/")
 })
 
+app.post('/users/add', urlEncodedParser, (req, res) => {
+    let use = req.body.usernameRegister;
+    let pswd = req.body.passwordRegister;
+    let name = req.body.name;
+    let firstName = req.body.firstName;
+    users.addUser(use,pswd,name,firstName)
+    res.redirect("/login");
+})
+
 
 app.post('/login', urlEncodedParser, (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     if (users.verif(username, password) === true) {
-        res.sendFile(path.join(__dirname + '/../../index.html'));
+        res.redirect("/");
     } else {
         //faire un truc plus style
-        res.status(401)
+        res.status(404)
     }
 });
 
