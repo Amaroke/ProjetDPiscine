@@ -47,9 +47,21 @@ module.exports = {
         })
         return events
     },
-    addEvent: function (event) {
+    addEvent: function (req) {
+        let event = {
+            //TODO user, id
+            "user" : "",
+            "id": "",
+            "title" : req.title,
+            "date" : new Date(req.date),
+            "duration" : req.duration,
+            "description": req.description
+        }
         json.events.push(event)
         fs.writeFileSync("./public/js/model/events.json", JSON.stringify(json))
+    },
+    deleteAll: function() {
+        fs.writeFileSync("./public/js/model/events.json", '{"events":[]}')
     }
 }
 

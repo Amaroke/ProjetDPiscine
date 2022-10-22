@@ -35,16 +35,17 @@ app.get('/events/year', (req, res) => {
     res.send(events.showEventsYear(new Date(req.query.date)))
 })
 
-app.post('/events/add', (req, res) => {
-    let event = {
-        "user" : req.query.user,
-        "title" : req.query.title,
-        "date" : new Date(req.query.date),
-        "duration" : req.query.duration
-    }
-    events.addEvent(event)
-    res.sendFile(path.join(__dirname + '/../../index.html'));
+app.post('/events/add', urlEncodedParser, (req, res) => {
+    events.addEvent(req.body)
+    res.redirect("/");
 })
+
+// Attention, utiliser avec postman pour reset events.json
+app.post('/events/delete/all', (req, res) => {
+    events.deleteAll()
+    res.redirect("/")
+})
+
 
 app.post('/login', urlEncodedParser, (req, res) => {
     let username = req.body.username;
