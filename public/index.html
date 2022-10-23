@@ -168,7 +168,11 @@
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                     </div>
                                 </div>
-
+                                <input id="user" name="user" value="" type="hidden">
+                                <script>
+                                    console.log(localStorage)
+                                    document.getElementById("user").value = localStorage.getItem("username").toString();
+                                </script>
                             </div>
                         </div>
                     </div>

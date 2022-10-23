@@ -62,19 +62,21 @@
                     let username = document.getElementById("username")
                     let lespanPassword = document.getElementById("mySpanPasswordSignIn")
                     let lespanUsername = document.getElementById("mySpanUsernameSignIn")
-
+                    let response = false;
                     function verifFormSignIn() {
-                        if (mdp_a_verif.value.length === 0 && username.value.length === 0) {
-                            lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
+                        if (mdp_a_verif.value.length === 0) {
                             lespanPassword.innerHTML = "Veuillez renseigner votre mot de passe !";
-                            return false;
-                        } else if (mdp_a_verif.value.length === 0) {
-                            lespanPassword.innerHTML = "Veuillez renseigner votre mot de passe !";
-                            return false;
-                        } else if (username.value.length === 0) {
+                        }
+                        if (mdp_a_verif.value.length !== 0 ) {
+                            lespanPassword.innerHTML = "";
+                        }
+                        if (username.value.length === 0) {
                             lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
-                            return false;
-                        } else {
+                        }
+                        if (username.value.length !== 0) {
+                            lespanUsername.innerHTML = "";
+                        }
+                        if(username.value.length !== 0 && mdp_a_verif.value.length !== 0 ) {
                             let a = username.value
                             let b = mdp_a_verif.value
                             let data = {username: a, password: b}
@@ -89,15 +91,15 @@
                                         return response.json()
                                     } else {
                                         window.location="/"
+                                        localStorage.setItem("username", document.getElementById("username").value)
+                                        console.log(localStorage)
                                     }
                                 }).then(data => {
                                 if (data.error === "username") {
                                     lespanUsername.innerHTML = "Utilisateur inexistant !";
-                                    return false;
                                 }
                                 if (data.error === "password") {
                                     lespanPassword.innerHTML = "Mauvais mot de passe !";
-                                    return false;
                                 }
                             })
 

@@ -54,9 +54,10 @@ module.exports = {
     },
 
     addEvent: function (req) {
+        console.log(req.user)
         let event = {
             // TODO
-            "user": "TODO",
+            "user": req.user,
             "id": "TODO",
             "title": req.title,
             "date": new Date(req.date),
