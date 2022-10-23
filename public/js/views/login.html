@@ -26,15 +26,14 @@
         </a>
       </div>
 
-      <form id="formConnexion" action="/login" method="POST" onsubmit="return verifFormSignIn()" class="w-full max-w-md ">
+      <form id="formConnexion" method="POST" onsubmit="return verifFormSignIn()" class="w-full max-w-md ">
         <div class="relative flex items-center mt-3">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </span>
-            //TODO Il manque plein de label
-          <input id="username" name="username" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Pseudo">
+                <input id="username" name="username" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Pseudo">
         </div>
           <span id="mySpanUsernameSignIn" style="color:red"></span>
         <div class="relative flex items-center mt-4">
@@ -43,19 +42,22 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                 </span>
-
-          <input id="password" name="password" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Mot de passe">
+                <input id="password" name="password" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Mot de passe">
         </div>
           <span id="mySpanPasswordSignIn" style="color:red"></span>
 
           <script>
-              // TODO CHECK LE WRONG
+              function getCurrentURL () {
+                  return window.location.href
+              }
+              let url = getCurrentURL()
+              let problem = url.split('?wrong=')[1];
               let mdp_a_verif = document.getElementById("password")
               let username = document.getElementById("username")
               let lespanPassword = document.getElementById("mySpanPasswordSignIn")
               let lespanUsername = document.getElementById("mySpanUsernameSignIn")
               function verifFormSignIn() {
-                  if(mdp_a_verif.value.length === 0 && username.value.length === 0){
+                  if(mdp_a_verif.value.length === 0 && username.value.length === 0 ){
                       lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
                       lespanPassword.innerHTML = "Veuillez renseigner votre mot de passe !";
                       return false;
@@ -66,18 +68,26 @@
                   } else if(username.value.length === 0){
                       lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
                       return false;
-                  }else{
+                  } else{
                       return true;
                   }
               }
           </script>
 
         <div class="mt-6">
-          <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+          <button id="boutonConnexion" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
             Connexion
           </button>
         </div>
       </form>
+
+        <script src="../controllers/controllerLogin.js">
+            axiosCall();
+
+            let boutonConnexion = document.getElementById("boutonConnexion");
+            boutonConnexion.addEventListener("click", function(){ localStorage.setItem("username", document.getElementById("username").innerText); });
+            console.log(localStorage);
+        </script>
 
 
     <form id="formInscription" action="users/add" method="POST" onsubmit="return verificationFormRegister()" class="w-full max-w-md hidden">
@@ -88,7 +98,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                   </svg>
                 </span>
-        <input id="name" name="name" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Nom">
+              <input id="name" name="name" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Nom">
       </div>
         <span id="mySpanName" style="color:red"></span>
 
@@ -99,7 +109,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                   </svg>
                 </span>
-        <input id="firstName" name="firstName" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Prénom">
+              <input id="firstName" name="firstName" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Prénom">
       </div>
         <span id="mySpanFirstName" style="color:red"></span>
 
@@ -109,8 +119,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                 </span>
-
-        <input id="usernameRegister" name="usernameRegister" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Pseudo">
+            <input id="usernameRegister" name="usernameRegister" type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Pseudo">
       </div>
 
         <span id="mySpanUsername" style="color:red"></span>
@@ -121,8 +130,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                 </span>
-
-        <input id="passwordRegister" name="passwordRegister" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Mot de passe">
+            <input id="passwordRegister" name="passwordRegister" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Mot de passe">
       </div>
 
       <div class="relative flex items-center mt-4">
@@ -131,8 +139,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                 </span>
-
-        <input id="passwordRegisterConfirm" name="passwordRegisterConfirm" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirmer mot de passe">
+            <input id="passwordRegisterConfirm" name="passwordRegisterConfirm" type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirmer mot de passe">
       </div>
         <span id="mySpanPassword" style="color:red"></span>
 

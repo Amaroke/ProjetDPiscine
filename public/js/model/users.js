@@ -4,33 +4,32 @@ const fs = require("fs");
 module.exports = {
 
     existUser: function (loginP) {
-        const objUsers = require('./users.json')
-        objUsers.users.forEach(function (user) {
+        let response = false;
+        json.users.forEach(function (user) {
             const login = user.login
             if (login === loginP) {
-                return true;
+                response = true;
             }
         })
-        return false
+        return response
     },
 
     validUser: function (loginP, passwordP) {
-        const objUsers = require('./users.json')
-        objUsers.users.forEach(function (user) {
+        let response = false;
+        json.users.forEach(function (user) {
             const login = user.login
             const password = user.password
             if (login === loginP && password === passwordP) {
-                return true
+                response = true
             }
         })
-        return false
+        return response
     },
 
     addUser: function (req) {
-        // TODO Utiliser des vrais noms
         let user = {
-            "login": req.use,
-            "password": req.pswd,
+            "login": req.usernameRegister,
+            "password": req.passwordRegister,
             "name": req.name,
             "first_name": req.firstName,
         }

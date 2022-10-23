@@ -3,6 +3,7 @@ const users = require('../model/users.js')
 const express = require('express')
 const bodyParser = require("body-parser")
 const path = require("path");
+const {existUser} = require("../model/users");
 const app = express()
 const urlEncodedParser = bodyParser.urlencoded({extended: false});
 
@@ -19,17 +20,17 @@ app.get('/login', (req, res) => {
 app.post('/login', urlEncodedParser, (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    if (users.existUser(username) === true) {
+    if (users.existUser(username)) {
         if (users.validUser(username, password) === true) {
             res.status(200)
             res.redirect("/");
         } else {
             res.status(401)
-            res.redirect("/login?wrong=password")
+            res.end("password")
         }
     } else {
         res.status(401)
-        res.redirect("/login?wrong=username")
+        res.end("username")
     }
 });
 
