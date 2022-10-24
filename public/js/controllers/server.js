@@ -90,9 +90,15 @@ app.delete('/events/delete/all', (req, res) => {
 
 // Users
 app.post('/users/add', (req, res) => {
-    users.addUser(req.body)
-    res.sendStatus(200)
+    let username = req.body.usernameSignUp;
+    if (users.existUser(username)) {
+        res.status(401).json({error: "username"})
+    } else {
+        users.addUser(req.body)
+        res.sendStatus(200)
+    }
 })
+
 
 app.delete('/users/delete/all', (req, res) => {
     users.deleteAll()

@@ -66,7 +66,7 @@
             </form>
             <!-- END FORM SIGNING -->
             <!-- FORM SIGNUP -->
-            <form id="formInscription" action="users/add" method="POST" onsubmit="return verificationFormSignUp()"
+            <form id="formInscription" method="POST" onsubmit="event.preventDefault(); verificationFormSignUp()"
                   class="w-full max-w-md hidden">
                 <div class="relative flex items-center mt-3">
                 <span class="absolute">
@@ -197,7 +197,7 @@
             let usernameValue = usernameToCheck.value
             let passwordValue = passwordToCheck.value
             let data = {username: usernameValue, password: passwordValue}
-            fetch("/login",
+            fetch('/auth',
                 {
                     method: "POST",
                     headers: {"Content-Type": "application/json"},
@@ -232,9 +232,6 @@
         let invalidUsernameSignUp = document.getElementById("invalidUsernameSignUp")
         let invalidName = document.getElementById("invalidName")
         let invalidFirstName = document.getElementById("invalidFirstName")
-        if (passwordToCheckSignUp.value === passwordToCheckConfirm.value && passwordToCheckSignUp.value.length !== 0 && passwordToCheckConfirm.value.length !== 0 && usernameToCheckSignUp.value.length !== 0 && name.value.length !== 0 && firstName.value.length !== 0) {
-            return true
-        }
         invalidPasswordSignUp.innerHTML =
             passwordToCheckSignUp.value.length === 0 || passwordToCheckConfirm.value.length === 0 ?
                 "Veuillez remplir les deux champ !" :
@@ -249,8 +246,34 @@
         invalidFirstName.innerHTML =
             firstName.value.length === 0 ?
                 "Le champ prénom est obligatoire !" : "";
-        return false
-        // TODO Ajouter la partie post pour vérifier que l'utilisateur n'existe pas déjà
+        if (passwordToCheckSignUp.value === passwordToCheckConfirm.value && passwordToCheckSignUp.value.length !== 0 && passwordToCheckConfirm.value.length !== 0 && usernameToCheckSignUp.value.length !== 0 && name.value.length !== 0 && firstName.value.length !== 0) {
+            let usernameSignUp = usernameToCheckSignUp.value
+            let passwordSignUp = passwordToCheckSignUp.value
+            let data = {
+                usernameSignUp: usernameSignUp,
+                passwordSignUp: passwordSignUp,
+                name: name.value,
+                firstName: firstName.value
+            }
+            fetch("/users/add",
+                {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.status !== 200) {
+                        return response.json()
+                    } else {
+                        window.location = "/auth"
+                    }
+                }).then(data => {
+                if (data.error === "username") {
+                    invalidUsernameSignUp.innerHTML = "Login déjà existant !";
+                }
+            })
+            return true;
+        }
     }
 </script>
 </html>
