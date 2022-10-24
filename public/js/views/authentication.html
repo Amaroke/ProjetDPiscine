@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../../css/app.css">
-    <script src="../controllers/controllerAuthentication.js"></script>
+    <!--<script src="../controllers/controllerAuthentication.js"></script>-->
 </head>
 <body>
 <section class="bg-white dark:bg-gray-900 ">
@@ -209,6 +209,7 @@
                     } else {
                         window.location = "/"
                         localStorage.setItem("username", document.getElementById("username").value)
+                        return true
                     }
                 }).then(data => {
                 if (data.error === "username") {
@@ -218,7 +219,7 @@
                     invalidPassword.innerHTML = "Mauvais mot de passe !";
                 }
             })
-            return true;
+            return true
         }
     }
 
@@ -266,13 +267,14 @@
                         return response.json()
                     } else {
                         window.location = "/auth"
+                        return true
                     }
                 }).then(data => {
                 if (data.error === "username") {
                     invalidUsernameSignUp.innerHTML = "Login déjà existant !";
                 }
             })
-            return true;
+            return true
         }
     }
 </script>

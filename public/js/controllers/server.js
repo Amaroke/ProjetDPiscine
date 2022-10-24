@@ -90,6 +90,7 @@ app.delete('/events/delete/all', (req, res) => {
 
 // Users
 app.post('/users/add', (req, res) => {
+    console.log(req.body)
     let username = req.body.usernameSignUp;
     if (users.existUser(username)) {
         res.status(401).json({error: "username"})
@@ -106,7 +107,7 @@ app.delete('/users/delete/all', (req, res) => {
 })
 
 
-// Easter-eggs : https://developer.mozilla.org/fr/docs/Web/HTTP/Status/418
+// Easter egg : https://developer.mozilla.org/fr/docs/Web/HTTP/Status/418
 app.get('/coffee', (req, res) => {
     res.sendStatus(418)
 })
