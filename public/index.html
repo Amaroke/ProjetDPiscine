@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--suppress CssNoGenericFontName -->
+<!--suppress CssNoGenericFontName, JSDeprecatedSymbols -->
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -123,7 +123,7 @@
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                <form name="formAddEvent" method="post" class="space-y-8">
+                <form name="formAddEvent" method="post" onsubmit="event.preventDefault(); verificationFormAddEvent()" class="space-y-8">
                     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div class="space-y-6 sm:space-y-5">
                             <div>
@@ -138,9 +138,10 @@
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="text" name="title" id="title"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
+                                        <span id="invalidTitle" style="color:red"></span>
                                     </div>
-                                </div>
 
+                                </div>
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="date"
                                            class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Date
@@ -148,16 +149,17 @@
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="datetime-local" name="date" id="date"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
+                                        <span id="invalidDate" style="color:red"></span>
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="duration"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (en
-                                        minutes)</label>
+                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (minutes)</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input id="duration" name="duration" type="number" min="0"
+                                        <input id="duration" name="duration" type="number" min="1" max="1440"
                                                class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                        <span id="invalidDuration" style="color:red"></span>
                                     </div>
                                 </div>
 
@@ -174,11 +176,10 @@
                         </div>
                     </div>
                     <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                        <button id="createEvent" type="submit" onClick="sendFormAddEvent('./events/add');"
-                                class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
+                        <button class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
                             Créer
                         </button>
-                        <button id="cancelAdd" onClick="cancelAddEvent()"
+                        <button id="cancelAdd" onClick="cancelAdd()"
                                 class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
                             Annuler
                         </button>

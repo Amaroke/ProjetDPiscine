@@ -21,7 +21,7 @@ app.post('/auth', (req, res) => {
     let password = req.body.password;
     if (users.existUser(username)) {
         if (users.validUser(username, password)) {
-            res.status(200).send()
+            res.sendStatus(200)
         } else {
             res.status(401).send({error: "password"})
         }
@@ -102,14 +102,13 @@ app.delete('/users/delete/all', (req, res) => {
 
 // Easter-eggs : https://developer.mozilla.org/fr/docs/Web/HTTP/Status/418
 app.get('/coffee', (req, res) => {
-    res.sendStatus(200)
+    res.sendStatus(418)
 })
 
 
 // Unknown endpoint
 app.use((req, res) => {
-    res.status(404);
-    res.redirect("/")
+    res.sendStatus(404);
 })
 
 

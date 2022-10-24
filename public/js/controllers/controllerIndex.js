@@ -1,7 +1,20 @@
 // Modal add event
-function sendFormAddEvent(url) {
-    document.formAddEvent.action = url;
-    document.formAddEvent.submit();
+function verificationFormAddEvent() {
+    let titleToCheck = document.getElementById("title")
+    let dateToCheck = document.getElementById("date")
+    let durationToCheck = document.getElementById("duration")
+    let invalidTitle = document.getElementById("invalidTitle")
+    let invalidDate = document.getElementById("invalidDate")
+    let invalidDuration = document.getElementById("invalidDuration")
+    if (titleToCheck.value.length !== 0 &&
+        dateToCheck.value.length !== 0 &&
+        durationToCheck.value.length !== 0) {
+        // TODO Ajouter la partie pour vérifier que l'évènement ne se superpose pas avec un autre et l'ajouter.
+    }
+    invalidTitle.innerHTML = titleToCheck.value.length === 0 ? "Il faut renseigner un nom !" : ""
+    invalidDate.innerHTML = dateToCheck.value.length === 0 ? "Il faut renseigner une date !" : ""
+    invalidDuration.innerHTML = durationToCheck.value.length === 0 ? "Il faut renseigner une durée !" : ""
+    return false
 }
 
 // TODO FAUT TRIER tout ce qui a en dessous
@@ -30,13 +43,9 @@ window.addEventListener("load", function () {
     let addEventButton = document.getElementById("addEventButton");
     let bgModalNewEvent = document.getElementById("bgModalNewEvent");
     let annulerEvent = document.getElementById("cancelAdd");
-    let creerEvent = document.getElementById("createEvent");
 
     setUpWeek();
 
-    creerEvent.addEventListener("click", function () {
-        modalNewEvent.classList.add("hidden");
-    });
     annulerEvent.addEventListener("click", function () {
         modalNewEvent.classList.add("hidden");
     });
