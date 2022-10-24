@@ -54,11 +54,13 @@ module.exports = {
     },
 
     addEvent: function (req) {
-        console.log(req.user)
+        let newId = 0
+        if (json.events.length > 0) {
+            newId = json.events[json.events.length - 1].id + 1
+        }
         let event = {
-            // TODO
             "user": req.user,
-            "id": "TODO",
+            "id": newId,
             "title": req.title,
             "date": new Date(req.date),
             "duration": req.duration,

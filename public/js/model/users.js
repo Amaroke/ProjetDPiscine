@@ -28,8 +28,8 @@ module.exports = {
 
     addUser: function (req) {
         let user = {
-            "login": req.usernameRegister,
-            "password": req.passwordRegister,
+            "login": req.usernameSignUp,
+            "password": req.passwordSignUp,
             "name": req.name,
             "first_name": req.firstName,
         }

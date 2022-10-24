@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<!--suppress HtmlFormInputWithoutLabel, JSDeprecatedSymbols -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="../../css/app.css">
+    <script src="../controllers/controllerAuthentication.js"></script>
 </head>
 <body>
 <section class="bg-white dark:bg-gray-900 ">
@@ -27,8 +29,8 @@
                     Inscription
                 </a>
             </div>
-
-            <form id="formConnexion" method="POST" onsubmit="event.preventDefault(); verifFormSignIn()"
+            <!-- FORM SIGNING -->
+            <form id="formConnexion" method="POST" onsubmit="event.preventDefault(); verificationFormSignIn()"
                   class="w-full max-w-md ">
                 <div class="relative flex items-center mt-3">
                 <span class="absolute">
@@ -42,7 +44,7 @@
                            class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Pseudo">
                 </div>
-                <span id="mySpanUsernameSignIn" style="color:red"></span>
+                <span id="invalidUsername" style="color:red"></span>
                 <div class="relative flex items-center mt-4">
                 <span class="absolute">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500"
@@ -55,69 +57,16 @@
                            class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Mot de passe">
                 </div>
-                <span id="mySpanPasswordSignIn" style="color:red"></span>
-
-                <script>
-                    let mdp_a_verif = document.getElementById("password")
-                    let username = document.getElementById("username")
-                    let lespanPassword = document.getElementById("mySpanPasswordSignIn")
-                    let lespanUsername = document.getElementById("mySpanUsernameSignIn")
-                    let response = false;
-                    function verifFormSignIn() {
-                        if (mdp_a_verif.value.length === 0) {
-                            lespanPassword.innerHTML = "Veuillez renseigner votre mot de passe !";
-                        }
-                        if (mdp_a_verif.value.length !== 0 ) {
-                            lespanPassword.innerHTML = "";
-                        }
-                        if (username.value.length === 0) {
-                            lespanUsername.innerHTML = "Veuillez renseigner votre pseudo !";
-                        }
-                        if (username.value.length !== 0) {
-                            lespanUsername.innerHTML = "";
-                        }
-                        if(username.value.length !== 0 && mdp_a_verif.value.length !== 0 ) {
-                            let a = username.value
-                            let b = mdp_a_verif.value
-                            let data = {username: a, password: b}
-                            fetch("/login",
-                                {
-                                    method: "POST",
-                                    headers: {"Content-Type": "application/json"},
-                                    body: JSON.stringify(data)
-                                })
-                                .then(response => {
-                                    if (response.status !== 200) {
-                                        return response.json()
-                                    } else {
-                                        window.location="/"
-                                        localStorage.setItem("username", document.getElementById("username").value)
-                                        console.log(localStorage)
-                                    }
-                                }).then(data => {
-                                if (data.error === "username") {
-                                    lespanUsername.innerHTML = "Utilisateur inexistant !";
-                                }
-                                if (data.error === "password") {
-                                    lespanPassword.innerHTML = "Mauvais mot de passe !";
-                                }
-                            })
-
-                            return true;
-                        }
-
-                    }
-                </script>
-
+                <span id="invalidPassword" style="color:red"></span>
                 <div class="mt-6">
                     <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                         Connexion
                     </button>
                 </div>
             </form>
-
-
-            <form id="formInscription" action="users/add" method="POST" onsubmit="return verificationFormRegister()"
+            <!-- END FORM SIGNING -->
+            <!-- FORM SIGNUP -->
+            <form id="formInscription" action="users/add" method="POST" onsubmit="return verificationFormSignUp()"
                   class="w-full max-w-md hidden">
                 <div class="relative flex items-center mt-3">
                 <span class="absolute">
@@ -132,8 +81,7 @@
                            class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Nom">
                 </div>
-                <span id="mySpanName" style="color:red"></span>
-
+                <span id="invalidName" style="color:red"></span>
                 <div class="relative flex items-center mt-3">
                 <span class="absolute">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -147,7 +95,7 @@
                            class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Prénom">
                 </div>
-                <span id="mySpanFirstName" style="color:red"></span>
+                <span id="invalidFirstName" style="color:red"></span>
 
                 <div class="relative flex items-center mt-3">
                 <span class="absolute">
@@ -158,12 +106,12 @@
                     </svg>
                 </span>
 
-                    <input id="usernameRegister" name="usernameRegister" type="text"
+                    <input id="usernameSignUp" name="usernameSignUp" type="text"
                            class="block w-full py-3 text-gray-700 bg-white border rounded-md px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Pseudo">
                 </div>
 
-                <span id="mySpanUsername" style="color:red"></span>
+                <span id="invalidUsernameSignUp" style="color:red"></span>
 
                 <div class="relative flex items-center mt-8">
                 <span class="absolute">
@@ -174,7 +122,7 @@
                     </svg>
                 </span>
 
-                    <input id="passwordRegister" name="passwordRegister" type="password"
+                    <input id="passwordSignUp" name="passwordSignUp" type="password"
                            class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Mot de passe">
                 </div>
@@ -188,44 +136,11 @@
                     </svg>
                 </span>
 
-                    <input id="passwordRegisterConfirm" name="passwordRegisterConfirm" type="password"
+                    <input id="passwordConfirmSignUp" name="passwordConfirmSignUp" type="password"
                            class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40"
                            placeholder="Confirmer mot de passe">
                 </div>
-                <span id="mySpanPassword" style="color:red"></span>
-
-                <script>
-                    let mdp_a_verif1 = document.getElementById("passwordRegister")
-                    let mdp_a_verif2 = document.getElementById("passwordRegisterConfirm")
-                    let usernameRegister = document.getElementById("usernameRegister")
-                    let firstName = document.getElementById("firstName")
-                    let name = document.getElementById("name")
-                    let lespanPasswordRegister = document.getElementById("mySpanPassword")
-                    let lespanUsernameRegister = document.getElementById("mySpanUsername")
-                    let lespanName = document.getElementById("mySpanName")
-                    let lespanFirstName = document.getElementById("mySpanFirstName")
-
-                    function verificationFormRegister() {
-                        if (mdp_a_verif1.value !== mdp_a_verif2.value) {
-                            lespanPasswordRegister.innerHTML = "Les mots de passe sont différents !";
-                            return false;
-                        } else if (mdp_a_verif1.value.length === 0 || mdp_a_verif2.value.length === 0) {
-                            lespanPasswordRegister.innerHTML = "Veuillez remplir les deux champs !";
-                            return false;
-                        } else if (usernameRegister.value.length === 0) {
-                            lespanUsernameRegister.innerHTML = "Le champs pseudo est obligatoire !";
-                            return false;
-                        } else if (name.value.length === 0) {
-                            lespanName.innerHTML = "Le champs nom est obligatoire !";
-                            return false;
-                        } else if (firstName.value.length === 0) {
-                            lespanFirstName.innerHTML = "Le champs prénom est obligatoire !";
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    }
-                </script>
+                <span id="invalidPasswordSignUp" style="color:red"></span>
 
                 <div class="mt-6">
                     <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
@@ -233,10 +148,12 @@
                     </button>
                 </div>
             </form>
+            <!-- END FORM SIGNUP -->
         </div>
     </div>
 </section>
 </body>
+<!-- TODO faut réussir à mettre tout ça dans controllerAuthentification, surement en utilisant le .htacces -->
 <script>
     window.addEventListener("load", function () {
         let displayFormConnexion = document.getElementById("displayFormConnexion");
@@ -255,7 +172,6 @@
             }
         });
 
-
         displayFormInscription.addEventListener("click", function () {
             if (displayFormInscription.classList.contains('border-gray-400')) {
                 displayFormInscription.classList.remove('border-gray-400');
@@ -267,5 +183,73 @@
             }
         });
     });
+
+    function verificationFormSignIn() {
+        let passwordToCheck = document.getElementById("password")
+        let usernameToCheck = document.getElementById("username")
+        let invalidPassword = document.getElementById("invalidPassword")
+        let invalidUsername = document.getElementById("invalidUsername")
+        let usernameToCheckEmpty = usernameToCheck.value.length === 0
+        let passwordToCheckEmpty = passwordToCheck.value.length === 0
+        invalidPassword.innerHTML = passwordToCheckEmpty ? "Veuillez renseigner votre mot de passe !" : "";
+        invalidUsername.innerHTML = usernameToCheckEmpty ? "Veuillez renseigner votre pseudo !" : "";
+        if (!usernameToCheckEmpty && !passwordToCheckEmpty) {
+            let usernameValue = usernameToCheck.value
+            let passwordValue = passwordToCheck.value
+            let data = {username: usernameValue, password: passwordValue}
+            fetch("/login",
+                {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.status !== 200) {
+                        return response.json()
+                    } else {
+                        window.location = "/"
+                        localStorage.setItem("username", document.getElementById("username").value)
+                    }
+                }).then(data => {
+                if (data.error === "username") {
+                    invalidUsername.innerHTML = "Utilisateur inexistant !";
+                }
+                if (data.error === "password") {
+                    invalidPassword.innerHTML = "Mauvais mot de passe !";
+                }
+            })
+            return true;
+        }
+    }
+
+    function verificationFormSignUp() {
+        let passwordToCheckSignUp = document.getElementById("passwordSignUp")
+        let passwordToCheckConfirm = document.getElementById("passwordConfirmSignUp")
+        let usernameToCheckSignUp = document.getElementById("usernameSignUp")
+        let firstName = document.getElementById("firstName")
+        let name = document.getElementById("name")
+        let invalidPasswordSignUp = document.getElementById("invalidPasswordSignUp")
+        let invalidUsernameSignUp = document.getElementById("invalidUsernameSignUp")
+        let invalidName = document.getElementById("invalidName")
+        let invalidFirstName = document.getElementById("invalidFirstName")
+        if (passwordToCheckSignUp.value === passwordToCheckConfirm.value && passwordToCheckSignUp.value.length !== 0 && passwordToCheckConfirm.value.length !== 0 && usernameToCheckSignUp.value.length !== 0 && name.value.length !== 0 && firstName.value.length !== 0) {
+            return true
+        }
+        invalidPasswordSignUp.innerHTML =
+            passwordToCheckSignUp.value.length === 0 || passwordToCheckConfirm.value.length === 0 ?
+                "Veuillez remplir les deux champ !" :
+                passwordToCheckSignUp.value !== passwordToCheckConfirm.value ?
+                    "Les mots de passe sont différents !" : "";
+        invalidUsernameSignUp.innerHTML =
+            usernameToCheckSignUp.value.length === 0 ?
+                "Le champ pseudo est obligatoire !" : "";
+        invalidName.innerHTML =
+            name.value.length === 0 ?
+                "Le champ nom est obligatoire !" : "";
+        invalidFirstName.innerHTML =
+            firstName.value.length === 0 ?
+                "Le champ prénom est obligatoire !" : "";
+        return false
+    }
 </script>
 </html>

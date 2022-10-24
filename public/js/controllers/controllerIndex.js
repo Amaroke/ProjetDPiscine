@@ -1,11 +1,10 @@
 // Modal add event
-
 function sendFormAddEvent(url) {
     document.formAddEvent.action = url;
     document.formAddEvent.submit();
 }
 
-// TODO FAUT TRIER
+// TODO FAUT TRIER tout ce qui a en dessous
 
 let curentView = "week";
 let currentMonth = new Date().getMonth() + 1;
@@ -30,7 +29,7 @@ window.addEventListener("load", function () {
     let modalNewEvent = document.getElementById("modalNewEvent");
     let addEventButton = document.getElementById("addEventButton");
     let bgModalNewEvent = document.getElementById("bgModalNewEvent");
-    let annulerEvent = document.getElementById("annulerEvent");
+    let annulerEvent = document.getElementById("cancelAdd");
     let creerEvent = document.getElementById("createEvent");
 
     setUpWeek();
@@ -251,3 +250,5 @@ function changeTitleHead() {
             break;
     }
 }
+
+document.getElementById("user").value = localStorage.getItem("username").toString();

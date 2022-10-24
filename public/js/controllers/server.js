@@ -11,18 +11,17 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 
 // Login
-app.get('/login', (req, res) => {
+app.get('/auth', (req, res) => {
     res.status(200)
-    res.sendFile(path.join(__dirname + '/../views/login.html'));
+    res.sendFile(path.join(__dirname + '/../views/authentication.html'));
 })
 
-app.post('/login', (req, res) => {
+app.post('/auth', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     if (users.existUser(username)) {
         if (users.validUser(username, password)) {
-            res.status(200)
-            res.redirect("/");
+            res.status(200).send()
         } else {
             res.status(401).send({error: "password"})
         }
@@ -36,93 +35,81 @@ app.post('/login', (req, res) => {
 app.get('/events', (req, res) => {
     let eventsList = events.showEvents()
     if (Object.keys(eventsList).length === 0) {
-        res.status(204)
+        res.sendStatus(204)
     } else {
-        res.status(200)
+        res.status(200).send(eventsList)
     }
-    res.send(eventsList)
 })
 
 app.get('/events/day', (req, res) => {
     let eventsList = events.showEventsDay(new Date(req.query.date))
     if (Object.keys(eventsList).length === 0) {
-        res.status(204)
+        res.sendStatus(204)
     } else {
-        res.status(200)
+        res.status(200).send(eventsList)
     }
-    res.send(eventsList)
 })
 
 app.get('/events/week', (req, res) => {
     let eventsList = events.showEventsWeek(new Date(req.query.date))
     if (Object.keys(eventsList).length === 0) {
-        res.status(204)
+        res.sendStatus(204)
     } else {
-        res.status(200)
+        res.status(200).send(eventsList)
     }
-    res.send(eventsList)
 })
 
 app.get('/events/month', (req, res) => {
     let eventsList = events.showEventsMonth(new Date(req.query.date))
     if (Object.keys(eventsList).length === 0) {
-        res.status(204)
+        res.sendStatus(204)
     } else {
-        res.status(200)
+        res.status(200).send(eventsList)
     }
-    res.send(eventsList)
 })
 
 app.get('/events/year', (req, res) => {
     let eventsList = events.showEventsYear(new Date(req.query.date))
     if (Object.keys(eventsList).length === 0) {
-        res.status(204)
+        res.sendStatus(204)
     } else {
-        res.status(200)
+        res.status(200).send(eventsList)
     }
-    res.send(eventsList)
 })
 
 app.post('/events/add', (req, res) => {
     events.addEvent(req.body)
-    res.status(200)
-    res.redirect("/");
+    res.sendStatus(200)
 })
 
 app.delete('/events/delete/all', (req, res) => {
     events.deleteAll()
-    res.status(200)
-    res.redirect("/")
+    res.sendStatus(200)
 })
 
 
 // Users
 app.post('/users/add', (req, res) => {
     users.addUser(req.body)
-    res.status(200)
-    res.redirect("/login");
+    res.sendStatus(200)
 })
 
 app.delete('/users/delete/all', (req, res) => {
     users.deleteAll()
-    res.status(200)
-    res.redirect("/")
+    res.sendStatus(200)
 })
 
 
 // Easter-eggs : https://developer.mozilla.org/fr/docs/Web/HTTP/Status/418
 app.get('/coffee', (req, res) => {
-    res.status(418)
-    res.send()
+    res.sendStatus(200)
 })
 
 
 // Unknown endpoint
 app.use((req, res) => {
     res.status(404);
-    res.json({
-        error: "Page not found"
-    });
+    res.redirect("/")
 })
 
 
