@@ -1,3 +1,5 @@
+"use strict";
+
 // noinspection JSUnresolvedVariable
 
 const json = require("./events.json");
@@ -51,6 +53,21 @@ module.exports = {
             }
         })
         return events
+    },
+
+    existingDate: function(date, duration) {
+        let dateDebut = new Date(date)
+        let dateFin = new Date(dateDebut.getTime() + duration*60000);
+        json.events.forEach(function (event) {
+            let dateEventDebut = new Date(event.date)
+            let dateEventFin = new Date(dateEventDebut.getTime() + event.duration*60000);
+            //TODO Problème d'UTC et variable incorrecte
+            let superimposed = (dateDebut < dateEventDebut && dateFin > dateEventDebut) || (dateDebut < dateEventFin && dateFin > dateEventFin)
+            if (superimposed) {
+                return true
+            }
+        })
+        return false
     },
 
     addEvent: function (req) {

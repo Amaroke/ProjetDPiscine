@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener("load", function () {
     let displayFormConnexion = document.getElementById("displayFormConnexion");
     let displayFormInscription = document.getElementById("displayFormInscription");

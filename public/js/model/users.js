@@ -1,3 +1,5 @@
+"use strict";
+
 const json = require("./users.json");
 const fs = require("fs");
 

@@ -1,3 +1,5 @@
+"use strict";
+
 const events = require('../model/events.js')
 const users = require('../model/users.js')
 const express = require('express')
@@ -78,8 +80,14 @@ app.get('/events/year', (req, res) => {
 })
 
 app.post('/events/add', (req, res) => {
-    events.addEvent(req.body)
-    res.sendStatus(200)
+    let date = req.body.date;
+    let duration = req.body.duration;
+    if (events.existingDate(date, duration)) {
+        res.status(401).json({error: "date"})
+    } else {
+        events.addEvent(req.body)
+        res.sendStatus(200)
+    }
 })
 
 app.delete('/events/delete/all', (req, res) => {
@@ -90,7 +98,6 @@ app.delete('/events/delete/all', (req, res) => {
 
 // Users
 app.post('/users/add', (req, res) => {
-    console.log(req.body)
     let username = req.body.usernameSignUp;
     if (users.existUser(username)) {
         res.status(401).json({error: "username"})

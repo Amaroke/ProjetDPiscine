@@ -1,20 +1,48 @@
+"use strict";
+
 // Modal add event
 function verificationFormAddEvent() {
     let titleToCheck = document.getElementById("title")
     let dateToCheck = document.getElementById("date")
     let durationToCheck = document.getElementById("duration")
+    let user = document.getElementById("user")
+    let description = document.getElementById("description")
     let invalidTitle = document.getElementById("invalidTitle")
     let invalidDate = document.getElementById("invalidDate")
     let invalidDuration = document.getElementById("invalidDuration")
-    if (titleToCheck.value.length !== 0 &&
-        dateToCheck.value.length !== 0 &&
-        durationToCheck.value.length !== 0) {
-        // TODO Ajouter la partie pour vérifier que l'évènement ne se superpose pas avec un autre et l'ajouter.
-    }
     invalidTitle.innerHTML = titleToCheck.value.length === 0 ? "Il faut renseigner un nom !" : ""
     invalidDate.innerHTML = dateToCheck.value.length === 0 ? "Il faut renseigner une date !" : ""
     invalidDuration.innerHTML = durationToCheck.value.length === 0 ? "Il faut renseigner une durée !" : ""
-    return false
+    if (titleToCheck.value.length !== 0 &&
+        dateToCheck.value.length !== 0 &&
+        durationToCheck.value.length !== 0) {
+        let data = {
+            user: user.value,
+            title: titleToCheck.value,
+            date: dateToCheck.value,
+            duration: durationToCheck.value,
+            description: description.value
+        }
+        fetch('/events/add',
+            {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.status !== 200) {
+                    return response.json()
+                } else {
+                    window.location = "/"
+                    return true
+                }
+            }).then(data => {
+            if (data.error === "date") {
+                invalidDate.innerHTML = "Il y a déjà un évènement sur cette date !";
+            }
+        })
+        return true
+    }
 }
 
 // TODO FAUT TRIER tout ce qui a en dessous
