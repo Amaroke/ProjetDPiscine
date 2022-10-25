@@ -5,7 +5,7 @@ function verificationFormAddEvent() {
     let titleToCheck = document.getElementById("title")
     let dateToCheck = document.getElementById("date")
     let durationToCheck = document.getElementById("duration")
-    let user = document.getElementById("user")
+    let user = localStorage.getItem("username").toString()
     let description = document.getElementById("description")
     let invalidTitle = document.getElementById("invalidTitle")
     let invalidDate = document.getElementById("invalidDate")
@@ -17,7 +17,7 @@ function verificationFormAddEvent() {
         dateToCheck.value.length !== 0 &&
         durationToCheck.value.length !== 0) {
         let data = {
-            user: user.value,
+            user: user,
             title: titleToCheck.value,
             date: dateToCheck.value,
             duration: durationToCheck.value,
@@ -288,4 +288,3 @@ function changeTitleHead() {
     }
 }
 
-document.getElementById("user").value = localStorage.getItem("username").toString();
