@@ -95,6 +95,38 @@ app.delete('/events/delete/all', (req, res) => {
     res.sendStatus(200)
 })
 
+app.get('/event', (req, res) => {
+    res.status(200)
+    res.sendFile(path.join(__dirname + '/../views/displayEvent.html'));
+})
+
+app.get('/event/:id', (req, res) => {
+    let event = events.eventById(req.params.id)
+    if (event === null) {
+        res.status(204).send(event)
+    } else {
+        res.status(200).send(event)
+    }
+})
+
+app.post('/modifyEvent/:id', (req, res) => {
+    let ret = events.modifyEvent(req.params.id, req.body);
+    if (ret === false) {
+        res.sendStatus(200)
+    } else {
+        res.sendStatus(200)
+    }
+})
+
+app.post('/deleteEvent/:id', (req, res) => {
+    let ret = events.deleteEvent(req.params.id);
+    if (ret === false) {
+        res.sendStatus(200)
+    } else {
+        res.sendStatus(200)
+    }
+})
+
 
 // Users
 app.post('/users/add', (req, res) => {

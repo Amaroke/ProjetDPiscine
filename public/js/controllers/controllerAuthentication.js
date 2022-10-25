@@ -1,6 +1,7 @@
 "use strict";
 
 window.addEventListener("load", function () {
+
     let displayFormConnexion = document.getElementById("displayFormConnexion");
     let displayFormInscription = document.getElementById("displayFormInscription");
     let formConnexion = document.getElementById("formConnexion");
@@ -12,8 +13,10 @@ window.addEventListener("load", function () {
             displayFormConnexion.classList.add('border-blue-500');
             displayFormInscription.classList.remove('border-blue-500');
             displayFormInscription.classList.add('border-gray-400');
-            formConnexion.classList.remove('hidden');
-            formInscription.classList.add('hidden');
+            formConnexion.classList.remove('opacity-0');
+            formConnexion.classList.remove('max-h-0');
+            formInscription.classList.add('opacity-0');
+            formInscription.classList.add('max-h-0');
         }
     });
 
@@ -23,8 +26,10 @@ window.addEventListener("load", function () {
             displayFormInscription.classList.add('border-blue-500');
             displayFormConnexion.classList.remove('border-blue-500');
             displayFormConnexion.classList.add('border-gray-400');
-            formInscription.classList.remove('hidden');
-            formConnexion.classList.add('hidden');
+            formInscription.classList.remove('opacity-0');
+            formInscription.classList.remove('max-h-0');
+            formConnexion.classList.add('opacity-0');
+            formConnexion.classList.add('max-h-0');
         }
     });
 });

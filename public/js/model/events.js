@@ -89,8 +89,45 @@ module.exports = {
 
     deleteAll: function () {
         fs.writeFileSync("./public/js/model/events.json", '{"events":[]}')
-    }
+    },
 
+    eventById: function (id) {
+        let rep = null;
+        json.events.forEach(function (event) {
+            console.log(parseInt(event.id)===parseInt(id))
+            if (parseInt(event.id) === parseInt(id)) {
+                rep = event;
+            }
+        })
+        return rep;
+    },
+
+    modifyEvent: function(id, infos){
+        let rep = false;
+        json.events.forEach(function (event) {
+            if (parseInt(event.id) === parseInt(id)) {
+                event.title = infos.title;
+                event.date = infos.date;
+                event.duration = infos.duration;
+                event.description = infos.description;
+                fs.writeFileSync("./public/js/model/events.json", JSON.stringify(json));
+                rep = true;
+            }
+        })
+        return rep;
+    },
+
+    deleteEvent: function(id){
+        let rep = false;
+        json.events.forEach(function (event) {
+            if (parseInt(event.id) === parseInt(id)) {
+                json.events.splice(json.events.indexOf(event), 1);
+                fs.writeFileSync("./public/js/model/events.json", JSON.stringify(json));
+                rep = true;
+            }
+        })
+        return rep;
+    }
 }
 
 function getWeekNumber(d) {

@@ -3,3 +3,8 @@
 @tailwind components;
 
 @font-face { font-family: 'Batuphat'; src: url('../font/Batuphat.otf'); }
+
+.transition-mx-height {
+    transition-property: max-height, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}

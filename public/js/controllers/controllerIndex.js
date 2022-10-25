@@ -123,7 +123,7 @@ window.addEventListener("load", function () {
         selectView.classList.add("hidden");
         curentView = "month";
         changeTitleHead();
-        menuButton.innerHTML = "Month view " +
+        menuButton.innerHTML = "Mois" +
             "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
@@ -134,7 +134,7 @@ window.addEventListener("load", function () {
         selectView.classList.add("hidden");
         curentView = "week";
         changeTitleHead();
-        menuButton.innerHTML = "Week view" +
+        menuButton.innerHTML = "Semaine" +
             "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
@@ -146,7 +146,7 @@ window.addEventListener("load", function () {
         selectView.classList.add("hidden");
         curentView = "day";
         changeTitleHead();
-        menuButton.innerHTML = "Day view" +
+        menuButton.innerHTML = "Jour" +
             "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
@@ -288,3 +288,72 @@ function changeTitleHead() {
     }
 }
 
+async function displayEvent(id) {
+    let displayEvent = document.getElementById("modalDisplayEvent");
+    displayEvent.classList.remove("hidden");
+    document.getElementById("buttonModifyEvent").addEventListener('click', function(){modifyEvent(id)});
+    document.getElementById("buttonDeleteEvent").addEventListener('click', function(){deleteEvent(id)});
+    let infos = await getEvent(id);
+    let title = document.getElementById("titleDisplayEvent");
+    let description = document.getElementById("descriptionDisplayEvent");
+    let date = document.getElementById("dateDisplayEvent");
+    let duree = document.getElementById("durationDisplayEvent");
+    title.value = infos.title;
+    description.value = infos.description;
+
+    Number.prototype.AddZero= function(b,c){
+        let  l= (String(b|| 10).length - String(this).length)+1;
+        return l> 0? new Array(l).join(c|| '0')+this : this;
+    }
+
+    let d = new Date(infos.date);
+    date.value = [d.getFullYear(), (d.getMonth() + 1).AddZero(), d.getDate().AddZero()].join('-') + 'T' + [d.getHours().AddZero(), d.getMinutes().AddZero()].join(':');
+    duree.value = infos.duration;
+}
+
+async function getEvent(id) {
+    return fetch("/event/" + id,
+        {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+        })
+}
+
+function closeModalDisplayEvent(){
+    let displayEvent = document.getElementById("modalDisplayEvent");
+    displayEvent.classList.add("hidden");
+}
+
+function modifyEvent(id){
+    let displayEvent = document.getElementById("modalDisplayEvent");
+    displayEvent.classList.add("hidden");
+    let data = {
+        title: document.getElementById("titleDisplayEvent").value,
+        description: document.getElementById("descriptionDisplayEvent").value,
+        date: document.getElementById("dateDisplayEvent").value,
+        duration: document.getElementById("durationDisplayEvent").value,
+    }
+    fetch("/modifyEvent/" + id,
+        {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data),
+        }).then(r => r.json());
+}
+
+function deleteEvent(id){
+    let displayEvent = document.getElementById("modalDisplayEvent");
+    displayEvent.classList.add("hidden");
+    fetch("/deleteEvent/" + id,
+        {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+        }).then(r => r.json());
+}
+
+//document.getElementById("user").value = localStorage.getItem("username")
