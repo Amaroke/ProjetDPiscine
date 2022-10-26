@@ -237,7 +237,7 @@ function changeTitleHead() {
     switch (curentView) {
         case "month":
             let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
-            document.getElementById("titleHead").innerHTML = mois[currentMonth + 1] + " " + currentYear
+            document.getElementById("titleHead").innerHTML = mois[currentMonth - 1] + " " + currentYear
             break;
         case "week":
             document.getElementById("titleHead").innerHTML = "Lun " + firstDayWeek.getUTCDate() + " - " + "Dim " + lastDayWeek.getUTCDate();

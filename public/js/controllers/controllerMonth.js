@@ -28,19 +28,20 @@ async function changeBoxDays(month, year) {
         document.getElementById("box" + i).className += "relative bg-gray-50 py-2 px-3 text-gray-500"
     }
     for (let i = firstDay - 1; i < actualMonthNbDays + firstDay - 1; ++i) {
-        document.getElementById("box" + i).innerHTML = (i + 2 - firstDay).toString() + ''
-        for (const event of events) {
-            if (new Date(event.date).getDate() === (i + 1 - firstDay)) {
-                document.getElementById("box" + i).innerHTML +=
-                    "<ol class=\"mt-2\"><li><a href=\"#\" class=\"group flex\">" +
-                    "<p class=\"flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600\">" +
-                    event.title + '</p>' +
-                    "<time dateTime=\"\" class=\"ml-3 hidden flex-none text-gray-500 group-hover:text-indigo-600 xl:block\">" +
-                    new Date(event.date).getHours() +
-                    "h</time></a></li></ol>"
+        document.getElementById("box" + i).innerHTML = (i + 2 - firstDay).toString()
+        if (events != null) {
+            for (const event of events) {
+                if (new Date(event.date).getDate() === (i + 1 - firstDay)) {
+                    document.getElementById("box" + i).innerHTML +=
+                        "<ol class=\"mt-2\"><li><a href=\"#\" class=\"group flex\">" +
+                        "<p class=\"flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600\">" +
+                        event.title + '</p>' +
+                        "<time dateTime=\"\" class=\"ml-3 hidden flex-none text-gray-500 group-hover:text-indigo-600 xl:block\">" +
+                        new Date(event.date).getHours() +
+                        "h</time></a></li></ol>"
+                }
             }
         }
-        document.getElementById("box" + i).innerHTML += ''
     }
     for (let i = actualMonthNbDays + firstDay - 1; i < 42; ++i) {
         document.getElementById("box" + i).innerHTML = (i + 2 - firstDay - actualMonthNbDays).toString()
