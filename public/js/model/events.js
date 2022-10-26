@@ -55,15 +55,14 @@ module.exports = {
         return events
     },
 
-    existingDate: function(date, duration) {
+    existingDate: function (date, duration) {
         let dateDebut = new Date(date)
-        let dateFin = new Date(dateDebut.getTime() + duration*60000);
+        let dateFin = new Date(dateDebut.getTime() + duration * 60000);
         json.events.forEach(function (event) {
             let dateEventDebut = new Date(event.date)
-            let dateEventFin = new Date(dateEventDebut.getTime() + event.duration*60000);
-            //TODO Problème d'UTC et variable incorrecte
+            let dateEventFin = new Date(dateEventDebut.getTime() + event.duration * 60000);
             let superimposed = (dateDebut < dateEventDebut && dateFin > dateEventDebut) || (dateDebut < dateEventFin && dateFin > dateEventFin)
-            if (superimposed) {
+            if (!superimposed) {
                 return true
             }
         })
@@ -94,7 +93,6 @@ module.exports = {
     eventById: function (id) {
         let rep = null;
         json.events.forEach(function (event) {
-            console.log(parseInt(event.id)===parseInt(id))
             if (parseInt(event.id) === parseInt(id)) {
                 rep = event;
             }
@@ -102,7 +100,7 @@ module.exports = {
         return rep;
     },
 
-    modifyEvent: function(id, infos){
+    modifyEvent: function (id, infos) {
         let rep = false;
         json.events.forEach(function (event) {
             if (parseInt(event.id) === parseInt(id)) {
@@ -117,7 +115,7 @@ module.exports = {
         return rep;
     },
 
-    deleteEvent: function(id){
+    deleteEvent: function (id) {
         let rep = false;
         json.events.forEach(function (event) {
             if (parseInt(event.id) === parseInt(id)) {

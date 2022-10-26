@@ -52,8 +52,8 @@ let currentMonth = new Date().getMonth() + 1;
 let currentDay = new Date().getDate();
 let currentYear = new Date().getFullYear();
 
-let firstdayWeek;
-let lastdayWeek;
+let firstDayWeek;
+let lastDayWeek;
 
 
 window.addEventListener("load", function () {
@@ -72,7 +72,7 @@ window.addEventListener("load", function () {
     let bgModalNewEvent = document.getElementById("bgModalNewEvent");
     let annulerEvent = document.getElementById("cancelAdd");
 
-    setUpWeek();
+    toDayWeek();
 
     annulerEvent.addEventListener("click", function () {
         modalNewEvent.classList.add("hidden");
@@ -130,7 +130,7 @@ window.addEventListener("load", function () {
     });
     week.addEventListener("click", function () {
         loadHTML("./js/views/week.html");
-        titleHead.innerHTML = "Lun " + firstdayWeek.getUTCDate() + "-" + "Dim " + lastdayWeek.getUTCDate();
+        titleHead.innerHTML = "Lun " + firstDayWeek.getUTCDate() + "-" + "Dim " + lastDayWeek.getUTCDate();
         selectView.classList.add("hidden");
         curentView = "week";
         changeTitleHead();
@@ -159,29 +159,25 @@ window.addEventListener("load", function () {
 function loadHTML(file) {
     fetch(file)
         .then(response => response.text())
-        .then(text => document.getElementById('display').innerHTML = text);
-}
-
-function setUpWeek() {
-    let curr = new Date(); // get current date
-    let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-    let last = first + 6; // last day is the first day + 6
-
-    firstdayWeek = new Date(curr.setDate(first));
-    lastdayWeek = new Date(curr.setDate(last));
-    changeTitleHead();
+        .then(text => {
+            document.getElementById('display').innerHTML = text
+            if (file === "./js/views/month.html") {
+                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {
+                })
+            }
+        });
 }
 
 function nextWeek() {
-    firstdayWeek.setDate(firstdayWeek.getDate() + 7);
-    lastdayWeek.setDate(lastdayWeek.getDate() + 7);
+    firstDayWeek.setDate(firstDayWeek.getDate() + 7);
+    lastDayWeek.setDate(lastDayWeek.getDate() + 7);
 
     changeTitleHead();
 }
 
 function prevWeek() {
-    firstdayWeek.setDate(firstdayWeek.getDate() - 7);
-    lastdayWeek.setDate(lastdayWeek.getDate() - 7);
+    firstDayWeek.setDate(firstDayWeek.getDate() - 7);
+    lastDayWeek.setDate(lastDayWeek.getDate() - 7);
 
     changeTitleHead();
 }
@@ -221,8 +217,8 @@ function toDayWeek() {
     let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
     let last = first + 6; // last day is the first day + 6
 
-    firstdayWeek = new Date(curr.setDate(first));
-    lastdayWeek = new Date(curr.setDate(last));
+    firstDayWeek = new Date(curr.setDate(first));
+    lastDayWeek = new Date(curr.setDate(last));
     changeTitleHead();
 }
 
@@ -240,50 +236,14 @@ function toDayDay() {
 function changeTitleHead() {
     switch (curentView) {
         case "month":
-            switch (currentMonth) {
-                case 1:
-                    titleHead.innerHTML = "Janvier" + " " + currentYear;
-                    break;
-                case 2:
-                    titleHead.innerHTML = "Février" + " " + currentYear;
-                    break;
-                case 3:
-                    titleHead.innerHTML = "Mars" + " " + currentYear;
-                    break;
-                case 4:
-                    titleHead.innerHTML = "Avril" + " " + currentYear;
-                    break;
-                case 5:
-                    titleHead.innerHTML = "Mai" + " " + currentYear;
-                    break;
-                case 6:
-                    titleHead.innerHTML = "Juin" + " " + currentYear;
-                    break;
-                case 7:
-                    titleHead.innerHTML = "Juillet" + " " + currentYear;
-                    break;
-                case 8:
-                    titleHead.innerHTML = "Aout" + " " + currentYear;
-                    break;
-                case 9:
-                    titleHead.innerHTML = "Septembre" + " " + currentYear;
-                    break;
-                case 10:
-                    titleHead.innerHTML = "Octobre" + " " + currentYear;
-                    break;
-                case 11:
-                    titleHead.innerHTML = "Novembre" + " " + currentYear;
-                    break;
-                case 12:
-                    titleHead.innerHTML = "Decembre" + " " + currentYear;
-                    break;
-            }
+            let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+            document.getElementById("titleHead").innerHTML = mois[currentMonth + 1] + " " + currentYear
             break;
         case "week":
-            titleHead.innerHTML = "Lun " + firstdayWeek.getUTCDate() + " - " + "Dim " + lastdayWeek.getUTCDate();
+            document.getElementById("titleHead").innerHTML = "Lun " + firstDayWeek.getUTCDate() + " - " + "Dim " + lastDayWeek.getUTCDate();
             break;
         case "day":
-            titleHead.innerHTML = "Day " + currentDay;
+            document.getElementById("titleHead").innerHTML = "Day " + currentDay;
             break;
     }
 }
@@ -291,24 +251,28 @@ function changeTitleHead() {
 async function displayEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.remove("hidden");
-    document.getElementById("buttonModifyEvent").addEventListener('click', function(){modifyEvent(id)});
-    document.getElementById("buttonDeleteEvent").addEventListener('click', function(){deleteEvent(id)});
+    document.getElementById("buttonModifyEvent").addEventListener('click', function () {
+        modifyEvent(id)
+    });
+    document.getElementById("buttonDeleteEvent").addEventListener('click', function () {
+        deleteEvent(id)
+    });
     let infos = await getEvent(id);
     let title = document.getElementById("titleDisplayEvent");
     let description = document.getElementById("descriptionDisplayEvent");
     let date = document.getElementById("dateDisplayEvent");
-    let duree = document.getElementById("durationDisplayEvent");
+    let duration = document.getElementById("durationDisplayEvent");
     title.value = infos.title;
     description.value = infos.description;
 
-    Number.prototype.AddZero= function(b,c){
-        let  l= (String(b|| 10).length - String(this).length)+1;
-        return l> 0? new Array(l).join(c|| '0')+this : this;
+    Number.prototype.AddZero = function (b, c) {
+        let l = (String(b || 10).length - String(this).length) + 1;
+        return l > 0 ? new Array(l).join(c || '0') + this : this;
     }
 
     let d = new Date(infos.date);
     date.value = [d.getFullYear(), (d.getMonth() + 1).AddZero(), d.getDate().AddZero()].join('-') + 'T' + [d.getHours().AddZero(), d.getMinutes().AddZero()].join(':');
-    duree.value = infos.duration;
+    duration.value = infos.duration;
 }
 
 async function getEvent(id) {
@@ -324,12 +288,12 @@ async function getEvent(id) {
         })
 }
 
-function closeModalDisplayEvent(){
+function closeModalDisplayEvent() {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");
 }
 
-function modifyEvent(id){
+function modifyEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");
     let data = {
@@ -346,7 +310,7 @@ function modifyEvent(id){
         }).then(r => r.json());
 }
 
-function deleteEvent(id){
+function deleteEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");
     fetch("/deleteEvent/" + id,

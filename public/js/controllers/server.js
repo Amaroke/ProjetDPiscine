@@ -66,7 +66,7 @@ app.get('/events/month', (req, res) => {
     if (Object.keys(eventsList).length === 0) {
         res.sendStatus(204)
     } else {
-        res.status(200).send(eventsList)
+        res.status(200).json(eventsList)
     }
 })
 
