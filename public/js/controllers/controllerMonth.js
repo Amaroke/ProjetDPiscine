@@ -25,7 +25,7 @@ async function changeBoxDays(month, year) {
 
     for (let i = 0; i < firstDay - 1; ++i) {
         document.getElementById("box" + i).innerHTML = (prevMonthNbDays - firstDay + i + 2).toString()
-        document.getElementById("box" + i).className += "relative bg-gray-50 py-2 px-3 text-gray-500"
+        document.getElementById("box" + i).className += " relative bg-gray-50 py-2 px-3 text-gray-500"
     }
     for (let i = firstDay - 1; i < actualMonthNbDays + firstDay - 1; ++i) {
         document.getElementById("box" + i).innerHTML = (i + 2 - firstDay).toString()

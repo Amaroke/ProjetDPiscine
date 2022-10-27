@@ -53,6 +53,11 @@ let currentDay = new Date().getDate();
 let currentYear = new Date().getFullYear();
 
 let firstDayWeek;
+let twoDayWeek;
+let threeDayWeek;
+let fourDayWeek;
+let fiveDayWeek;
+let sixDayWeek;
 let lastDayWeek;
 
 
@@ -165,11 +170,20 @@ function loadHTML(file) {
                 changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {
                 })
             }
+            if (file === "./js/views/week.html") {
+                fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                })
+            }
         });
 }
 
 function nextWeek() {
     firstDayWeek.setDate(firstDayWeek.getDate() + 7);
+    twoDayWeek.setDate(twoDayWeek.getDate() + 7);
+    threeDayWeek.setDate(threeDayWeek.getDate() + 7);
+    fourDayWeek.setDate(fourDayWeek.getDate() + 7);
+    fiveDayWeek.setDate(fiveDayWeek.getDate() + 7);
+    sixDayWeek.setDate(sixDayWeek.getDate() + 7);
     lastDayWeek.setDate(lastDayWeek.getDate() + 7);
 
     changeTitleHead();
@@ -177,6 +191,11 @@ function nextWeek() {
 
 function prevWeek() {
     firstDayWeek.setDate(firstDayWeek.getDate() - 7);
+    twoDayWeek.setDate(twoDayWeek.getDate() - 7);
+    threeDayWeek.setDate(threeDayWeek.getDate() - 7);
+    fourDayWeek.setDate(fourDayWeek.getDate() - 7);
+    fiveDayWeek.setDate(fiveDayWeek.getDate() - 7);
+    sixDayWeek.setDate(sixDayWeek.getDate() - 7);
     lastDayWeek.setDate(lastDayWeek.getDate() - 7);
 
     changeTitleHead();
@@ -215,9 +234,19 @@ function prevDay() {
 function toDayWeek() {
     let curr = new Date(); // get current date
     let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
+    let two = first + 1
+    let three = first + 2
+    let four = first + 3
+    let five = first + 4
+    let six = first + 5
     let last = first + 6; // last day is the first day + 6
 
     firstDayWeek = new Date(curr.setDate(first));
+    twoDayWeek = new Date(curr.setDate(two));
+    threeDayWeek = new Date(curr.setDate(three));
+    fourDayWeek = new Date(curr.setDate(four));
+    fiveDayWeek = new Date(curr.setDate(five));
+    sixDayWeek = new Date(curr.setDate(six));
     lastDayWeek = new Date(curr.setDate(last));
     changeTitleHead();
 }
