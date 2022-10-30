@@ -7,13 +7,35 @@
     <link rel="stylesheet" href="../../css/app.css">
     <script src="js/controllers/controllerAuthentication.js"></script>
 </head>
-<body>
+<body id="body" class="dark:bg-gray-900 bg-white dark:darkScrollbar">
 <section class="bg-white dark:bg-gray-900 ">
-    <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
+    <div id="nightMode" class="mt-5 w-fit" style="transform: scale(.4); ">
+        <input type="checkbox" id="hide-checkbox">
+        <label for="hide-checkbox" class="toggle">
+                <span class="toggle-button">
+                    <span class="crater crater-1"></span>
+                    <span class="crater crater-2"></span>
+                    <span class="crater crater-3"></span>
+                    <span class="crater crater-4"></span>
+                    <span class="crater crater-5"></span>
+                    <span class="crater crater-6"></span>
+                    <span class="crater crater-7"></span>
+                </span>
+            <span class="star star-1"></span>
+            <span class="star star-2"></span>
+            <span class="star star-3"></span>
+            <span class="star star-4"></span>
+            <span class="star star-5"></span>
+            <span class="star star-6"></span>
+            <span class="star star-7"></span>
+            <span class="star star-8"></span>
+        </label>
+    </div>
+    <div class="container flex items-center justify-center min-h-screen px-6 mx-auto -mt-24">
         <div class="w-full max-w-md my-5">
             <div class="flex justify-center mb-5">
-                <h1 style="font-family: Batuphat,sans-serif" class="text-gray-500 text-7xl">
-                    <span class="block lg:inline">DP</span>
+                <h1 style="font-family: Batuphat,sans-serif" class="text-7xl">
+                    <span class="block dark:text-white text-gray-500 lg:inline">DP</span>
                     <span class="block text-sky-600 lg:inline -ml-4">iscine</span>
                 </h1>
             </div>

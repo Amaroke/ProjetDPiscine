@@ -3,23 +3,49 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Planning DPISCINE</title>
     <link rel="stylesheet" href="css/app.css">
     <script src="js/controllers/controllerMonth.js"></script>
     <script src="js/controllers/controllerWeek.js"></script>
+    <script src="js/controllers/controllerDay.js"></script>
     <script src="js/controllers/controllerIndex.js"></script>
 </head>
-<body style="background-color: #37b6f0">
-<div class="max-w-full mx-auto bg-white">
+<body id="body" style="background-color: #37b6f0" class=" dark:darkScrollbar">
+<div class="max-w-full mx-auto bg-white dark:text-white dark:bg-gray-900 dark:bg-gray-900">
     <div class="flex items-center justify-between pt-6">
-        <div class="justify-start ml-20"></div>
+        <div class="justify-start flex justify-between">
+            <div id="nightMode" class="mt-5" style="transform: scale(.4);">
+                <input type="checkbox" id="hide-checkbox">
+                <label for="hide-checkbox" class="toggle">
+                <span class="toggle-button">
+                    <span class="crater crater-1"></span>
+                    <span class="crater crater-2"></span>
+                    <span class="crater crater-3"></span>
+                    <span class="crater crater-4"></span>
+                    <span class="crater crater-5"></span>
+                    <span class="crater crater-6"></span>
+                    <span class="crater crater-7"></span>
+                </span>
+                    <span class="star star-1"></span>
+                    <span class="star star-2"></span>
+                    <span class="star star-3"></span>
+                    <span class="star star-4"></span>
+                    <span class="star star-5"></span>
+                    <span class="star star-6"></span>
+                    <span class="star star-7"></span>
+                    <span class="star star-8"></span>
+                </label>
+            </div>
+        </div>
         <div class="flex justify-center self-center">
-            <h1 style="font-family: Batuphat" class="text-gray-500 text-7xl -mb-8">
-                <span class="block lg:inline">DP</span>
+            <h1 style="font-family: Batuphat,sans-serif" class="text-7xl">
+                <span class="block dark:text-white text-gray-500 lg:inline">DP</span>
                 <span class="block text-sky-600 lg:inline -ml-4">iscine</span>
             </h1>
         </div>
-        <div class="flex justify-end -mb-6">
+        <div class="flex justify-end m-8 ml-32">
             <a id="logout" onclick="logout()"
                class="cursor-pointer mr-5 whitespace-nowrap inline-flex items-center justify-center pl-3 pr-2 py-2 border border-transparent rounded-full shadow-sm text-base font-medium bg-sky-500 hover:bg-sky-600">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="text-white">
@@ -27,7 +53,7 @@
                 </svg>
                 <script>
                     function logout() {
-                        localStorage.clear()
+                        localStorage.removeItem('username')
                         window.location = "/auth"
                     }
                 </script>
@@ -56,13 +82,13 @@
 </div>
 <div class="flex p-10 h-full flex-col">
     <div class="rounded-xl">
-        <header class="flex flex-none items-center justify-between border-b border-gray-200 py-4 px-6 bg-white rounded-t-xl">
-            <h1 id="titleHead" class="text-lg font-semibold text-gray-900">
+        <header class="flex flex-none items-center justify-between border-b border-gray-200 dark:border-gray-500 py-4 px-6 bg-white dark:text-white dark:bg-gray-900 dark:bg-gray-900 dark:text-white rounded-t-xl">
+            <h1 id="titleHead" class="text-lg font-semibold text-gray-900 dark:text-white">
             </h1>
             <div class="flex items-center">
                 <div class="flex items-center rounded-md shadow-sm md:items-stretch">
                     <button id="prev" type="button"
-                            class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
+                            class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 dark:border-gray-500 bg-white dark:text-white dark:bg-gray-900 dark:hover:text-white dark:hover:bg-gray-800 py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2">
                         <span class="sr-only">Previous month</span>
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true">
@@ -72,12 +98,12 @@
                         </svg>
                     </button>
                     <button id="today" type="button"
-                            class="hidden border-t border-b border-gray-300 bg-white px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block">
+                            class="hidden border-t dark:hover:text-white dark:hover:bg-gray-800 border-b border-gray-300 dark:border-gray-500 bg-white dark:text-white dark:bg-gray-900 px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block">
                         Aujourd'hui
                     </button>
                     <span class="relative -mx-px h-5 w-px bg-gray-300 md:hidden"></span>
                     <button id="next" type="button"
-                            class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
+                            class="flex items-center justify-center rounded-r-md border dark:hover:text-white dark:hover:bg-gray-800 dark:border-gray-500 border-l-0 border-gray-300 bg-white dark:text-white dark:bg-gray-900 py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2">
                         <span class="sr-only">Next month</span>
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true">
@@ -89,7 +115,7 @@
                 </div>
                 <div class="hidden md:ml-4 md:flex md:items-center">
                     <div class="relative">
-                        <button class="flex items-center rounded-md border border-gray-300 bg-white py-2 pl-3 pr-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+                        <button class="flex items-center rounded-md border border-gray-300 dark:hover:text-white dark:border-gray-500 dark:hover:bg-gray-800 bg-white dark:text-white dark:bg-gray-900 py-2 pl-3 pr-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                                 id="menu-button" aria-expanded="false" aria-haspopup="true">
                             Semaine
                             <svg class="ml-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -100,16 +126,16 @@
                             </svg>
                         </button>
                         <div class="hidden Entering: transition ease-out duration-100 From: transform opacity-0 scale-95 To: transform opacity-100 Leaving: transition ease-in duration-75 From: transform opacity-100 scale-100
-                    To: transform opacity-0 scale-95 scale-100 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    To: transform opacity-0 scale-95 scale-100 absolute right-0 z-10 mt-3 w-36 origin-top-right overflow-hidden rounded-md bg-white dark:text-white dark:bg-gray-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                              role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
                              id="selectView">
                             <div class="py-1" role="none">
                                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                                <a href="javascript:void(0)" class="dark:text-white text-gray-700 block px-4 py-2 text-sm dark:hover:bg-gray-800 hover:bg-gray-100"
                                    role="menuitem" tabindex="-1" id="dayView">Jour</a>
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                                <a href="javascript:void(0)" class="dark:text-white text-gray-700 block px-4 py-2 text-sm dark:hover:bg-gray-800 hover:bg-gray-100"
                                    role="menuitem" tabindex="-1" id="weekView">Semaine</a>
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100"
+                                <a href="javascript:void(0)" class="dark:text-white text-gray-700 block px-4 py-2 text-sm dark:hover:bg-gray-800 hover:bg-gray-100"
                                    role="menuitem" tabindex="-1" id="monthView">Mois</a>
                             </div>
                         </div>
@@ -131,55 +157,55 @@
     <div id="bgModalNewEvent" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+            <div class="relative transform overflow-hidden rounded-lg bg-white dark:text-white dark:bg-gray-900 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <form name="formAddEvent" method="post" onsubmit="event.preventDefault(); verificationFormAddEvent()"
                       class="space-y-8">
                     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div class="space-y-6 sm:space-y-5">
                             <div>
-                                <h3 class="text-lg font-medium leading-6 text-gray-900">Ajouter un nouvel événement</h3>
-                                <p class="mt-1 max-w-2xl text-sm text-gray-500">Veuillez remplir les informations et
+                                <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Ajouter un nouvel événement</h3>
+                                <p class="mt-1 max-w-2xl text-sm text-gray-500 dark:text-white">Veuillez remplir les informations et
                                     cliquer sur créer !</p>
                             </div>
                             <div class="space-y-6 sm:space-y-5">
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="title"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Nom</label>
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Nom</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="text" name="title" id="title"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 dark:bg-gray-900 dark:focus:bg-gray-800 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
                                         <span id="invalidTitle" style="color:red"></span>
                                     </div>
 
                                 </div>
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="date"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Date
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Date
                                     </label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="datetime-local" name="date" id="date"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm dark:bg-gray-900 dark:focus:bg-gray-800 focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
                                         <span id="invalidDate" style="color:red"></span>
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="duration"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Durée
                                         (minutes)</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
-                                        <input id="duration" name="duration" type="number" min="1" max="1440"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                        <input id="duration" name="duration" type="number" min="5" max="1440" step="5"
+                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm dark:bg-gray-900 dark:focus:bg-gray-800 focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                         <span id="invalidDuration" style="color:red"></span>
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="description"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Description</label>
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Description</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input id="description" name="description" type="text"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 dark:bg-gray-900 dark:focus:bg-gray-800 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                     </div>
                                 </div>
                             </div>
@@ -190,7 +216,7 @@
                             Créer
                         </button>
                         <button id="cancelAdd" onClick="cancelAdd()"
-                                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
+                                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white dark:text-white dark:bg-gray-900 px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
                             Annuler
                         </button>
                     </div>
@@ -204,12 +230,12 @@
     <div id="bgModalDisplayEvent" class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                <form name="formDisplayEvent" class="space-y-8">
+            <div class="relative transform overflow-hidden rounded-lg bg-white dark:text-white dark:bg-gray-900 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                <form name="formDisplayEvent" class="space-y-8" onsubmit="event.preventDefault()">
                     <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
                         <div class="space-y-6 sm:space-y-5">
                             <div class="flex justify-between">
-                                <h3 id="titleModal" class="text-lg font-medium leading-6 text-gray-900 pt-2">
+                                <h3 id="titleModal" class="text-lg font-medium dark:text-white leading-6 text-gray-900 pt-2">
                                     Modifier/Supprimer l'événement</h3>
                                 <div class="flex justify-end ">
                                     <a id="buttonDeleteEvent"
@@ -225,39 +251,39 @@
                             <div class="space-y-6 sm:space-y-5">
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="titleDisplayEvent"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Titre</label>
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Titre</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="text" name="title" id="titleDisplayEvent"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 dark:bg-gray-900 dark:focus:bg-gray-800 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="dateDisplayEvent"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Date
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Date
                                     </label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input type="datetime-local" name="date" id="dateDisplayEvent"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 dark:bg-gray-900 dark:focus:bg-gray-800 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:max-w-xs sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="durationDisplayEvent"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Durée (en
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Durée (en
                                         minutes)</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input id="durationDisplayEvent" name="duration" type="number" min="0"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 dark:bg-gray-900 dark:focus:bg-gray-800 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                     </div>
                                 </div>
 
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label for="descriptionDisplayEvent"
-                                           class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Description</label>
+                                           class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Description</label>
                                     <div class="mt-1 sm:col-span-2 sm:mt-0">
                                         <input id="descriptionDisplayEvent" name="description" type="text"
-                                               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                               class="block w-full max-w-lg rounded-md border-gray-300 dark:bg-gray-900 dark:focus:bg-gray-800 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                     </div>
                                 </div>
                             </div>
@@ -268,8 +294,8 @@
                                 class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
                             Modifier
                         </button>
-                        <button onclick="closeModalDisplayEvent()"
-                                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
+                        <button id="annulerDisplayEvent"
+                                class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white dark:text-white dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:text-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
                             Annuler
                         </button>
                     </div>

@@ -1,5 +1,7 @@
 async function fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, month, year, day){
 
+    document.getElementById("lesEvenements").innerHTML = "";
+
     let actualDate = new Date(year, month, day)
     let lesJoursDeLaSemaine = [firstDayWeek, twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek, lastDayWeek];
     let events;
@@ -23,7 +25,7 @@ async function fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, five
             console.log(new Date(test.date).getDate() === (jour.getDate()), index)
             if (new Date(test.date).getDate() === (jour.getDate())) {
                 document.getElementById("lesEvenements").innerHTML +=
-                    "<li class=\"relative mt-px flex sm:col-start-"+ (index +1) +"\" style=\"grid-row: "+ (2+12*new Date(test.date).getHours()) +" / span "+ 0.2* test.duration +"\">" +
+                    "<li class=\"relative mt-px flex sm:col-start-"+ (index +1) +"\" style=\"grid-row: "+ parseInt(2+12*new Date(test.date).getHours()+ (12*(new Date(test.date).getMinutes()/60))) +" / span "+ 0.2* test.duration +"\">" +
                     "<a href=\"#\"\n" +
                     "class=\"group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200\">\n" +
                     "<p class=\"order-1 font-semibold text-gray-700\">" + test.title + "</p>\n" +

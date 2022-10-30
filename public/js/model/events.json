@@ -1,1 +1,16 @@
-{"events":[]}
+{
+  "events":[
+    {"user":"admin","id":0,"title":"Anthony","date":"2022-10-08T09:28:00.000Z","duration":"30","description":"Hello"},
+    {"user":"admin","id":1,"title":"test","date":"2022-10-08T14:34:00.000Z","duration":"60","description":"hello"},
+    {"user":"admin","id":2,"title":"estsfesf","date":"2022-10-07T09:30:00.000Z","duration":"50","description":"esfesfsf"},
+    {"user":"admin","id":3,"title":"esfesfesf","date":"2022-10-07T15:36:00.000Z","duration":"80","description":"esfesfesf"},
+    {"user":"admin","id":4,"title":"sefsefesf","date":"2022-10-07T00:25:00.000Z","duration":"80","description":"esfesfesf"},
+    {"user":"admin","id":5,"title":"aaaaaaaaaaaa","date":"2022-10-05T15:11:00.000Z","duration":"26","description":"aaaaaaaaa"},
+    {"user":"admin","id":6,"title":"aaaaa","date":"2022-10-30T16:13:00.000Z","duration":"60","description":"aaaaaaaa"},
+    {"user":"admin","id":7,"title":"test","date":"2022-10-30T09:00:00.000Z","duration":"90","description":"hola"},
+    {"user":"admin","id":8,"title":"ohohoh","date":"2022-10-29T23:00:00.000Z","duration":"30","description":"zdzzdz"},
+    {"user":"admin","id":9,"title":"erezrezrzerez","date":"2022-10-30T04:42:00.000Z","duration":"45","description":"rezrezrezr"},
+    {"user":"admin","id":10,"title":"eezrzrzerzerzerezrzer","date":"2022-10-30T02:15","duration":"60","description":"ezrezrezrezrez"},
+    {"user":"admin","id":11,"title":"rtrtrtrtrt","date":"2022-10-31T19:15:00.000Z","duration":"60","description":"rtrtrtrtrtrtrt"}
+  ]
+}

@@ -2,6 +2,32 @@
 
 window.addEventListener("load", function () {
 
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById("body").classList.remove('whiteScrollbar');
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById("body").classList.add('whiteScrollbar');
+    }
+
+    let nightMode = document.getElementById("nightMode");
+    let nbClick = 0;
+
+    nightMode.addEventListener("click", function () {
+        nbClick++;
+        if (nbClick%2 !== 0) {
+            if (localStorage.theme === 'dark') {
+                localStorage.theme = 'light';
+                document.documentElement.classList.remove('dark');
+                document.getElementById("body").classList.add('whiteScrollbar');
+            } else {
+                localStorage.theme = 'dark';
+                document.documentElement.classList.add('dark');
+                document.getElementById("body").classList.remove('whiteScrollbar');
+            }
+        }
+    });
+
     let displayFormConnexion = document.getElementById("displayFormConnexion");
     let displayFormInscription = document.getElementById("displayFormInscription");
     let formConnexion = document.getElementById("formConnexion");

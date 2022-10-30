@@ -62,6 +62,32 @@ let lastDayWeek;
 
 
 window.addEventListener("load", function () {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById("body").classList.remove('whiteScrollbar');
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById("body").classList.add('whiteScrollbar');
+    }
+
+    let nightMode = document.getElementById("nightMode");
+    let nbClick = 0;
+
+    nightMode.addEventListener("click", function () {
+        nbClick++;
+        if (nbClick%2 !== 0) {
+            if (localStorage.theme === 'dark') {
+                localStorage.theme = 'light';
+                document.documentElement.classList.remove('dark');
+                document.getElementById("body").classList.add('whiteScrollbar');
+            } else {
+                localStorage.theme = 'dark';
+                document.documentElement.classList.add('dark');
+                document.getElementById("body").classList.remove('whiteScrollbar');
+            }
+        }
+    });
+
     loadHTML("./js/views/week.html");
     let menuButton = document.getElementById("menu-button");
     let selectView = document.getElementById("selectView");
@@ -76,11 +102,16 @@ window.addEventListener("load", function () {
     let addEventButton = document.getElementById("addEventButton");
     let bgModalNewEvent = document.getElementById("bgModalNewEvent");
     let annulerEvent = document.getElementById("cancelAdd");
+    let annulerDisplayEvent = document.getElementById("annulerDisplayEvent");
+    let modalDisplayEvent = document.getElementById("modalDisplayEvent");
 
     toDayWeek();
 
     annulerEvent.addEventListener("click", function () {
         modalNewEvent.classList.add("hidden");
+    });
+    annulerDisplayEvent.addEventListener("click", function () {
+        modalDisplayEvent.classList.add("hidden");
     });
     bgModalNewEvent.addEventListener("click", function () {
         modalNewEvent.classList.add("hidden");
@@ -92,12 +123,15 @@ window.addEventListener("load", function () {
         switch (curentView) {
             case "week":
                 nextWeek();
+                fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
                 break;
             case "month":
                 nextMonth();
+                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {});
                 break;
             case "day":
                 nextDay();
+                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
                 break;
         }
     });
@@ -105,23 +139,33 @@ window.addEventListener("load", function () {
         switch (curentView) {
             case "week":
                 prevWeek();
+                fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
                 break;
             case "month":
                 prevMonth();
+                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {});
                 break;
             case "day":
                 prevDay();
+                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
                 break;
         }
     });
+
     today.addEventListener("click", function () {
-        if (curentView === "week") {
-            toDayWeek();
-        } else if (curentView === "month") {
-            toDayMonth();
-        } else if (curentView === "day") {
-            toDayDay();
-        }
+            if (curentView === "week") {
+                toDayWeek();
+                fillWeek(firstDayWeek, twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek, lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                });
+            } else if (curentView === "month") {
+                toDayMonth();
+                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {
+                });
+            } else if (curentView === "day") {
+                toDayDay();
+                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                });
+            }
     });
     month.addEventListener("click", function () {
         loadHTML("./js/views/month.html");
@@ -166,13 +210,16 @@ function loadHTML(file) {
         .then(response => response.text())
         .then(text => {
             document.getElementById('display').innerHTML = text
-            if (file === "./js/views/month.html") {
-                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {
-                })
-            }
-            if (file === "./js/views/week.html") {
-                fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
-                })
+            switch (file) {
+                case "./js/views/month.html":
+                    changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {});
+                    break;
+                case "./js/views/week.html":
+                    fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                    break;
+                case "./js/views/day.html":
+                    fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                    break;
             }
         });
 }
@@ -315,11 +362,6 @@ async function getEvent(id) {
                 return response.json();
             }
         })
-}
-
-function closeModalDisplayEvent() {
-    let displayEvent = document.getElementById("modalDisplayEvent");
-    displayEvent.classList.add("hidden");
 }
 
 function modifyEvent(id) {
