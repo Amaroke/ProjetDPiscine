@@ -18,7 +18,7 @@ window.addEventListener("load", function () {
 
     nightMode.addEventListener("click", function () {
         nbClick++;
-        if (nbClick%2 !== 0) {
+        if (nbClick % 2 !== 0) {
             if (localStorage.theme === 'dark') {
                 localStorage.theme = 'light';
                 document.documentElement.classList.remove('dark');

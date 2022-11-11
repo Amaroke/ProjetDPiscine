@@ -358,7 +358,7 @@ function modifyEvent(id) {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data),
         }).then(r => r.json());
-    loadHTML("./js/views/"+currentView+".html");
+    loadHTML("./js/views/" + currentView + ".html");
 }
 
 function deleteEvent(id) {
@@ -369,5 +369,5 @@ function deleteEvent(id) {
             method: "POST",
             headers: {"Content-Type": "application/json"},
         }).then(r => r.json());
-    loadHTML("./js/views/"+currentView+".html");
+    loadHTML("./js/views/" + currentView + ".html");
 }
