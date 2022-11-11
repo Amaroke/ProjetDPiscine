@@ -1,3 +1,5 @@
+"use strict";
+
 async function fillDay(month, year, day){
 
     document.getElementById("lesEventsJour").innerHTML = "";

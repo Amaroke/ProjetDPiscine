@@ -1,9 +1,8 @@
-async function fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, month, year, day){
+"use strict";
 
-    document.getElementById("lesEvenements").innerHTML = "";
+async function fillWeek(month, year, firstDayWeek) {
 
-    let actualDate = new Date(year, month, day)
-    let lesJoursDeLaSemaine = [firstDayWeek, twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek, lastDayWeek];
+    let actualDate = firstDayWeek
     let events;
 
     await fetch("/events/week?date=" + actualDate.toJSON(),
@@ -20,39 +19,28 @@ async function fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, five
         })
 
 
-    for(const [index, jour] of lesJoursDeLaSemaine.entries()){
-        for (const test of events) {
-            console.log(new Date(test.date).getDate() === (jour.getDate()), index)
-            if (new Date(test.date).getDate() === (jour.getDate())) {
-                document.getElementById("lesEvenements").innerHTML +=
-                    "<li class=\"relative mt-px flex sm:col-start-"+ (index +1) +"\" style=\"grid-row: "+ parseInt(2+12*new Date(test.date).getHours()+ (12*(new Date(test.date).getMinutes()/60))) +" / span "+ 0.2* test.duration +"\">" +
-                    "<a href=\"#\"\n" +
-                    "class=\"group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200\">\n" +
-                    "<p class=\"order-1 font-semibold text-gray-700\">" + test.title + "</p>\n" +
+    actualDate = new Date(firstDayWeek)
+    for (let i = 1; i <= 7; ++i) {
+        document.getElementById("day" + i).innerHTML = actualDate.getUTCDate().toString();
+        actualDate.setDate(actualDate.getDate() + 1)
+    }
+
+    actualDate = new Date(firstDayWeek)
+    document.getElementById("events").innerHTML = ""
+    for (let i = 1; i <= 7; ++i) {
+        for (const event of events) {
+            if (new Date(event.date).getUTCDate() === (actualDate.getUTCDate())) {
+                document.getElementById("events").innerHTML +=
+                    "<li class=\"relative mt-px flex sm:col-start-" + i + "\" style=\"grid-row: " + Math.round(2 + 12 * new Date(event.date).getHours() + (12 * (new Date(event.date).getMinutes() / 60))) + " / span " + 0.2 * event.duration + "\">" +
+                    "<a href=\"#\"\n" + "onclick=\"displayEvent(" + event.id + ")\"" + " class=\"group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200\">\n" +
+                    "<p class=\"order-1 font-semibold text-gray-700\">" + event.title + "</p>\n" +
                     "<p class=\"text-gray-500 group-hover:text-gray-700\">\n" +
-                    "<time datetime=\" " + new Date(test.date).getHours() + "\">" + new Date(test.date).getHours() +" : " + new Date(test.date).getMinutes() +"</time>\n" +
                     "</p>\n" +
                     "</a>" +
                     "</li>"
                 ;
-
-
             }
-
-
         }
+        actualDate.setDate(actualDate.getDate() + 1)
     }
-
-
-    //IMMONDICE
-    document.getElementById("day1").innerHTML = firstDayWeek.getUTCDate();
-    document.getElementById("day2").innerHTML = twoDayWeek.getUTCDate();
-    document.getElementById("day3").innerHTML = threeDayWeek.getUTCDate();
-    document.getElementById("day4").innerHTML = fourDayWeek.getUTCDate();
-    document.getElementById("day5").innerHTML = fiveDayWeek.getUTCDate();
-    document.getElementById("day6").innerHTML = sixDayWeek.getUTCDate();
-    document.getElementById("day7").innerHTML = lastDayWeek.getUTCDate();
-
-
-
 }

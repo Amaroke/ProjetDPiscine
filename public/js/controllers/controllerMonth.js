@@ -1,4 +1,6 @@
-async function changeBoxDays(month, year) {
+"use strict";
+
+async function fillDays(month, year) {
 
     let events;
     let prevMonth = month === 0 ? 11 : month - 1

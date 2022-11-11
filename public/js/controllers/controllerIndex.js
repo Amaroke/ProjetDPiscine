@@ -1,3 +1,5 @@
+// noinspection DuplicatedCode
+
 "use strict";
 
 // Modal add event
@@ -45,22 +47,14 @@ function verificationFormAddEvent() {
     }
 }
 
-// TODO FAUT TRIER tout ce qui a en dessous
-
-let curentView = "week";
+let currentView = "week";
 let currentMonth = new Date().getMonth() + 1;
 let currentDay = new Date().getDate();
 let currentYear = new Date().getFullYear();
-
 let firstDayWeek;
-let twoDayWeek;
-let threeDayWeek;
-let fourDayWeek;
-let fiveDayWeek;
-let sixDayWeek;
 let lastDayWeek;
 
-
+// DarkTheme
 window.addEventListener("load", function () {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
@@ -75,7 +69,7 @@ window.addEventListener("load", function () {
 
     nightMode.addEventListener("click", function () {
         nbClick++;
-        if (nbClick%2 !== 0) {
+        if (nbClick % 2 !== 0) {
             if (localStorage.theme === 'dark') {
                 localStorage.theme = 'light';
                 document.documentElement.classList.remove('dark');
@@ -88,7 +82,7 @@ window.addEventListener("load", function () {
         }
     });
 
-    loadHTML("./js/views/week.html");
+    loadHTML("./js/views/" + currentView + ".html");
     let menuButton = document.getElementById("menu-button");
     let selectView = document.getElementById("selectView");
     let month = document.getElementById("monthView");
@@ -120,59 +114,63 @@ window.addEventListener("load", function () {
         modalNewEvent.classList.remove("hidden");
     });
     next.addEventListener("click", function () {
-        switch (curentView) {
+        switch (currentView) {
             case "week":
                 nextWeek();
-                fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+                });
                 break;
             case "month":
-                console.log(currentMonth, currentYear)
                 nextMonth();
-                console.log(currentMonth, currentYear)
-                changeBoxDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {});
+                fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
+                });
                 break;
             case "day":
                 nextDay();
-                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                });
                 break;
         }
     });
     prev.addEventListener("click", function () {
-        switch (curentView) {
+        switch (currentView) {
             case "week":
                 prevWeek();
-                fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+                });
                 break;
             case "month":
                 prevMonth();
-                changeBoxDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {});
+                fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
+                });
                 break;
             case "day":
                 prevDay();
-                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                });
                 break;
         }
     });
 
     today.addEventListener("click", function () {
-            if (curentView === "week") {
-                toDayWeek();
-                fillWeek(firstDayWeek, twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek, lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
-                });
-            } else if (curentView === "month") {
-                toDayMonth();
-                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {
-                });
-            } else if (curentView === "day") {
-                toDayDay();
-                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
-                });
-            }
+        if (currentView === "week") {
+            toDayWeek();
+            fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+            });
+        } else if (currentView === "month") {
+            toDayMonth();
+            fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
+            });
+        } else if (currentView === "day") {
+            toDayDay();
+            fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+            });
+        }
     });
     month.addEventListener("click", function () {
         loadHTML("./js/views/month.html");
         selectView.classList.add("hidden");
-        curentView = "month";
+        currentView = "month";
         changeTitleHead();
         menuButton.innerHTML = "Mois" +
             "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
@@ -183,19 +181,17 @@ window.addEventListener("load", function () {
         loadHTML("./js/views/week.html");
         titleHead.innerHTML = "Lun " + firstDayWeek.getUTCDate() + "-" + "Dim " + lastDayWeek.getUTCDate();
         selectView.classList.add("hidden");
-        curentView = "week";
+        currentView = "week";
         changeTitleHead();
         menuButton.innerHTML = "Semaine" +
             "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
-
-
     });
     day.addEventListener("click", function () {
         loadHTML("./js/views/day.html");
         selectView.classList.add("hidden");
-        curentView = "day";
+        currentView = "day";
         changeTitleHead();
         menuButton.innerHTML = "Jour" +
             "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
@@ -214,13 +210,16 @@ function loadHTML(file) {
             document.getElementById('display').innerHTML = text
             switch (file) {
                 case "./js/views/month.html":
-                    changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {});
+                    fillDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {
+                    });
                     break;
                 case "./js/views/week.html":
-                    fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                    fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+                    });
                     break;
                 case "./js/views/day.html":
-                    fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
+                    fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                    });
                     break;
             }
         });
@@ -228,25 +227,13 @@ function loadHTML(file) {
 
 function nextWeek() {
     firstDayWeek.setDate(firstDayWeek.getDate() + 7);
-    twoDayWeek.setDate(twoDayWeek.getDate() + 7);
-    threeDayWeek.setDate(threeDayWeek.getDate() + 7);
-    fourDayWeek.setDate(fourDayWeek.getDate() + 7);
-    fiveDayWeek.setDate(fiveDayWeek.getDate() + 7);
-    sixDayWeek.setDate(sixDayWeek.getDate() + 7);
     lastDayWeek.setDate(lastDayWeek.getDate() + 7);
-
     changeTitleHead();
 }
 
 function prevWeek() {
     firstDayWeek.setDate(firstDayWeek.getDate() - 7);
-    twoDayWeek.setDate(twoDayWeek.getDate() - 7);
-    threeDayWeek.setDate(threeDayWeek.getDate() - 7);
-    fourDayWeek.setDate(fourDayWeek.getDate() - 7);
-    fiveDayWeek.setDate(fiveDayWeek.getDate() - 7);
-    sixDayWeek.setDate(sixDayWeek.getDate() - 7);
     lastDayWeek.setDate(lastDayWeek.getDate() - 7);
-
     changeTitleHead();
 }
 
@@ -281,22 +268,12 @@ function prevDay() {
 }
 
 function toDayWeek() {
-    let curr = new Date(); // get current date
-    let first = curr.getDate() - curr.getDay() + 1; // First day is the day of the month - the day of the week
-    let two = first + 1
-    let three = first + 2
-    let four = first + 3
-    let five = first + 4
-    let six = first + 5
-    let last = first + 6; // last day is the first day + 6
-
-    firstDayWeek = new Date(curr.setDate(first));
-    twoDayWeek = new Date(curr.setDate(two));
-    threeDayWeek = new Date(curr.setDate(three));
-    fourDayWeek = new Date(curr.setDate(four));
-    fiveDayWeek = new Date(curr.setDate(five));
-    sixDayWeek = new Date(curr.setDate(six));
-    lastDayWeek = new Date(curr.setDate(last));
+    const date = new Date();
+    const day = date.getDay();
+    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
+    firstDayWeek = new Date(date.setDate(diff));
+    lastDayWeek = new Date()
+    lastDayWeek.setDate(firstDayWeek.getDate() + 6);
     changeTitleHead();
 }
 
@@ -312,7 +289,7 @@ function toDayDay() {
 }
 
 function changeTitleHead() {
-    switch (curentView) {
+    switch (currentView) {
         case "month":
             let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
             document.getElementById("titleHead").innerHTML = mois[currentMonth - 1] + " " + currentYear
@@ -381,6 +358,7 @@ function modifyEvent(id) {
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(data),
         }).then(r => r.json());
+    loadHTML("./js/views/"+currentView+".html");
 }
 
 function deleteEvent(id) {
@@ -391,6 +369,5 @@ function deleteEvent(id) {
             method: "POST",
             headers: {"Content-Type": "application/json"},
         }).then(r => r.json());
+    loadHTML("./js/views/"+currentView+".html");
 }
-
-//document.getElementById("user").value = localStorage.getItem("username")

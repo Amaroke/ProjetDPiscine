@@ -1,5 +1,8 @@
+// noinspection DuplicatedCode
+
 "use strict";
 
+//DarkTheme
 window.addEventListener("load", function () {
 
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
