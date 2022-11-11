@@ -126,8 +126,10 @@ window.addEventListener("load", function () {
                 fillWeek(firstDayWeek,twoDayWeek, threeDayWeek, fourDayWeek, fiveDayWeek, sixDayWeek ,lastDayWeek, currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {});
                 break;
             case "month":
+                console.log(currentMonth, currentYear)
                 nextMonth();
-                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {});
+                console.log(currentMonth, currentYear)
+                changeBoxDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {});
                 break;
             case "day":
                 nextDay();
@@ -143,7 +145,7 @@ window.addEventListener("load", function () {
                 break;
             case "month":
                 prevMonth();
-                changeBoxDays(currentMonth === 1 ? 11 : currentMonth - 1, currentYear).then(() => {});
+                changeBoxDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {});
                 break;
             case "day":
                 prevDay();

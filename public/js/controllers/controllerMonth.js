@@ -10,6 +10,7 @@ async function changeBoxDays(month, year) {
     let prevMonthNbDays = getNbJours(prevDate)
     let actualMonthNbDays = getNbJours(actualDate)
     let firstDay = actualDate.getDay()
+
     await fetch("/events/month?date=" + actualDate.toJSON(),
         {
             method: "GET",
@@ -23,29 +24,25 @@ async function changeBoxDays(month, year) {
             events = data
         })
 
-    events.sort((a, b) => {
-        return new Date(a.date) - new Date(b.date)
-    });
-
     for (let i = 0; i < firstDay - 1; ++i) {
         document.getElementById("box" + i).innerHTML = "";
         document.getElementById("box" + i).innerHTML = (prevMonthNbDays - firstDay + i + 2).toString()
-        document.getElementById("box" + i).className += " relative dark:bg-gray-800 bg-gray-50 py-2 px-3 text-gray-500"
+        document.getElementById("box" + i).className = " relative dark:bg-gray-800 bg-gray-50 py-2 px-3 text-gray-500"
     }
     for (let i = firstDay - 1; i < actualMonthNbDays + firstDay - 1; ++i) {
         document.getElementById("box" + i).innerHTML = "";
         document.getElementById("box" + i).innerHTML = (i + 2 - firstDay).toString()
+        document.getElementById("box" + i).className = " relative bg-white dark:bg-gray-900 py-2 px-3 overflow-auto max-h-24 h-24 whiteScrollbar2 dark:darkScrollbar"
         if (events != null) {
             for (const event of events) {
                 if (new Date(event.date).getDate() === (i + 2 - firstDay)) {
-                    let dateCurrent = new Date(event.date);
-                    console.log(event.title +" - " +dateCurrent.getUTCHours() +" h " + dateCurrent.getUTCMinutes())
+                    let dateCurrent = new Date(event.date)
                     document.getElementById("box" + i).innerHTML +=
-                        "<ol class=\"mt-2 px-2 py-0.5 rounded-lg dark:hover:bg-gray-800 hover:bg-gray-50\"><li><a href=\"javascript:void(0)\" onclick=\"displayEvent(" +event.id +")\"" +"class=\"group flex\">" +
+                        "<ol class=\"mt-2 px-2 py-0.5 rounded-lg dark:hover:bg-gray-800 hover:bg-gray-50\"><li><a href=\"javascript:void(0)\" onclick=\"displayEvent(" + event.id + ")\"" + " class=\"group flex\">" +
                         "<p class=\"flex-auto truncate font-medium text-gray-900 dark:text-white group-hover:text-sky-500\">" +
                         event.title + '</p>' +
                         "<time dateTime=\"\" class=\"ml-3 hidden flex-none text-gray-500 dark:text-white group-hover:text-sky-500 xl:block\">" +
-                        (parseInt(dateCurrent.getUTCMinutes()) === 0 ? (parseInt(dateCurrent.getUTCHours())+2 >= 24 ? (parseInt(dateCurrent.getUTCHours())+2)-24 : parseInt(dateCurrent.getUTCHours())+2) : (parseInt(dateCurrent.getUTCHours())+1 >= 24 ? (parseInt(dateCurrent.getUTCHours())+1)-24 : parseInt(dateCurrent.getUTCHours())+1)) +"h" +(dateCurrent.getMinutes() === 0 ? dateCurrent.getMinutes()+'0' : dateCurrent.getMinutes()) +" </time></a></li></ol>"
+                        dateCurrent.getHours() + "h" + (dateCurrent.getMinutes() > 10 ? dateCurrent.getMinutes() : ("0" + dateCurrent.getMinutes())) + " </time></a></li></ol>"
                 }
             }
         }
