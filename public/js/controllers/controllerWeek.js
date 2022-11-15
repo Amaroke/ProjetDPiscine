@@ -21,7 +21,7 @@ async function fillWeek(month, year, firstDayWeek) {
 
     actualDate = new Date(firstDayWeek)
     for (let i = 1; i <= 7; ++i) {
-        document.getElementById("day" + i).innerHTML = actualDate.getUTCDate().toString();
+        document.getElementById("day" + i).innerHTML = actualDate.getDate().toString();
         actualDate.setDate(actualDate.getDate() + 1)
     }
 
@@ -30,7 +30,7 @@ async function fillWeek(month, year, firstDayWeek) {
     for (let i = 1; i <= 7; ++i) {
         if (events != null) {
             for (const event of events) {
-                if (new Date(event.date).getUTCDate() === (actualDate.getUTCDate())) {
+                if (new Date(event.date).getDate() === (actualDate.getDate())) {
                     document.getElementById("events").innerHTML +=
                         "<li class=\"relative mt-px flex sm:col-start-" + i + "\" style=\"grid-row: " + Math.round(2 + 12 * new Date(event.date).getHours() + (12 * (new Date(event.date).getMinutes() / 60))) + " / span " + 0.2 * event.duration + "\">" +
                         "<a href=\"#\"\n" + "onclick=\"displayEvent(" + event.id + ")\"" + " class=\"group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-gray-100 p-2 text-xs leading-5 hover:bg-gray-200\">\n" +

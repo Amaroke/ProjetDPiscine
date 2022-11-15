@@ -25,10 +25,10 @@ app.post('/auth', (req, res) => {
         if (users.validUser(username, password)) {
             res.sendStatus(200)
         } else {
-            res.status(401).send({error: "password"})
+            res.status(401).json({error: "password"})
         }
     } else {
-        res.status(401).send({error: "username"})
+        res.status(401).json({error: "username"})
     }
 });
 
@@ -39,7 +39,7 @@ app.get('/events', (req, res) => {
     if (Object.keys(eventsList).length === 0) {
         res.sendStatus(204)
     } else {
-        res.status(200).send(eventsList)
+        res.status(200).json(eventsList)
     }
 })
 
@@ -48,7 +48,7 @@ app.get('/events/day', (req, res) => {
     if (Object.keys(eventsList).length === 0) {
         res.sendStatus(204)
     } else {
-        res.status(200).send(eventsList)
+        res.status(200).json(eventsList)
     }
 })
 
@@ -57,7 +57,7 @@ app.get('/events/week', (req, res) => {
     if (Object.keys(eventsList).length === 0) {
         res.sendStatus(204)
     } else {
-        res.status(200).send(eventsList)
+        res.status(200).json(eventsList)
     }
 })
 
@@ -75,7 +75,7 @@ app.get('/events/year', (req, res) => {
     if (Object.keys(eventsList).length === 0) {
         res.sendStatus(204)
     } else {
-        res.status(200).send(eventsList)
+        res.status(200).json(eventsList)
     }
 })
 
@@ -103,16 +103,16 @@ app.get('/event', (req, res) => {
 app.get('/event/:id', (req, res) => {
     let event = events.eventById(req.params.id)
     if (event === null) {
-        res.status(204).send(event)
+        res.status(204)
     } else {
-        res.status(200).send(event)
+        res.status(200).json(event)
     }
 })
 
 app.post('/modifyEvent/:id', (req, res) => {
     let ret = events.modifyEvent(req.params.id, req.body);
-    if (ret === false) {
-        res.sendStatus(200)
+    if (!ret) {
+        res.sendStatus(204)
     } else {
         res.sendStatus(200)
     }
@@ -120,8 +120,8 @@ app.post('/modifyEvent/:id', (req, res) => {
 
 app.post('/deleteEvent/:id', (req, res) => {
     let ret = events.deleteEvent(req.params.id);
-    if (ret === false) {
-        res.sendStatus(200)
+    if (!ret) {
+        res.sendStatus(204)
     } else {
         res.sendStatus(200)
     }
