@@ -60,12 +60,13 @@ module.exports = {
         let newDateFin = new Date(newDateDebut.getTime() + duration * 60000);
         let existing = false;
         json.events.forEach(function (event) {
+            let userEvent = event.user;
             let dateEventDebut = new Date(event.date);
             let dateEventFin = new Date(dateEventDebut.getTime() + event.duration * 60000);
-            let superimposed = (newDateDebut > dateEventDebut && newDateDebut < dateEventFin) ||
-                (newDateFin > dateEventDebut && newDateFin < dateEventFin) ||
-                (newDateDebut > dateEventDebut && newDateFin < dateEventFin) ||
-                (newDateDebut <= dateEventDebut && newDateFin >= dateEventFin);
+            let superimposed = (newDateDebut > dateEventDebut && newDateDebut < dateEventFin && localStorage.username === userEvent) ||
+                (newDateFin > dateEventDebut && newDateFin < dateEventFin && localStorage.username === userEvent) ||
+                (newDateDebut > dateEventDebut && newDateFin < dateEventFin && localStorage.username === userEvent) ||
+                (newDateDebut <= dateEventDebut && newDateFin >= dateEventFin && localStorage.username === userEvent);
             if (superimposed) {
                 existing = true;
             }
@@ -84,7 +85,8 @@ module.exports = {
             "title": req.title,
             "date": new Date(req.date),
             "duration": req.duration,
-            "description": req.description
+            "description": req.description,
+            "importance": req.importance
         }
         json.events.push(event)
         fs.writeFileSync("./public/js/model/events.json", JSON.stringify(json))
@@ -112,6 +114,7 @@ module.exports = {
                 event.date = infos.date;
                 event.duration = infos.duration;
                 event.description = infos.description;
+                event.importance = infos.importance;
                 fs.writeFileSync("./public/js/model/events.json", JSON.stringify(json));
                 rep = true;
             }

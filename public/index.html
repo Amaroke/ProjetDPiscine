@@ -163,7 +163,7 @@
             <div class="relative transform overflow-hidden rounded-lg bg-white dark:text-white dark:bg-gray-900 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <form name="formAddEvent" method="post" onsubmit="event.preventDefault(); verificationFormAddEvent()"
                       class="space-y-8">
-                    <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+                    <div class="space-y-8 divide-top divide-gray-200 sm:space-y-5">
                         <div class="space-y-6 sm:space-y-5">
                             <div>
                                 <h3 class="text-lg font-medium leading-6 text-gray-900 dark:text-white">Ajouter un
@@ -217,28 +217,22 @@
                                     <label class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Importance</label>
                                     <div class="relative">
                                         <button type="button" id="importanceCreate" class="relative max-w-lg cursor-default rounded-md border border-gray-300 dark:bg-gray-900 dark:text-white bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-                                            <span class="flex items-center">
-                                                <img src="https://img.icons8.com/emoji/48/null/black-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
-                                                <span class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
+                                            <span id="importanceCreateSelected" class="flex items-center">
+                                                <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                <span id="importanceSelectCreate" class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
                                             </span>
                                             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                                <!-- Heroicon name: mini/chevron-up-down -->
                                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                                     <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
                                                 </svg>
                                             </span>
                                         </button>
-                                        <ul id="listeImportanceCreate" class="dark:darkScrollbar hidden absolute z-10 mt-1 max-h-56 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
+                                        <ul id="listeImportanceCreate" class="whiteScrollbar dark:darkScrollbar hidden absolute z-10 mt-1 max-h-16 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
                                             <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceCreate-1" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/black-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Normale</span>
                                                 </div>
-                                                <span id="checkImportanceCreate-1" class="text-sky-500 absolute inset-y-0 right-0 flex items-center pr-4">
-                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
 
                                             <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceCreate-2" role="option">
@@ -246,11 +240,6 @@
                                                     <img src="https://img.icons8.com/emoji/48/null/purple-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Important</span>
                                                 </div>
-                                                <span id="checkImportanceCreate-2" class="text-white dark:text-gray-900 absolute inset-y-0 right-0 flex items-center pr-4">
-                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
 
                                             <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceCreate-3" role="option">
@@ -258,12 +247,6 @@
                                                     <img src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Très important</span>
                                                 </div>
-
-                                                <span id="checkImportanceCreate-3" class="text-white dark:text-gray-900 absolute inset-y-0 right-0 flex items-center pr-4">
-                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
                                         </ul>
                                     </div>
@@ -274,11 +257,11 @@
                         <button class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
                             Créer
                         </button>
-                        <a id="cancelAdd" onClick="cancelAdd()"
-                                class="mt-3 cursor-pointer w-full text-center rounded-md border border-gray-300 bg-white dark:text-white dark:bg-gray-900 px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
+                        <a id="cancelAdd" class="mt-3 cursor-pointer w-full text-center rounded-md border border-gray-300 bg-white dark:text-white dark:bg-gray-900 px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
                             Annuler
                         </a>
                     </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -351,9 +334,9 @@
                                     <label class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Importance</label>
                                     <div class="relative">
                                         <button type="button" id="importanceDisplay" class="relative max-w-lg cursor-default rounded-md border border-gray-300 dark:bg-gray-900 dark:text-white bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
-                                            <span class="flex items-center">
-                                                <img src="https://img.icons8.com/emoji/48/null/black-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
-                                                <span class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
+                                            <span id="importanceDisplaySelected" class="flex items-center">
+                                                <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                <span id="importanceSelectDisplay" class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
                                             </span>
                                             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                                                 <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -361,17 +344,12 @@
                                                 </svg>
                                             </span>
                                         </button>
-                                        <ul id="listeImportanceDisplay" class="dark:darkScrollbar hidden absolute z-10 mt-1 max-h-56 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
+                                        <ul id="listeImportanceDisplay" class="whiteScrollbar dark:darkScrollbar hidden absolute z-10 mt-1 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-option-3">
                                             <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceDisplay-1" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/black-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Normale</span>
                                                 </div>
-                                                <span id="checkImportance-1" class="text-sky-500 absolute inset-y-0 right-0 flex items-center pr-4">
-                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
 
                                             <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceDisplay-2" role="option">
@@ -379,11 +357,6 @@
                                                     <img src="https://img.icons8.com/emoji/48/null/purple-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Important</span>
                                                 </div>
-                                                <span id="checkImportance-2" class="text-white dark:text-gray-900 absolute inset-y-0 right-0 flex items-center pr-4">
-                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
 
                                             <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceDisplay-3" role="option">
@@ -391,11 +364,6 @@
                                                     <img src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Très important</span>
                                                 </div>
-                                                <span id="checkImportance-3" class="text-white dark:text-gray-900 absolute inset-y-0 right-0 flex items-center pr-4">
-                                                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </span>
                                             </li>
                                         </ul>
                                     </div>

@@ -9,6 +9,7 @@ function verificationFormAddEvent() {
     let durationToCheck = document.getElementById("duration")
     let user = localStorage.getItem("username").toString()
     let description = document.getElementById("description")
+    let importance = document.getElementById("importanceSelectCreate")
     let invalidTitle = document.getElementById("invalidTitle")
     let invalidDate = document.getElementById("invalidDate")
     let invalidDuration = document.getElementById("invalidDuration")
@@ -25,7 +26,8 @@ function verificationFormAddEvent() {
             title: titleToCheck.value,
             date: dateToCheck.value,
             duration: durationToCheck.value,
-            description: description.value
+            description: description.value,
+            importance: importance.innerText
         }
         fetch('/events/add',
             {
@@ -103,6 +105,38 @@ window.addEventListener("load", function () {
     let annulerEvent = document.getElementById("cancelAdd");
     let annulerDisplayEvent = document.getElementById("annulerDisplayEvent");
     let modalDisplayEvent = document.getElementById("modalDisplayEvent");
+
+    let importanceCreate = document.getElementById("importanceCreate");
+    let listeImportanceCreate = document.getElementById("listeImportanceCreate");
+    importanceCreate.addEventListener('click', function () {
+        listeImportanceCreate.classList.contains("hidden") ? listeImportanceCreate.classList.remove("hidden") : listeImportanceCreate.classList.add("hidden");
+    });
+
+    let importanceCreate1 = document.getElementById("importanceCreate-1");
+    let importanceCreate2 = document.getElementById("importanceCreate-2");
+    let importanceCreate3 = document.getElementById("importanceCreate-3");
+    let importanceCreateSelected = document.getElementById("importanceCreateSelected");
+
+    importanceCreate1.addEventListener('click', function () {
+        importanceCreateSelected.innerHTML =
+            "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
+        listeImportanceCreate.classList.add("hidden");
+    });
+
+    importanceCreate2.addEventListener('click', function () {
+        importanceCreateSelected.innerHTML =
+            "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
+        listeImportanceCreate.classList.add("hidden");
+    });
+
+    importanceCreate3.addEventListener('click', function () {
+        importanceCreateSelected.innerHTML =
+            "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
+        listeImportanceCreate.classList.add("hidden");
+    });
 
     //Setup de la date courante
     toDayWeek();
@@ -337,8 +371,6 @@ function changeTitleHead() {
 
 //Fonction pour afficher un evenement
 async function displayEvent(id) {
-    let displayEvent = document.getElementById("modalDisplayEvent");
-    displayEvent.classList.remove("hidden");
     document.getElementById("buttonModifyEvent").addEventListener('click', function () {
         modifyEvent(id)
     });
@@ -350,15 +382,61 @@ async function displayEvent(id) {
     let description = document.getElementById("descriptionDisplayEvent");
     let date = document.getElementById("dateDisplayEvent");
     let duration = document.getElementById("durationDisplayEvent");
-    let importance = document.getElementById("importanceDisplay");
-    let listeImportance = document.getElementById("listeImportanceDisplay");
+    let importanceDisplay = document.getElementById("importanceDisplay");
+    let listeImportanceDisplay = document.getElementById("listeImportanceDisplay");
 
-    importance.addEventListener('click', function () {
-        listeImportance.classList.contains("hidden") ? listeImportance.classList.remove("hidden") : listeImportance.classList.add("hidden");
+    let displayEvent = document.getElementById("modalDisplayEvent");
+    displayEvent.classList.remove("hidden");
+
+    importanceDisplay.addEventListener('click', function () {
+        listeImportanceDisplay.classList.contains("hidden") ? listeImportanceDisplay.classList.remove("hidden") : listeImportanceDisplay.classList.add("hidden");
+    });
+
+    let importanceDisplay1 = document.getElementById("importanceDisplay-1");
+    let importanceDisplay2 = document.getElementById("importanceDisplay-2");
+    let importanceDisplay3 = document.getElementById("importanceDisplay-3");
+    let importanceDisplaySelected = document.getElementById("importanceDisplaySelected");
+
+    importanceDisplay1.addEventListener('click', function () {
+        importanceDisplaySelected.innerHTML =
+            "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<span id=\"importanceSelectDisplay\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
+        listeImportanceDisplay.classList.add("hidden");
+    });
+
+    importanceDisplay2.addEventListener('click', function () {
+        importanceDisplaySelected.innerHTML =
+            "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<span id=\"importanceSelectDisplay\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
+        listeImportanceDisplay.classList.add("hidden");
+    });
+
+    importanceDisplay3.addEventListener('click', function () {
+        importanceDisplaySelected.innerHTML =
+            "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<span id=\"importanceSelectDisplay\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
+        listeImportanceDisplay.classList.add("hidden");
     });
 
     title.value = infos.title;
     description.value = infos.description;
+    switch (infos.importance) {
+        case 'Normale':
+            importanceDisplaySelected.innerHTML =
+                "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
+            break;
+        case 'Important':
+            importanceDisplaySelected.innerHTML =
+                "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
+            break;
+        case 'Très important':
+            importanceDisplaySelected.innerHTML =
+                "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
+            break;
+    }
 
     Number.prototype.AddZero = function (b, c) {
         let l = (String(b || 10).length - String(this).length) + 1;
@@ -393,6 +471,7 @@ function modifyEvent(id) {
         description: document.getElementById("descriptionDisplayEvent").value,
         date: document.getElementById("dateDisplayEvent").value,
         duration: document.getElementById("durationDisplayEvent").value,
+        importance: document.getElementById("importanceSelectDisplay").innerText
     }
     fetch("/modifyEvent/" + id,
         {
