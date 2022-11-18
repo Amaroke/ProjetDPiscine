@@ -350,6 +350,13 @@ async function displayEvent(id) {
     let description = document.getElementById("descriptionDisplayEvent");
     let date = document.getElementById("dateDisplayEvent");
     let duration = document.getElementById("durationDisplayEvent");
+    let importance = document.getElementById("importanceDisplay");
+    let listeImportance = document.getElementById("listeImportanceDisplay");
+
+    importance.addEventListener('click', function () {
+        listeImportance.classList.contains("hidden") ? listeImportance.classList.remove("hidden") : listeImportance.classList.add("hidden");
+    });
+
     title.value = infos.title;
     description.value = infos.description;
 
