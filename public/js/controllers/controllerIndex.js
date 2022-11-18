@@ -101,7 +101,6 @@ window.addEventListener("load", function () {
     let titleHead = document.getElementById("titleHead");
     let modalNewEvent = document.getElementById("modalNewEvent");
     let addEventButton = document.getElementById("addEventButton");
-    let bgModalNewEvent = document.getElementById("bgModalNewEvent");
     let annulerEvent = document.getElementById("cancelAdd");
     let annulerDisplayEvent = document.getElementById("annulerDisplayEvent");
     let modalDisplayEvent = document.getElementById("modalDisplayEvent");
@@ -355,16 +354,17 @@ function toDayDay() {
 
 //Fonction pour changer le titre de la page
 function changeTitleHead() {
+    let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
     switch (currentView) {
         case "month":
-            let mois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
             document.getElementById("titleHead").innerHTML = mois[currentMonth - 1] + " " + currentYear
             break;
         case "week":
             document.getElementById("titleHead").innerHTML = "Lun " + firstDayWeek.getUTCDate() + " - " + "Dim " + lastDayWeek.getUTCDate();
             break;
         case "day":
-            document.getElementById("titleHead").innerHTML = "Day " + currentDay;
+            let jour = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
+            document.getElementById("titleHead").innerHTML = jour[new Date(currentYear, currentMonth-1, currentDay).getDay()] +" " + currentDay +" "  +mois[currentMonth - 1] + " " + currentYear;
             break;
     }
 }
