@@ -12,9 +12,11 @@ function verificationFormAddEvent() {
     let invalidTitle = document.getElementById("invalidTitle")
     let invalidDate = document.getElementById("invalidDate")
     let invalidDuration = document.getElementById("invalidDuration")
+
     invalidTitle.innerHTML = titleToCheck.value.length === 0 ? "Il faut renseigner un nom !" : ""
     invalidDate.innerHTML = dateToCheck.value.length === 0 ? "Il faut renseigner une date !" : ""
     invalidDuration.innerHTML = durationToCheck.value.length === 0 ? "Il faut renseigner une durée !" : ""
+
     if (titleToCheck.value.length !== 0 &&
         dateToCheck.value.length !== 0 &&
         durationToCheck.value.length !== 0) {
@@ -82,7 +84,10 @@ window.addEventListener("load", function () {
         }
     });
 
+    //Chargement de la vue courante
     loadHTML("./js/views/" + currentView + ".html");
+
+    //Récupération des différents éléments utilisés
     let menuButton = document.getElementById("menu-button");
     let selectView = document.getElementById("selectView");
     let month = document.getElementById("monthView");
@@ -99,20 +104,25 @@ window.addEventListener("load", function () {
     let annulerDisplayEvent = document.getElementById("annulerDisplayEvent");
     let modalDisplayEvent = document.getElementById("modalDisplayEvent");
 
+    //Setup de la date courante
     toDayWeek();
 
+    //Bouton pour annuler l'ajout d'un évènement
     annulerEvent.addEventListener("click", function () {
         modalNewEvent.classList.add("hidden");
     });
+
+    //Bouton pour annuler l'affichage d'un évènement
     annulerDisplayEvent.addEventListener("click", function () {
         modalDisplayEvent.classList.add("hidden");
     });
-    bgModalNewEvent.addEventListener("click", function () {
-        modalNewEvent.classList.add("hidden");
-    });
+
+    //Bouton pour ajouter un évènement
     addEventButton.addEventListener("click", function () {
         modalNewEvent.classList.remove("hidden");
     });
+
+    //Bouton pour aller au jour/semaine/mois prochain(e)
     next.addEventListener("click", function () {
         switch (currentView) {
             case "week":
@@ -132,6 +142,8 @@ window.addEventListener("load", function () {
                 break;
         }
     });
+
+    //Bouton pour aller au jour/semaine/mois précédent(e)
     prev.addEventListener("click", function () {
         switch (currentView) {
             case "week":
@@ -152,6 +164,7 @@ window.addEventListener("load", function () {
         }
     });
 
+    //Bouton pour aller au jour/semaine/mois courant(e)
     today.addEventListener("click", function () {
         if (currentView === "week") {
             toDayWeek();
@@ -167,6 +180,8 @@ window.addEventListener("load", function () {
             });
         }
     });
+
+    //Bouton pour afficher le mois
     month.addEventListener("click", function () {
         loadHTML("./js/views/month.html");
         selectView.classList.add("hidden");
@@ -177,6 +192,8 @@ window.addEventListener("load", function () {
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
     });
+
+    //Bouton pour afficher la semaine
     week.addEventListener("click", function () {
         loadHTML("./js/views/week.html");
         titleHead.innerHTML = "Lun " + firstDayWeek.getUTCDate() + "-" + "Dim " + lastDayWeek.getUTCDate();
@@ -188,6 +205,8 @@ window.addEventListener("load", function () {
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
     });
+
+    //Bouton pour afficher le jour
     day.addEventListener("click", function () {
         loadHTML("./js/views/day.html");
         selectView.classList.add("hidden");
@@ -198,10 +217,13 @@ window.addEventListener("load", function () {
             "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
             "</svg>";
     });
+
+    //Bouton pour afficher le menu de selection
     menuButton.addEventListener("click", function () {
         selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
     });
 });
+
 
 function loadHTML(file) {
     fetch(file)
@@ -225,18 +247,21 @@ function loadHTML(file) {
         });
 }
 
+//Fonction pour aller à la semaine suivante
 function nextWeek() {
     firstDayWeek.setDate(firstDayWeek.getDate() + 7);
     lastDayWeek.setDate(lastDayWeek.getDate() + 7);
     changeTitleHead();
 }
 
+//Fonction pour aller à la semaine précédente
 function prevWeek() {
     firstDayWeek.setDate(firstDayWeek.getDate() - 7);
     lastDayWeek.setDate(lastDayWeek.getDate() - 7);
     changeTitleHead();
 }
 
+//Fonction pour aller au mois suivant
 function nextMonth() {
     if (currentMonth === 12) {
         currentMonth = 1;
@@ -247,6 +272,7 @@ function nextMonth() {
     changeTitleHead();
 }
 
+//Fonction pour aller au mois précédent
 function prevMonth() {
     if (currentMonth === 1) {
         currentMonth = 12;
@@ -257,16 +283,19 @@ function prevMonth() {
     changeTitleHead();
 }
 
+//Fonction pour aller au jour suivant
 function nextDay() {
     currentDay++;
     changeTitleHead();
 }
 
+//Fonction pour aller au jour précédent
 function prevDay() {
     currentDay--;
     changeTitleHead();
 }
 
+//Fonction pour aller à la semaine courante
 function toDayWeek() {
     const date = new Date();
     const day = date.getDay();
@@ -277,17 +306,20 @@ function toDayWeek() {
     changeTitleHead();
 }
 
+//Fonction pour aller au mois courant
 function toDayMonth() {
     currentMonth = new Date().getMonth() + 1;
     currentYear = new Date().getFullYear();
     changeTitleHead();
 }
 
+//Fonction pour aller au jour courant
 function toDayDay() {
     currentDay = new Date().getDate();
     changeTitleHead();
 }
 
+//Fonction pour changer le titre de la page
 function changeTitleHead() {
     switch (currentView) {
         case "month":
@@ -303,6 +335,7 @@ function changeTitleHead() {
     }
 }
 
+//Fonction pour afficher un evenement
 async function displayEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.remove("hidden");
@@ -330,6 +363,7 @@ async function displayEvent(id) {
     duration.value = infos.duration;
 }
 
+//Fonction pour récupérer un evenement
 async function getEvent(id) {
     return fetch("/event/" + id,
         {
@@ -343,6 +377,7 @@ async function getEvent(id) {
         })
 }
 
+//Fonction pour modifier un evenement
 function modifyEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");
@@ -361,6 +396,7 @@ function modifyEvent(id) {
     loadHTML("./js/views/" + currentView + ".html");
 }
 
+//Fonction pour supprimer un evenement
 function deleteEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");

@@ -56,17 +56,21 @@ module.exports = {
     },
 
     existingDate: function (date, duration) {
-        let dateDebut = new Date(date)
-        let dateFin = new Date(dateDebut.getTime() + duration * 60000);
+        let newDateDebut = new Date(date)
+        let newDateFin = new Date(newDateDebut.getTime() + duration * 60000);
+        let existing = false;
         json.events.forEach(function (event) {
-            let dateEventDebut = new Date(event.date)
+            let dateEventDebut = new Date(event.date);
             let dateEventFin = new Date(dateEventDebut.getTime() + event.duration * 60000);
-            let superimposed = (dateDebut < dateEventDebut && dateFin > dateEventDebut) || (dateDebut < dateEventFin && dateFin > dateEventFin)
-            if (!superimposed) {
-                return true
+            let superimposed = (newDateDebut > dateEventDebut && newDateDebut < dateEventFin) ||
+                (newDateFin > dateEventDebut && newDateFin < dateEventFin) ||
+                (newDateDebut > dateEventDebut && newDateFin < dateEventFin) ||
+                (newDateDebut <= dateEventDebut && newDateFin >= dateEventFin);
+            if (superimposed) {
+                existing = true;
             }
         })
-        return false
+        return existing;
     },
 
     addEvent: function (req) {
