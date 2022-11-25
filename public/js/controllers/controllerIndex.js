@@ -283,10 +283,6 @@ window.addEventListener("load", function () {
         }
 
     subscribe();
-        //Bouton pour afficher le menu de selection
-        menuButton.addEventListener("click", function () {
-            selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
-        });
     } else {
         window.location = "/auth"
     }
