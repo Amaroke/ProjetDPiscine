@@ -60,7 +60,15 @@ let lastDayWeek;
 
 // DarkTheme
 window.addEventListener("load", function () {
-    if(localStorage.length === 2){
+    let variable = false;
+    for (let i = 0; i < localStorage.length; i++) {
+        console.log(localStorage.key(i));
+        if(localStorage.key(i) === "username"){
+            variable = true;
+        }
+    }
+
+    if(variable === true){
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             document.getElementById("body").classList.remove('whiteScrollbar');
