@@ -60,201 +60,207 @@ let lastDayWeek;
 
 // DarkTheme
 window.addEventListener("load", function () {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-        document.getElementById("body").classList.remove('whiteScrollbar');
+    if(localStorage.length === 2){
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById("body").classList.remove('whiteScrollbar');
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById("body").classList.add('whiteScrollbar');
+        }
+
+        let nightMode = document.getElementById("nightMode");
+        let nbClick = 0;
+
+        nightMode.addEventListener("click", function () {
+            nbClick++;
+            if (nbClick % 2 !== 0) {
+                if (localStorage.theme === 'dark') {
+                    localStorage.theme = 'light';
+                    document.documentElement.classList.remove('dark');
+                    document.getElementById("body").classList.add('whiteScrollbar');
+                } else {
+                    localStorage.theme = 'dark';
+                    document.documentElement.classList.add('dark');
+                    document.getElementById("body").classList.remove('whiteScrollbar');
+                }
+            }
+        });
+
+        //Chargement de la vue courante
+        //Est ce que le champ "theme" est toujours la ?
+        loadHTML("./js/views/" + currentView + ".html");
+
+        //Récupération des différents éléments utilisés
+        let menuButton = document.getElementById("menu-button");
+        let selectView = document.getElementById("selectView");
+        let month = document.getElementById("monthView");
+        let week = document.getElementById("weekView");
+        let day = document.getElementById("dayView");
+        let next = document.getElementById("next");
+        let prev = document.getElementById("prev");
+        let today = document.getElementById("today");
+        let titleHead = document.getElementById("titleHead");
+        let modalNewEvent = document.getElementById("modalNewEvent");
+        let addEventButton = document.getElementById("addEventButton");
+        let annulerEvent = document.getElementById("cancelAdd");
+        let annulerDisplayEvent = document.getElementById("annulerDisplayEvent");
+        let modalDisplayEvent = document.getElementById("modalDisplayEvent");
+
+        let importanceCreate = document.getElementById("importanceCreate");
+        let listeImportanceCreate = document.getElementById("listeImportanceCreate");
+        importanceCreate.addEventListener('click', function () {
+            listeImportanceCreate.classList.contains("hidden") ? listeImportanceCreate.classList.remove("hidden") : listeImportanceCreate.classList.add("hidden");
+        });
+
+        let importanceCreate1 = document.getElementById("importanceCreate-1");
+        let importanceCreate2 = document.getElementById("importanceCreate-2");
+        let importanceCreate3 = document.getElementById("importanceCreate-3");
+        let importanceCreateSelected = document.getElementById("importanceCreateSelected");
+
+        importanceCreate1.addEventListener('click', function () {
+            importanceCreateSelected.innerHTML =
+                "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
+            listeImportanceCreate.classList.add("hidden");
+        });
+
+        importanceCreate2.addEventListener('click', function () {
+            importanceCreateSelected.innerHTML =
+                "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
+            listeImportanceCreate.classList.add("hidden");
+        });
+
+        importanceCreate3.addEventListener('click', function () {
+            importanceCreateSelected.innerHTML =
+                "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
+            listeImportanceCreate.classList.add("hidden");
+        });
+
+        //Setup de la date courante
+        toDayWeek();
+
+        //Bouton pour annuler l'ajout d'un évènement
+        annulerEvent.addEventListener("click", function () {
+            modalNewEvent.classList.add("hidden");
+        });
+
+        //Bouton pour annuler l'affichage d'un évènement
+        annulerDisplayEvent.addEventListener("click", function () {
+            modalDisplayEvent.classList.add("hidden");
+        });
+
+        //Bouton pour ajouter un évènement
+        addEventButton.addEventListener("click", function () {
+            modalNewEvent.classList.remove("hidden");
+        });
+
+        //Bouton pour aller au jour/semaine/mois prochain(e)
+        next.addEventListener("click", function () {
+            switch (currentView) {
+                case "week":
+                    nextWeek();
+                    fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+                    });
+                    break;
+                case "month":
+                    nextMonth();
+                    fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
+                    });
+                    break;
+                case "day":
+                    nextDay();
+                    fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                    });
+                    break;
+            }
+        });
+
+        //Bouton pour aller au jour/semaine/mois précédent(e)
+        prev.addEventListener("click", function () {
+            switch (currentView) {
+                case "week":
+                    prevWeek();
+                    fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+                    });
+                    break;
+                case "month":
+                    prevMonth();
+                    fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
+                    });
+                    break;
+                case "day":
+                    prevDay();
+                    fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                    });
+                    break;
+            }
+        });
+
+        //Bouton pour aller au jour/semaine/mois courant(e)
+        today.addEventListener("click", function () {
+            if (currentView === "week") {
+                toDayWeek();
+                fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
+                });
+            } else if (currentView === "month") {
+                toDayMonth();
+                fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
+                });
+            } else if (currentView === "day") {
+                toDayDay();
+                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
+                });
+            }
+        });
+
+        //Bouton pour afficher le mois
+        month.addEventListener("click", function () {
+            loadHTML("./js/views/month.html");
+            selectView.classList.add("hidden");
+            currentView = "month";
+            changeTitleHead();
+            menuButton.innerHTML = "Mois" +
+                "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
+                "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
+                "</svg>";
+        });
+
+        //Bouton pour afficher la semaine
+        week.addEventListener("click", function () {
+            loadHTML("./js/views/week.html");
+            titleHead.innerHTML = "Lun " + firstDayWeek.getUTCDate() + "-" + "Dim " + lastDayWeek.getUTCDate();
+            selectView.classList.add("hidden");
+            currentView = "week";
+            changeTitleHead();
+            menuButton.innerHTML = "Semaine" +
+                "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
+                "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
+                "</svg>";
+        });
+
+        //Bouton pour afficher le jour
+        day.addEventListener("click", function () {
+            loadHTML("./js/views/day.html");
+            selectView.classList.add("hidden");
+            currentView = "day";
+            changeTitleHead();
+            menuButton.innerHTML = "Jour" +
+                "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
+                "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
+                "</svg>";
+        });
+
+        //Bouton pour afficher le menu de selection
+        menuButton.addEventListener("click", function () {
+            selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
+        });
     } else {
-        document.documentElement.classList.remove('dark');
-        document.getElementById("body").classList.add('whiteScrollbar');
+        window.location = "/auth"
     }
 
-    let nightMode = document.getElementById("nightMode");
-    let nbClick = 0;
-
-    nightMode.addEventListener("click", function () {
-        nbClick++;
-        if (nbClick % 2 !== 0) {
-            if (localStorage.theme === 'dark') {
-                localStorage.theme = 'light';
-                document.documentElement.classList.remove('dark');
-                document.getElementById("body").classList.add('whiteScrollbar');
-            } else {
-                localStorage.theme = 'dark';
-                document.documentElement.classList.add('dark');
-                document.getElementById("body").classList.remove('whiteScrollbar');
-            }
-        }
-    });
-
-    //Chargement de la vue courante
-    loadHTML("./js/views/" + currentView + ".html");
-
-    //Récupération des différents éléments utilisés
-    let menuButton = document.getElementById("menu-button");
-    let selectView = document.getElementById("selectView");
-    let month = document.getElementById("monthView");
-    let week = document.getElementById("weekView");
-    let day = document.getElementById("dayView");
-    let next = document.getElementById("next");
-    let prev = document.getElementById("prev");
-    let today = document.getElementById("today");
-    let titleHead = document.getElementById("titleHead");
-    let modalNewEvent = document.getElementById("modalNewEvent");
-    let addEventButton = document.getElementById("addEventButton");
-    let annulerEvent = document.getElementById("cancelAdd");
-    let annulerDisplayEvent = document.getElementById("annulerDisplayEvent");
-    let modalDisplayEvent = document.getElementById("modalDisplayEvent");
-
-    let importanceCreate = document.getElementById("importanceCreate");
-    let listeImportanceCreate = document.getElementById("listeImportanceCreate");
-    importanceCreate.addEventListener('click', function () {
-        listeImportanceCreate.classList.contains("hidden") ? listeImportanceCreate.classList.remove("hidden") : listeImportanceCreate.classList.add("hidden");
-    });
-
-    let importanceCreate1 = document.getElementById("importanceCreate-1");
-    let importanceCreate2 = document.getElementById("importanceCreate-2");
-    let importanceCreate3 = document.getElementById("importanceCreate-3");
-    let importanceCreateSelected = document.getElementById("importanceCreateSelected");
-
-    importanceCreate1.addEventListener('click', function () {
-        importanceCreateSelected.innerHTML =
-            "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
-            "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
-        listeImportanceCreate.classList.add("hidden");
-    });
-
-    importanceCreate2.addEventListener('click', function () {
-        importanceCreateSelected.innerHTML =
-            "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
-            "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
-        listeImportanceCreate.classList.add("hidden");
-    });
-
-    importanceCreate3.addEventListener('click', function () {
-        importanceCreateSelected.innerHTML =
-            "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
-            "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
-        listeImportanceCreate.classList.add("hidden");
-    });
-
-    //Setup de la date courante
-    toDayWeek();
-
-    //Bouton pour annuler l'ajout d'un évènement
-    annulerEvent.addEventListener("click", function () {
-        modalNewEvent.classList.add("hidden");
-    });
-
-    //Bouton pour annuler l'affichage d'un évènement
-    annulerDisplayEvent.addEventListener("click", function () {
-        modalDisplayEvent.classList.add("hidden");
-    });
-
-    //Bouton pour ajouter un évènement
-    addEventButton.addEventListener("click", function () {
-        modalNewEvent.classList.remove("hidden");
-    });
-
-    //Bouton pour aller au jour/semaine/mois prochain(e)
-    next.addEventListener("click", function () {
-        switch (currentView) {
-            case "week":
-                nextWeek();
-                fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
-                });
-                break;
-            case "month":
-                nextMonth();
-                fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
-                });
-                break;
-            case "day":
-                nextDay();
-                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
-                });
-                break;
-        }
-    });
-
-    //Bouton pour aller au jour/semaine/mois précédent(e)
-    prev.addEventListener("click", function () {
-        switch (currentView) {
-            case "week":
-                prevWeek();
-                fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
-                });
-                break;
-            case "month":
-                prevMonth();
-                fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
-                });
-                break;
-            case "day":
-                prevDay();
-                fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
-                });
-                break;
-        }
-    });
-
-    //Bouton pour aller au jour/semaine/mois courant(e)
-    today.addEventListener("click", function () {
-        if (currentView === "week") {
-            toDayWeek();
-            fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek).then(() => {
-            });
-        } else if (currentView === "month") {
-            toDayMonth();
-            fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear).then(() => {
-            });
-        } else if (currentView === "day") {
-            toDayDay();
-            fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay).then(() => {
-            });
-        }
-    });
-
-    //Bouton pour afficher le mois
-    month.addEventListener("click", function () {
-        loadHTML("./js/views/month.html");
-        selectView.classList.add("hidden");
-        currentView = "month";
-        changeTitleHead();
-        menuButton.innerHTML = "Mois" +
-            "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
-            "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
-            "</svg>";
-    });
-
-    //Bouton pour afficher la semaine
-    week.addEventListener("click", function () {
-        loadHTML("./js/views/week.html");
-        titleHead.innerHTML = "Lun " + firstDayWeek.getUTCDate() + "-" + "Dim " + lastDayWeek.getUTCDate();
-        selectView.classList.add("hidden");
-        currentView = "week";
-        changeTitleHead();
-        menuButton.innerHTML = "Semaine" +
-            "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
-            "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
-            "</svg>";
-    });
-
-    //Bouton pour afficher le jour
-    day.addEventListener("click", function () {
-        loadHTML("./js/views/day.html");
-        selectView.classList.add("hidden");
-        currentView = "day";
-        changeTitleHead();
-        menuButton.innerHTML = "Jour" +
-            "<svg class=\"ml-2 h-5 w-5 text-gray-400\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"currentColor\" aria-hidden=\"true\">\n" +
-            "<path fill-rule=\"evenodd\" d=\"M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z\" clip-rule=\"evenodd\" />\n" +
-            "</svg>";
-    });
-
-    //Bouton pour afficher le menu de selection
-    menuButton.addEventListener("click", function () {
-        selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
-    });
 });
 
 
