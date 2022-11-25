@@ -118,7 +118,7 @@ app.post('/modifyEvent/:id', (req, res) => {
     }
 })
 
-app.post('/deleteEvent/:id', (req, res) => {
+app.delete('/deleteEvent/:id', (req, res) => {
     let ret = events.deleteEvent(req.params.id);
     if (!ret) {
         res.sendStatus(204)

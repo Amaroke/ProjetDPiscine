@@ -15,7 +15,7 @@ module.exports = {
         const events = []
         json.events.forEach(function (event) {
             const dateEvent = new Date(event.date)
-            if (dateEvent.getDay() === date.getDay() && dateEvent.getMonth() === date.getMonth() && dateEvent.getFullYear() === date.getFullYear()) {
+            if (dateEvent.getDate() === date.getDate() && dateEvent.getMonth() === date.getMonth() && dateEvent.getFullYear() === date.getFullYear()) {
                 events.push(event)
             }
         })

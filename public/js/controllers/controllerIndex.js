@@ -253,6 +253,28 @@ window.addEventListener("load", function () {
                 "</svg>";
         });
 
+    //Bouton pour afficher le menu de selection
+    menuButton.addEventListener("click", function () {
+        selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
+    });
+
+    async function subscribe() {
+        switch(currentView) {
+            case "week":
+                await fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek);
+                break;
+            case "month":
+                await fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear);
+                break;
+            case "day":
+                await fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay);
+                break;
+        }
+        await new Promise(r => setTimeout(r, 5000));
+            await subscribe();
+        }
+
+    subscribe();
         //Bouton pour afficher le menu de selection
         menuButton.addEventListener("click", function () {
             selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
@@ -324,13 +346,21 @@ function prevMonth() {
 
 //Fonction pour aller au jour suivant
 function nextDay() {
-    currentDay++;
+    let date = new Date(currentYear, currentMonth - 1, currentDay);
+    date.setDate(date.getDate() + 1);
+    currentDay = date.getDate();
+    currentMonth = date.getMonth() + 1;
+    currentYear = date.getFullYear();
     changeTitleHead();
 }
 
 //Fonction pour aller au jour précédent
 function prevDay() {
-    currentDay--;
+let date = new Date(currentYear, currentMonth - 1, currentDay);
+    date.setDate(date.getDate() - 1);
+    currentDay = date.getDate();
+    currentMonth = date.getMonth() + 1;
+    currentYear = date.getFullYear();
     changeTitleHead();
 }
 
@@ -354,7 +384,10 @@ function toDayMonth() {
 
 //Fonction pour aller au jour courant
 function toDayDay() {
-    currentDay = new Date().getDate();
+    let date = new Date();
+    currentDay = date.getDate();
+    currentMonth = date.getMonth() + 1;
+    currentYear = date.getFullYear();
     changeTitleHead();
 }
 
