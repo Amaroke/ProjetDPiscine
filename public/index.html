@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DPISCINE</title>
     <link rel="stylesheet" href="css/app.css">
-    <link rel="icon" href="images/favicon.png" />
+    <link rel="icon" href="images/favicon.png"/>
     <script src="js/controllers/controllerMonth.js"></script>
     <script src="js/controllers/controllerWeek.js"></script>
     <script src="js/controllers/controllerDay.js"></script>
@@ -217,52 +217,69 @@
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Importance</label>
                                     <div class="relative">
-                                        <button type="button" id="importanceCreate" class="relative max-w-lg cursor-default rounded-md border border-gray-300 dark:bg-gray-900 dark:text-white bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
+                                        <button type="button" id="importanceCreate"
+                                                class="relative max-w-lg cursor-default rounded-md border border-gray-300 dark:bg-gray-900 dark:text-white bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                                aria-haspopup="listbox" aria-expanded="true"
+                                                aria-labelledby="listbox-label">
                                             <span id="importanceCreateSelected" class="flex items-center">
-                                                <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
-                                                <span id="importanceSelectCreate" class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
+                                                <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png"
+                                                     alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                <span id="importanceSelectCreate"
+                                                      class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
                                             </span>
                                             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
+                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                          d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                                                          clip-rule="evenodd"/>
                                                 </svg>
                                             </span>
                                         </button>
-                                        <ul id="listeImportanceCreate" class="whiteScrollbar dark:darkScrollbar hidden absolute z-10 mt-1 max-h-16 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20" tabindex="-1" role="listbox" aria-labelledby="listbox-label">
-                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceCreate-1" role="option">
+                                        <ul id="listeImportanceCreate"
+                                            class="whiteScrollbar dark:darkScrollbar hidden absolute z-10 mt-1 max-h-16 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20"
+                                            tabindex="-1" role="listbox" aria-labelledby="listbox-label">
+                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10"
+                                                id="importanceCreate-1" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png"
+                                                         alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Normale</span>
                                                 </div>
                                             </li>
 
-                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceCreate-2" role="option">
+                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10"
+                                                id="importanceCreate-2" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/purple-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/purple-circle-emoji.png"
+                                                         alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Important</span>
                                                 </div>
                                             </li>
 
-                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceCreate-3" role="option">
+                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10"
+                                                id="importanceCreate-3" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png"
+                                                         alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Très important</span>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
+                                </div>
                             </div>
                         </div>
+                        <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                            <button class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
+                                Créer
+                            </button>
+                            <a id="cancelAdd"
+                               class="mt-3 cursor-pointer w-full text-center rounded-md border border-gray-300 bg-white dark:text-white dark:bg-gray-900 px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
+                                Annuler
+                            </a>
+                        </div>
                     </div>
-                    <div class="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                        <button class="inline-flex w-full justify-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-2 sm:text-sm">
-                            Créer
-                        </button>
-                        <a id="cancelAdd" class="mt-3 cursor-pointer w-full text-center rounded-md border border-gray-300 bg-white dark:text-white dark:bg-gray-900 px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 dark:text-white dark:bg-gray-900 dark:hover:bg-gray-800 dark:hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 sm:col-start-1 sm:mt-0 sm:text-sm">
-                            Annuler
-                        </a>
-                    </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -334,35 +351,51 @@
                                 <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5">
                                     <label class="block text-sm font-medium dark:text-white text-gray-700 sm:mt-px sm:pt-2">Importance</label>
                                     <div class="relative">
-                                        <button type="button" id="importanceDisplay" class="relative max-w-lg cursor-default rounded-md border border-gray-300 dark:bg-gray-900 dark:text-white bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label">
+                                        <button type="button" id="importanceDisplay"
+                                                class="relative max-w-lg cursor-default rounded-md border border-gray-300 dark:bg-gray-900 dark:text-white bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                                aria-haspopup="listbox" aria-expanded="true"
+                                                aria-labelledby="listbox-label">
                                             <span id="importanceDisplaySelected" class="flex items-center">
-                                                <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
-                                                <span id="importanceSelectDisplay" class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
+                                                <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png"
+                                                     alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                <span id="importanceSelectDisplay"
+                                                      class="ml-3 block truncate text-black dark:text-white w-60 ">Normale</span>
                                             </span>
                                             <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd" d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z" clip-rule="evenodd" />
+                                                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                    <path fill-rule="evenodd"
+                                                          d="M10 3a.75.75 0 01.55.24l3.25 3.5a.75.75 0 11-1.1 1.02L10 4.852 7.3 7.76a.75.75 0 01-1.1-1.02l3.25-3.5A.75.75 0 0110 3zm-3.76 9.2a.75.75 0 011.06.04l2.7 2.908 2.7-2.908a.75.75 0 111.1 1.02l-3.25 3.5a.75.75 0 01-1.1 0l-3.25-3.5a.75.75 0 01.04-1.06z"
+                                                          clip-rule="evenodd"/>
                                                 </svg>
                                             </span>
                                         </button>
-                                        <ul id="listeImportanceDisplay" class="whiteScrollbar dark:darkScrollbar hidden absolute z-10 mt-1 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20" tabindex="-1" role="listbox" aria-labelledby="listbox-label">
-                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceDisplay-1" role="option">
+                                        <ul id="listeImportanceDisplay"
+                                            class="whiteScrollbar dark:darkScrollbar hidden absolute z-10 mt-1 w-fit overflow-auto rounded-md dark:bg-gray-900 dark:text-white bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm max-h-20"
+                                            tabindex="-1" role="listbox" aria-labelledby="listbox-label">
+                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10"
+                                                id="importanceDisplay-1" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/blue-circle-emoji.png"
+                                                         alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Normale</span>
                                                 </div>
                                             </li>
 
-                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceDisplay-2" role="option">
+                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10"
+                                                id="importanceDisplay-2" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/purple-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/purple-circle-emoji.png"
+                                                         alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Important</span>
                                                 </div>
                                             </li>
 
-                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10" id="importanceDisplay-3" role="option">
+                                            <li class="cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-900 dark:text-white relative select-none py-2 pl-3 pr-10"
+                                                id="importanceDisplay-3" role="option">
                                                 <div class="flex items-center">
-                                                    <img src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png" alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
+                                                    <img src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png"
+                                                         alt="" class="h-6 w-6 flex-shrink-0 rounded-full">
                                                     <span class="font-normal ml-3 block truncate w-56">Très important</span>
                                                 </div>
                                             </li>

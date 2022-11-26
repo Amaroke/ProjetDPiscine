@@ -23,7 +23,7 @@ async function fillDay(month, year, day) {
 
     if (events != null) {
         for (let event of events) {
-            if(currentUser === event.user){
+            if (currentUser === event.user) {
                 switch (event.importance) {
                     case "Normale":
                         document.getElementById("lesEventsJour").innerHTML +=

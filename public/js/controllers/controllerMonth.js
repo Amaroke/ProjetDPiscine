@@ -58,7 +58,6 @@ async function fillDays(month, year) {
                                     "<time dateTime=\"\" class=\"ml-3 hidden flex-none text-violet-600 group-hover:text-violet-800 xl:block\">" +
                                     dateCurrent.getHours() + "h" + (dateCurrent.getMinutes() > 10 ? dateCurrent.getMinutes() : ("0" + dateCurrent.getMinutes())) + " </time></a></li></ol>"
                                 break;
-                                break;
                             case "Très important":
                                 document.getElementById("box" + i).innerHTML +=
                                     "<ol class=\"mt-2 px-2 py-0.5 rounded-lg bg-red-200 dark:hover:bg-red-300 hover:bg-red-300\"><li><a href=\"javascript:void(0)\" onclick=\"displayEvent(" + event.id + ")\"" + " class=\"group flex\">" +
@@ -66,7 +65,6 @@ async function fillDays(month, year) {
                                     event.title + '</p>' +
                                     "<time dateTime=\"\" class=\"ml-3 hidden flex-none text-red-600 group-hover:text-red-800 xl:block\">" +
                                     dateCurrent.getHours() + "h" + (dateCurrent.getMinutes() > 10 ? dateCurrent.getMinutes() : ("0" + dateCurrent.getMinutes())) + " </time></a></li></ol>"
-                                break;
                                 break;
                         }
                     }

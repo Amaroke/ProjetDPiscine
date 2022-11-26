@@ -1,4 +1,4 @@
-// noinspection DuplicatedCode
+// noinspection DuplicatedCode,InfiniteRecursionJS
 
 "use strict";
 
@@ -60,15 +60,15 @@ let lastDayWeek;
 
 // DarkTheme
 window.addEventListener("load", function () {
-    let variable = false;
+    let userConnected = false;
     for (let i = 0; i < localStorage.length; i++) {
         console.log(localStorage.key(i));
-        if(localStorage.key(i) === "username"){
-            variable = true;
+        if (localStorage.key(i) === "username") {
+            userConnected = true;
         }
     }
 
-    if(variable === true){
+    if (userConnected === true) {
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             document.getElementById("body").classList.remove('whiteScrollbar');
@@ -95,8 +95,8 @@ window.addEventListener("load", function () {
             }
         });
 
-        //Chargement de la vue courante
-        //Est ce que le champ "theme" est toujours la ?
+        // Chargement de la vue courante
+        // Est-ce que le champ "theme" est toujours là ?
         loadHTML("./js/views/" + currentView + ".html");
 
         //Récupération des différents éléments utilisés
@@ -128,21 +128,21 @@ window.addEventListener("load", function () {
 
         importanceCreate1.addEventListener('click', function () {
             importanceCreateSelected.innerHTML =
-                "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
                 "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
             listeImportanceCreate.classList.add("hidden");
         });
 
         importanceCreate2.addEventListener('click', function () {
             importanceCreateSelected.innerHTML =
-                "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
                 "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
             listeImportanceCreate.classList.add("hidden");
         });
 
         importanceCreate3.addEventListener('click', function () {
             importanceCreateSelected.innerHTML =
-                "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
                 "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
             listeImportanceCreate.classList.add("hidden");
         });
@@ -261,28 +261,28 @@ window.addEventListener("load", function () {
                 "</svg>";
         });
 
-    //Bouton pour afficher le menu de selection
-    menuButton.addEventListener("click", function () {
-        selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
-    });
+        //Bouton pour afficher le menu de selection
+        menuButton.addEventListener("click", function () {
+            selectView.classList.contains("hidden") ? selectView.classList.remove("hidden") : selectView.classList.add("hidden");
+        });
 
-    async function subscribe() {
-        switch(currentView) {
-            case "week":
-                await fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek);
-                break;
-            case "month":
-                await fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear);
-                break;
-            case "day":
-                await fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay);
-                break;
-        }
-        await new Promise(r => setTimeout(r, 5000));
+        async function subscribe() {
+            switch (currentView) {
+                case "week":
+                    await fillWeek(currentMonth === 1 ? 12 : currentMonth - 1, currentYear, firstDayWeek);
+                    break;
+                case "month":
+                    await fillDays(currentMonth === 1 ? 12 : currentMonth - 1, currentYear);
+                    break;
+                case "day":
+                    await fillDay(currentMonth === 1 ? 11 : currentMonth - 1, currentYear, currentDay);
+                    break;
+            }
+            await new Promise(r => setTimeout(r, 5000));
             await subscribe();
         }
 
-    subscribe();
+        subscribe().then();
     } else {
         window.location = "/auth"
     }
@@ -360,7 +360,7 @@ function nextDay() {
 
 //Fonction pour aller au jour précédent
 function prevDay() {
-let date = new Date(currentYear, currentMonth - 1, currentDay);
+    let date = new Date(currentYear, currentMonth - 1, currentDay);
     date.setDate(date.getDate() - 1);
     currentDay = date.getDate();
     currentMonth = date.getMonth() + 1;
@@ -407,12 +407,12 @@ function changeTitleHead() {
             break;
         case "day":
             let jour = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
-            document.getElementById("titleHead").innerHTML = jour[new Date(currentYear, currentMonth-1, currentDay).getDay()] +" " + currentDay +" "  +mois[currentMonth - 1] + " " + currentYear;
+            document.getElementById("titleHead").innerHTML = jour[new Date(currentYear, currentMonth - 1, currentDay).getDay()] + " " + currentDay + " " + mois[currentMonth - 1] + " " + currentYear;
             break;
     }
 }
 
-//Fonction pour afficher un evenement
+// Fonction pour afficher un évènement
 async function displayEvent(id) {
     document.getElementById("buttonModifyEvent").addEventListener('click', function () {
         modifyEvent(id)
@@ -442,21 +442,21 @@ async function displayEvent(id) {
 
     importanceDisplay1.addEventListener('click', function () {
         importanceDisplaySelected.innerHTML =
-            "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
             "<span id=\"importanceSelectDisplay\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
         listeImportanceDisplay.classList.add("hidden");
     });
 
     importanceDisplay2.addEventListener('click', function () {
         importanceDisplaySelected.innerHTML =
-            "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
             "<span id=\"importanceSelectDisplay\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
         listeImportanceDisplay.classList.add("hidden");
     });
 
     importanceDisplay3.addEventListener('click', function () {
         importanceDisplaySelected.innerHTML =
-            "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+            "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
             "<span id=\"importanceSelectDisplay\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
         listeImportanceDisplay.classList.add("hidden");
     });
@@ -466,17 +466,17 @@ async function displayEvent(id) {
     switch (infos.importance) {
         case 'Normale':
             importanceDisplaySelected.innerHTML =
-                "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<img src=\"https://img.icons8.com/emoji/48/null/blue-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
                 "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Normale</span>";
             break;
         case 'Important':
             importanceDisplaySelected.innerHTML =
-                "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<img src=\"https://img.icons8.com/emoji/48/null/purple-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
                 "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Important</span>";
             break;
         case 'Très important':
             importanceDisplaySelected.innerHTML =
-                "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">"+
+                "<img src=\"https://img.icons8.com/emoji/48/null/red-circle-emoji.png\" alt=\"\" class=\"h-6 w-6 flex-shrink-0 rounded-full\">" +
                 "<span id=\"importanceSelectCreate\" class=\"font-normal ml-3 block truncate w-56\">Très important</span>";
             break;
     }
@@ -491,7 +491,7 @@ async function displayEvent(id) {
     duration.value = infos.duration;
 }
 
-//Fonction pour récupérer un evenement
+//Fonction pour récupérer un évènement
 async function getEvent(id) {
     return fetch("/event/" + id,
         {
@@ -505,7 +505,7 @@ async function getEvent(id) {
         })
 }
 
-//Fonction pour modifier un evenement
+// Fonction pour modifier un évènement
 function modifyEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");
@@ -525,13 +525,13 @@ function modifyEvent(id) {
     loadHTML("./js/views/" + currentView + ".html");
 }
 
-//Fonction pour supprimer un evenement
+// Fonction pour supprimer un évènement
 function deleteEvent(id) {
     let displayEvent = document.getElementById("modalDisplayEvent");
     displayEvent.classList.add("hidden");
     fetch("/deleteEvent/" + id,
         {
-            method: "POST",
+            method: "DELETE",
             headers: {"Content-Type": "application/json"},
         }).then(r => r.json());
     loadHTML("./js/views/" + currentView + ".html");
