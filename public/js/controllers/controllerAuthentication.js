@@ -8,9 +8,12 @@ window.addEventListener("load", function () {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
         document.getElementById("body").classList.remove('whiteScrollbar');
+        localStorage.theme = 'dark';
     } else {
         document.documentElement.classList.remove('dark');
         document.getElementById("body").classList.add('whiteScrollbar');
+        document.getElementById("hide-checkbox").checked = true;
+        localStorage.theme = 'light';
     }
 
     let nightMode = document.getElementById("nightMode");

@@ -62,28 +62,32 @@ let lastDayWeek;
 window.addEventListener("load", function () {
     let userConnected = false;
     for (let i = 0; i < localStorage.length; i++) {
-        console.log(localStorage.key(i));
         if (localStorage.key(i) === "username") {
             userConnected = true;
         }
     }
 
+
+
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById("body").classList.remove('whiteScrollbar');
+        localStorage.theme = 'dark';
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById("body").classList.add('whiteScrollbar');
+        document.getElementById("hide-checkbox").checked = true;
+        localStorage.theme = 'light';
+    }
+
+
     if (userConnected === true) {
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            document.getElementById("body").classList.remove('whiteScrollbar');
-        } else {
-            document.documentElement.classList.remove('dark');
-            document.getElementById("body").classList.add('whiteScrollbar');
-        }
 
         let nightMode = document.getElementById("nightMode");
         let nbClick = 0;
 
         nightMode.addEventListener("click", function () {
-            nbClick++;
-            if (nbClick % 2 !== 0) {
-                if (localStorage.theme === 'dark') {
+                if (document.getElementById('hide-checkbox').checked === true) {
                     localStorage.theme = 'light';
                     document.documentElement.classList.remove('dark');
                     document.getElementById("body").classList.add('whiteScrollbar');
@@ -92,7 +96,6 @@ window.addEventListener("load", function () {
                     document.documentElement.classList.add('dark');
                     document.getElementById("body").classList.remove('whiteScrollbar');
                 }
-            }
         });
 
         // Chargement de la vue courante
