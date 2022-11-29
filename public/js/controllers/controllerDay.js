@@ -6,7 +6,9 @@ async function fillDay(month, year, day) {
 
     let actualDate = new Date(year, month, day)
     let events;
+    let events2;
     let currentUser = localStorage.getItem("username");
+    let dateBefore = new Date(new Date(actualDate).setDate(actualDate.getDate() - 1))
 
     await fetch("/events/day?date=" + actualDate.toJSON(),
         {
@@ -20,6 +22,44 @@ async function fillDay(month, year, day) {
         }).then(data => {
             events = data
         })
+
+    await fetch("/events/day?date=" + dateBefore.toJSON(),
+        {
+            method: "GET",
+            headers: {"Content-Type": "application/json"},
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json()
+            }
+        }).then(data => {
+            events2 = data
+        })
+
+    if (events2 != null) {
+        for (const event of events2) {
+            if (new Date(event.date).getHours() + (event.duration / 60) >= 24) {
+                let newDate = new Date(event.date)
+                newDate.setDate(new Date(event.date).getDate() + 1);
+                newDate.setHours(0);
+                let newDuration = ((new Date(event.date).getHours() + (event.duration / 60)) - 24) * 60
+                let eventToAdd = {
+                    "user": event.user,
+                    "id": event.id,
+                    "title": event.title,
+                    "date": newDate,
+                    "duration": newDuration,
+                    "description": event.description,
+                    "importance": event.importance
+                }
+                if (events != null) {
+                    events.push(eventToAdd)
+                } else {
+                    events = new Array(eventToAdd)
+                }
+            }
+        }
+    }
 
     if (events != null) {
         for (let event of events) {

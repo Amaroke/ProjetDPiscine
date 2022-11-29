@@ -8,7 +8,6 @@
 /.idea/webServers.xml
 
 /.idea/misc.xml
-/public/css/app.css
 /node_modules/
 /.idea/
 /package-lock.json

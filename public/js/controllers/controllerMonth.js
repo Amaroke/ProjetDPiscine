@@ -38,7 +38,7 @@ async function fillDays(month, year) {
         document.getElementById("box" + i).className = " relative bg-white dark:bg-gray-900 py-2 px-3 overflow-auto max-h-24 h-24 whiteScrollbar2 dark:darkScrollbar"
         if (events != null) {
             for (const event of events) {
-                if(currentUser === event.user){
+                if (currentUser === event.user) {
                     if (new Date(event.date).getDate() === (i + 2 - firstDay)) {
                         let dateCurrent = new Date(event.date)
                         switch (event.importance) {

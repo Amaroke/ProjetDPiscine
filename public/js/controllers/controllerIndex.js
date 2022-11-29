@@ -68,7 +68,6 @@ window.addEventListener("load", function () {
     }
 
 
-
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
         document.getElementById("body").classList.remove('whiteScrollbar');
@@ -84,18 +83,17 @@ window.addEventListener("load", function () {
     if (userConnected === true) {
 
         let nightMode = document.getElementById("nightMode");
-        let nbClick = 0;
 
         nightMode.addEventListener("click", function () {
-                if (document.getElementById('hide-checkbox').checked === true) {
-                    localStorage.theme = 'light';
-                    document.documentElement.classList.remove('dark');
-                    document.getElementById("body").classList.add('whiteScrollbar');
-                } else {
-                    localStorage.theme = 'dark';
-                    document.documentElement.classList.add('dark');
-                    document.getElementById("body").classList.remove('whiteScrollbar');
-                }
+            if (document.getElementById('hide-checkbox').checked === true) {
+                localStorage.theme = 'light';
+                document.documentElement.classList.remove('dark');
+                document.getElementById("body").classList.add('whiteScrollbar');
+            } else {
+                localStorage.theme = 'dark';
+                document.documentElement.classList.add('dark');
+                document.getElementById("body").classList.remove('whiteScrollbar');
+            }
         });
 
         // Chargement de la vue courante
