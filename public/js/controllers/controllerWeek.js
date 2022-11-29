@@ -19,23 +19,24 @@ async function fillWeek(month, year, firstDayWeek) {
             events = data
         })
 
-
-    for (const event of events) {
-        if (new Date(event.date).getHours() + (event.duration / 60) >= 24) {
-            let newDate = new Date(event.date)
-            newDate.setDate(new Date(event.date).getDate() + 1);
-            newDate.setHours(0);
-            let newDuration = ((new Date(event.date).getHours() + (event.duration / 60)) - 24) * 60
-            let eventToAdd = {
-                "user": event.user,
-                "id": event.id,
-                "title": event.title,
-                "date": newDate,
-                "duration": newDuration,
-                "description": event.description,
-                "importance": event.importance
+    if (events != null) {
+        for (const event of events) {
+            if (new Date(event.date).getHours() + (event.duration / 60) >= 24) {
+                let newDate = new Date(event.date)
+                newDate.setDate(new Date(event.date).getDate() + 1);
+                newDate.setHours(0);
+                let newDuration = ((new Date(event.date).getHours() + (event.duration / 60)) - 24) * 60
+                let eventToAdd = {
+                    "user": event.user,
+                    "id": event.id,
+                    "title": event.title,
+                    "date": newDate,
+                    "duration": newDuration,
+                    "description": event.description,
+                    "importance": event.importance
+                }
+                events.push(eventToAdd)
             }
-            events.push(eventToAdd)
         }
     }
 
